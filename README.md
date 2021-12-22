@@ -31,11 +31,11 @@ Input your wanted criteria and then click submit.
   
 Next, click search to view attractions and decide which one is best for you!
 
-# credits
+# Credits
 
 This program was written by Nixon Hanna (nhanna95) and Shrey Agarwal (ShreyAgarwal310). Our FBLA advisor Lori Anderson-Stowe
 
-# license
+# License
 
 Copyright (c) 2021 Nixon Hanna, Shrey Agarwal
 
