@@ -46,6 +46,40 @@ ny_cities = ["", "New York City", "Broadway", "Brooklyn"]
 tx_cities = ["", "Houston", "Dallas", "Austin"]
 fl_cities = ["", "Miama", "Orlando"]
 
+attractions = [["Golden State Bridge", "San Francisco", "California", 0, "Sightseeing", False, 4.8],
+                ["Yosemite National Park", "San Franciso", "California", 15, "Nature", False, 4.8],
+                ["Disneyland", "Anaheim", "California", 250, "Pleasure", False, 4.8],
+                ["Death Valley National Park", "Los Angeles", "California", 30, "Nature", False, 4.7],
+                ["Big Sur", "San Jose", "California", 10, "Nature", False, 4.5],
+                ["Lake Tahoe", "San Francisco", "California", 10, "Nature", False, 4.8],
+                ["Sequoia National Park", "Los Angeles", "California", 35, "Nature", False, 4.8],
+                ["Redwood National Park", "San Francisco", "California", 0, "Nature", False, 4.8],
+                ["Joshua Tree National Park", "Los Angeles", "California", 30, "Nature", False, 4.8],
+                ["Universal Studios Hollywood", "Los Angeles", "California", 110, "Pleasure", False, 4.6],
+                ["Hearst Castle", "San Francisco", "California", 35, "Educational", True, 4.6],
+                ["Santa Catalina Island", "Los Angeles", "California", 0, "Sightseeing", False, 4.6],
+                ["Channel Islands National Park", "Los Angeles", "California", 0, "Sightseeing", False, 4.7],
+                ["The Getty Center", "Los Angeles", "California", 0, "Educational", True, 4.8],
+                ["Statue of Liberty", "New York City", "New York", 0, "Sightseeing", False, 4.7],
+                ["Central Park", "New York City", "New York", 0, "Nature", False, 4.8],
+                ["Rockefeller Center", "New York City", "New York", 40, "Sightseeing", True, 4.7],
+                ["Metropolitan Museum of Art", "New York City", "New York", 25, "Educational", True, 4.8],
+                ["Broadway", "New York City", "New York", 100, "Sightseeing", False, 4.5],
+                ["Empire State Building", "New York City", "New York", 36, "Sightseeing", True, 4.7],
+                ["9/11 Memorial", "New York City", "New York", 30, "Educational", False, 4.9],
+                ["High Line", "New York City", "New York", 0, "Sightseeing", False, 4.7],
+                ["Times Square", "New York City", "New York", 0, "Sightseeing", False, 4.7],
+                ["Brooklyn Bridge", "New York City", "New York", 0, "Sightseeing", False, 4.8],
+                ["Fifth Avenue", "New York City", "New York", 0, "Sightseeing", False, 4.8],
+                ["Grand Central Terminal", "New York City", "New York", 0, "Sightseeing", False, 4.7],
+                ["One World Observatory", "New York City", "New York", 43, "Pleasure", True, 4.7],
+                ["The Frick Collection", "New York City", "New York", 20, "Educational", True, 4.6],
+                ["New York Public Library", "New York City", "New York", 0, "Educational", True, 4.7],
+                ["Wall Street", "New York City", "New York", 0, "Sightseeing", True, 4.6],
+                ["Radio City Music Hall", "New York City", "New York", 31, "Pleasure", True, 4.7],
+                ["St. Patrick's Cathedral", "New York City", "New York", 10, "Sightseeing", True, 4.8],
+                ["Carnegie Hall", "New York City", "New York", 300, "Sightseeing", True, 4.7],
+                ["Bryant Park", "New York City", "New York", 0, "Sightseeing", False, 4.7]]
 
 state_choice= StringVar(window)
 city_choice = StringVar(window)
