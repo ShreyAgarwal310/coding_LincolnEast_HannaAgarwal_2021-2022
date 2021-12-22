@@ -107,8 +107,19 @@ attractions = [["Golden State Bridge", "San Francisco", "California", 0, "Sights
                 ["Natural Bridge Caverns", "San Antonio", "Texas", 30, "Nature", False, 4.7],
                 ["Houston's Museum District", "Houston", "Texas", 20, "Educational", True, 4.5],
                 ["Gruene Historic District", "San Antonio", "Texas", 10, "Sightseeing", False, 4.3],
-                ["Dalas Arboretum", "Dallas", "Texas", 10, "Sightseeing", False, 4.3],
-                []]
+                ["Dallas Arboretum", "Dallas", "Texas", 10, "Sightseeing", False, 4.3],
+                ["Henry Doorly Zoo", "Omaha", "Nebraska", 20, "Educational", False, 4.8],
+                ["Old Market in Omaha", "Omaha", "Nebraska", 0, "Sightseeing", False, 4.4],
+                ["Strategic Air and Space Museum", "Omaha", "Nebraska", 15, "Educational", 4.7],
+                ["Chimney Rock Historic Site", "Scottsbluff", "Nebraska", 0, "Sightseeing", False, 4.2],
+                ["Haymarket District in Lincoln", "Lincoln", "Nebraska", 0, "Sightseeing", False, 4.7],
+                ["Nebraska State Capitol", "Lincoln", "Nebraska", 0, "Sightseeing", True, 4.5],
+                ["Lied Center", "Lincoln", "Nebraska", 50, "Pleasure", True, 4.3],
+                ["Sheldon Museum of Art", "Lincoln", "Nebraska", 0, "Educational", True, 4.5],
+                ["National Museum of Roller Skating", "Lincoln", "Nebraska", 0, "Educational", True, 3.9],
+                ["Scottsbluff National Monument", "Scottsbluff", "Nebraska", 0, "Sightseeing", False, 4.8],
+                ["Golden Spike Tower", "North Platte", "Nebraska", 10, "Sightseeing", False, 4.7],
+                ["Carhenge", "Scottsbluff", "Nebraska", 0, "Sightseeing", False, 4.6]]
 
 
 state_choice= StringVar(window)
