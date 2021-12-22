@@ -1,10 +1,5 @@
-import requests
-import json
-import urllib.request
-import shutil
 from tkinter import *
 from tkinter import ttk
-from PIL import ImageTk, Image
 
 window = Tk()
 window.configure(background='white')
@@ -13,9 +8,17 @@ window.geometry("750x500")
 
 def get_choices():
     state = state_dropdown.get()
+    state_boolean = not (state == "Select a State")
     city = cities_dropdown.get()
+    city_boolean = not (city == "Select a State First" or city == "")
     min_p = min_price_slider.get()
-    print(city, state, min_p)
+    max_p = max_price_slider.get()
+    type = type_dropdown.get()
+    type_boolean = not (type == "Select a Type")
+    rating = rating_slider.get()
+    inside = 1 == inside_choice.get()
+
+    print(city, state, min_p, max_p, type, rating, inside, state_boolean, city_boolean, type_boolean)
 
 def pick_cities(e):
     state = state_dropdown.get()
@@ -36,15 +39,13 @@ def pick_cities(e):
         cities_dropdown.current(0)
     
 
-
-
-
 states_options = ["Nebraska", "California", "New York", "Texas", "Florida"]
 ne_cities = ["", "Lincoln", "Omaha"]
 ca_cities = ["", "San Francisco", "Los Angeles", "San Jose", "Anaheim", "Sacramento"]
 ny_cities = ["", "New York City", "Broadway", "Brooklyn"]
 tx_cities = ["", "Houston", "Dallas", "Austin"]
-fl_cities = ["", "Miama", "Orlando"]
+fl_cities = ["", "Miami", "Orlando"]
+type_options = ["Education", "Sightseeing", "Nature", "Pleasure"]
 
 attractions = [["Golden State Bridge", "San Francisco", "California", 0, "Sightseeing", False, 4.8],
                 ["Yosemite National Park", "San Franciso", "California", 15, "Nature", False, 4.8],
@@ -81,9 +82,14 @@ attractions = [["Golden State Bridge", "San Francisco", "California", 0, "Sights
                 ["Carnegie Hall", "New York City", "New York", 300, "Sightseeing", True, 4.7],
                 ["Bryant Park", "New York City", "New York", 0, "Sightseeing", False, 4.7]]
 
+
 state_choice= StringVar(window)
 city_choice = StringVar(window)
 min_price = DoubleVar(window)
+max_price = DoubleVar(window)
+type_choice = StringVar(window)
+rating_choice = DoubleVar(window)
+inside_choice = IntVar()
 
 
 state_choice.set("Select a State")
@@ -92,22 +98,32 @@ city_choice.set("Select a City")
 
 state_dropdown = ttk.Combobox(window, width = 16, textvariable = state_choice)
 state_dropdown['values'] = states_options
-state_dropdown.place(x = 10, y = 50)  
+state_dropdown.place(x = 10, y = 70)  
 state_dropdown.bind("<<ComboboxSelected>>", pick_cities)
 
 cities_dropdown = ttk.Combobox(window, width = 16, values = ["Select a State First"])
 cities_dropdown.current(0)
-cities_dropdown.place(x = 10, y = 90)
+cities_dropdown.place(x = 10, y = 110)
 
-min_price_slider = Scale(window, variable = min_price, from_ = 0, to = 50, orient = HORIZONTAL)
-min_price_slider.place(x = 10, y = 120)
-min_price_slider.configure(background='white')
+type_dropdown = ttk.Combobox(window, width = 16, value = type_options)
+type_dropdown.set("Select a Type")
+type_dropdown.place(x = 10, y = 150)
 
+inside_check = Checkbutton(window, text = "Inside", variable = inside_choice)
+inside_check.place(x = 10, y = 190)
 
+min_price_slider = Scale(window, variable = min_price, from_ = 0, to = 50, orient = HORIZONTAL, resolution = 5)
+min_price_slider.place(x = 10, y = 240)
+min_price_slider.configure(background = 'white')
 
+max_price_slider = Scale(window, variable = max_price, from_ = 50, to = 300, orient = HORIZONTAL, resolution = 5)
+max_price_slider.place(x = 10, y = 290)
+max_price_slider.set(300)
+max_price_slider.configure(background = 'white')
 
-
-
+rating_slider = Scale(window, variable = rating_choice, from_ = 0, to = 5, orient = HORIZONTAL, resolution = 0.1)
+rating_slider.place(x = 10, y = 340)
+rating_slider.configure(background = 'white')
 
 search_button = Button(window, text='Search', command=get_choices)
 search_button.place(x = 50, y = 400)
@@ -116,13 +132,4 @@ search_button.place(x = 50, y = 400)
 separator = ttk.Separator(window, orient='vertical')
 separator.place(relx=0.2, rely=0, relwidth=.001, relheight=1)
 
-
-
-
-
 window.mainloop()
-
-
-
-
-# location, price, type, inside outside, rating
