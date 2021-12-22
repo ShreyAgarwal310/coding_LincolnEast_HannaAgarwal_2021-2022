@@ -2,7 +2,7 @@
 
 # Insert title of project here
 
-# description
+# Description
 
 This project was made for the Nebraska FBLA SLC 2021-2022 Coding and Programming event. 
 The main purpose of the program is to provide the user with possible places to visit based on six criteria: city, state, cost, type, indoor/outdoor, rating (based on Google Reviews)
@@ -11,25 +11,25 @@ Based on the user's input, we will recommend as many locations as possible and w
 We used the library tKinter for the app window
 We used the programming language Python for our code and developed it in VSCode
 
-Some challenges we faced were
-  how to input the attractions into a list
-  search through the list if the user didn't input all the info
-  show the cities within each of the states based on the original user input of state
+Some challenges we faced were:
+  How to input the attractions into a list
+  Search through the list if the user didn't input all the info
+  Show the cities within each of the states based on the original user input of state
   
-Features we hope to implement in the future
-  a link to the websites so users can have more information
-  a map feature allowing users to narrow in what they want
+Features we hope to implement in the future:
+  A link to the websites so users can have more information
+  A map feature allowing users to narrow in what they want
   
-# instructions
+# Instructions
 
-open the app
+Open the app
 
-input your wanted criteria and then click submit.
-  state, city, type are dropdowns
-  cost is a drag (top bar is min price, middle bar is max price)
-  required rating is the bottomest drag bar (0-5)
+Input your wanted criteria and then click submit.
+  State, city, type are dropdowns
+  Cost is a drag (top bar is min price, middle bar is max price)
+  Required rating is the bottomest drag bar (0-5)
   
-next, click search to view attractions and decide which one is best for you!
+Next, click search to view attractions and decide which one is best for you!
 
 # credits
 
