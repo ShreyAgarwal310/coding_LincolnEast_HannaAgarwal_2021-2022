@@ -1,12 +1,16 @@
 from tkinter import *
 from tkinter import ttk
+import copy
 
+#creates the window of tkinter
 window = Tk()
 window.configure(background='white')
 window.title('Thing')
 window.geometry("750x500")
 
+# this function runs whenever the "search" button is presse
 def search():
+    # gets all of the data and makes sure it's valid
     state = state_dropdown.get()
     state_boolean = not (state == "Select a State")
     city = cities_dropdown.get()
@@ -20,6 +24,7 @@ def search():
 
     print(city, state, min_p, max_p, type, rating, inside, state_boolean, city_boolean, type_boolean)
 
+    # checks if data entered is valid and then searches through the data to find acceptable places based on input
     if (state_boolean and city_boolean and type_boolean):
         for i in attractions:
             if(i[1] == city and i[2] == state):
@@ -29,9 +34,7 @@ def search():
                 matches.append(i)
                 print(i)
 
-
-
-
+# changes the possible selections of the city based on which state the user picked
 def pick_cities(e):
     state = state_dropdown.get()
     if(state == "Nebraska"):
@@ -50,7 +53,7 @@ def pick_cities(e):
         cities_dropdown['values'] = fl_cities
         cities_dropdown.current(0)
     
-
+# initializes all the city and state options for each state
 states_options = ["Nebraska", "California", "New York", "Texas", "Florida"]
 ne_cities = ["", "Lincoln", "Omaha"]
 ca_cities = ["", "San Francisco", "Los Angeles", "San Jose", "Anaheim", "Sacramento"]
@@ -59,6 +62,7 @@ tx_cities = ["", "Houston", "Dallas", "Austin"]
 fl_cities = ["", "Miami", "Orlando"]
 type_options = ["Education", "Sightseeing", "Nature", "Pleasure"]
 
+# stores the data for the possible places to go
 attractions = [["Golden State Bridge", "San Francisco", "California", 0, "Sightseeing", False, 4.8],
                 ["Yosemite National Park", "San Franciso", "California", 15, "Nature", False, 4.8],
                 ["Disneyland", "Anaheim", "California", 250, "Pleasure", False, 4.8],
@@ -133,9 +137,13 @@ attractions = [["Golden State Bridge", "San Francisco", "California", 0, "Sights
                 ["Golden Spike Tower", "North Platte", "Nebraska", 10, "Sightseeing", False, 4.7],
                 ["Carhenge", "Scottsbluff", "Nebraska", 0, "Sightseeing", False, 4.6]]
 
+# creates backup of the attractions list
+attractions_backup = copy.deepcopy(attractions)
+
 matches = []
 in_city = []
 
+# initializes variables to store user's input
 state_choice= StringVar(window)
 city_choice = StringVar(window)
 min_price = DoubleVar(window)
@@ -144,44 +152,51 @@ type_choice = StringVar(window)
 rating_choice = DoubleVar(window)
 inside_choice = IntVar()
 
-
+# sets the default dropdown option
 state_choice.set("Select a State")
 city_choice.set("Select a City")
 
-
+# creates the dropdown where users select their state
 state_dropdown = ttk.Combobox(window, width = 16, textvariable = state_choice)
 state_dropdown['values'] = states_options
 state_dropdown.place(x = 10, y = 70)  
 state_dropdown.bind("<<ComboboxSelected>>", pick_cities)
 
+# creates the dropdown where users select their city
 cities_dropdown = ttk.Combobox(window, width = 16, values = ["Select a State First"])
 cities_dropdown.current(0)
 cities_dropdown.place(x = 10, y = 110)
 
+# creates the dropdown where users select their type of attraction
 type_dropdown = ttk.Combobox(window, width = 16, value = type_options)
 type_dropdown.set("Select a Type")
 type_dropdown.place(x = 10, y = 150)
 
+# creates the dropdown where users select wheter or not they want to be outside
 inside_check = Checkbutton(window, text = "Inside", variable = inside_choice)
 inside_check.place(x = 10, y = 190)
 
+# creates the slider where users decide the minimum price of their attraction
 min_price_slider = Scale(window, variable = min_price, from_ = 0, to = 50, orient = HORIZONTAL, resolution = 5)
 min_price_slider.place(x = 10, y = 240)
 min_price_slider.configure(background = 'white')
 
+# creates the slider where users decide the maximum price of their attraction
 max_price_slider = Scale(window, variable = max_price, from_ = 50, to = 300, orient = HORIZONTAL, resolution = 5)
 max_price_slider.place(x = 10, y = 290)
 max_price_slider.set(300)
 max_price_slider.configure(background = 'white')
 
+# creates the slider where users decide the rating they want their attraction to be
 rating_slider = Scale(window, variable = rating_choice, from_ = 0, to = 5, orient = HORIZONTAL, resolution = 0.1)
 rating_slider.place(x = 10, y = 340)
 rating_slider.configure(background = 'white')
 
+# creates the button users click to search once they have finished their entering
 search_button = Button(window, text='Search', command=search)
 search_button.place(x = 50, y = 400)
 
-
+# separates the sidebar from the main display
 separator = ttk.Separator(window, orient='vertical')
 separator.place(relx=0.2, rely=0, relwidth=.001, relheight=1)
 
