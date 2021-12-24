@@ -83,6 +83,8 @@ def search():
             if((i[1] == city or (not city_boolean)) and (i[2] == state or (not state_boolean)) and (i[3] <= max_p) and (i[4] == type or (not type_boolean)) and (i[6] >= rating)):
                 matches.append(i)
 
+    print(matches)    
+
 
 
 # changes the possible selections of the city based on which state the user picked
@@ -222,21 +224,33 @@ inside_check.place(x = 10, y = 190)
 
 # creates the slider where users decide the maximum price of their attraction
 max_price_slider = Scale(window, variable = max_price, from_ = 0, to = 300, orient = HORIZONTAL, resolution = 5)
-max_price_slider.place(x = 10, y = 240)
+max_price_slider.place(x = 10, y = 250)
 max_price_slider.set(300)
 max_price_slider.configure(background = 'white')
 
+max_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 9)
+max_text.place(x = 10, y = 230)
+max_text.insert('end', 'Max Price')
+max_text.configure(state = 'disabled')
+
 # creates the slider where users decide the rating they want their attraction to be
 rating_slider = Scale(window, variable = rating_choice, from_ = 0, to = 5, orient = HORIZONTAL, resolution = 0.1)
-rating_slider.place(x = 10, y = 290)
+rating_slider.place(x = 10, y = 320)
 rating_slider.configure(background = 'white')
+
+rating_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 14)
+rating_text.place(x = 10, y = 300)
+rating_text.insert('end', 'Minimum Rating')
+rating_text.configure(state = 'disabled')
+
 
 # creates the button users click to search once they have finished their entering
 search_button = Button(window, text='Search', command=search)
-search_button.place(x = 50, y = 350)
+search_button.place(x = 50, y = 420)
 
 # separates the sidebar from the main display
 separator = ttk.Separator(window, orient='vertical')
 separator.place(relx=0.2, rely=0, relwidth=.001, relheight=1)
 
 window.mainloop()
+
