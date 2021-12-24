@@ -12,12 +12,12 @@ We used the library tKinter for the app window
 We used the programming language Python for our code and developed it in VSCode
 
 Some challenges we faced were:
-  How to input the attractions into a list
-  Search through the list if the user didn't input all the info
-  Show the cities within each of the states based on the original user input of state
+  How to input the attractions into a list, 
+  Search through the list if the user didn't input all the info, 
+  Show the cities within each of the states based on the original user input of state, 
   
 Features we hope to implement in the future:
-  A link to the websites so users can have more information
+  A link to the websites so users can have more information, 
   A map feature allowing users to narrow in what they want
   
 # Instructions
@@ -25,15 +25,15 @@ Features we hope to implement in the future:
 Open the app
 
 Input your wanted criteria and then click submit.
-  State, city, type are dropdowns
-  Cost is a drag (top bar is min price, middle bar is max price)
+  State, city, type are dropdowns, 
+  Cost is a drag (top bar is min price, middle bar is max price), 
   Required rating is the bottomost drag bar (0-5)
   
 Next, click search to view attractions and decide which one is best for you!
 
 # Credits
 
-This program was written by Nixon Hanna (nhanna95) and Shrey Agarwal (ShreyAgarwal310). Our FBLA advisor Lori Anderson-Stowe
+This program was written by Nixon Hanna (nhanna95) and Shrey Agarwal (ShreyAgarwal310). Our FBLA advisor is Lori Anderson-Stowe
 
 # License
 
