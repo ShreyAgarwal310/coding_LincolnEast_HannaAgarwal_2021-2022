@@ -27,7 +27,7 @@ Open the app
 Input your wanted criteria and then click submit.
   State, city, type are dropdowns
   Cost is a drag (top bar is min price, middle bar is max price)
-  Required rating is the bottomest drag bar (0-5)
+  Required rating is the bottomost drag bar (0-5)
   
 Next, click search to view attractions and decide which one is best for you!
 
