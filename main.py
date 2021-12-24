@@ -20,7 +20,7 @@ def search():
     state = state_dropdown.get()
     state_boolean = not (state == "Select a State")
     city = cities_dropdown.get()
-    city_boolean = not (city == "Select a State First" or city == "Select a City")
+    city_boolean = not (city == "Select a State First" or city == "Select a City" or city == "Any")
     max_p = max_price_slider.get()
     type = type_dropdown.get()
     type_boolean = not (type == "Select a Type" or type == "Any")
@@ -85,6 +85,12 @@ def search():
 
     print(matches)    
 
+# runs when the next button is pressed to show the next attraction
+def next():
+    print("next")
+
+def back():
+    print("back")
 
 
 # changes the possible selections of the city based on which state the user picked
@@ -101,15 +107,17 @@ def pick_cities(e):
     elif(state == "Florida"):
         cities_dropdown['values'] = fl_cities
 
+    cities_dropdown.configure(state = 'normal')
     cities_dropdown.set("Select a City")
+
     
 # initializes all the city and state options for each state
 states_options = ["Nebraska", "California", "New York", "Texas", "Florida"]
-ne_cities = ["Lincoln", "Omaha", "Scottsbluff", "North Platt"]
-ca_cities = ["San Francisco", "Los Angeles", "San Jose", "Anaheim"]
-ny_cities = ["New York City"]
-tx_cities = ["Houston", "Dallas", "Austin", "San Antonio", "Fort Worth"]
-fl_cities = ["Miami", "Orlando", "Tampa", "Key West"]
+ne_cities = ["Any", "Lincoln", "Omaha", "Scottsbluff", "North Platt"]
+ca_cities = ["Any", "San Francisco", "Los Angeles", "San Jose", "Anaheim"]
+ny_cities = ["Any", "New York City"]
+tx_cities = ["Any", "Houston", "Dallas", "Austin", "San Antonio", "Fort Worth"]
+fl_cities = ["Any", "Miami", "Orlando", "Tampa", "Key West"]
 type_options = ["Any", "Educational", "Sightseeing", "Nature", "Pleasure"]
 
 # stores the data for the possible places to go
@@ -176,7 +184,7 @@ attractions = [["Golden State Bridge", "San Francisco", "California", 0, "Sights
                 ["Dallas Arboretum", "Dallas", "Texas", 10, "Sightseeing", False, 4.3],
                 ["Henry Doorly Zoo", "Omaha", "Nebraska", 20, "Educational", False, 4.8],
                 ["Old Market in Omaha", "Omaha", "Nebraska", 0, "Sightseeing", False, 4.4],
-                ["Strategic Air and Space Museum", "Omaha", "Nebraska", 15, "Educational", 4.7],
+                ["Strategic Air and Space Museum", "Omaha", "Nebraska", 15, "Educational", True, 4.7],
                 ["Chimney Rock Historic Site", "Scottsbluff", "Nebraska", 0, "Sightseeing", False, 4.2],
                 ["Haymarket District in Lincoln", "Lincoln", "Nebraska", 0, "Sightseeing", False, 4.7],
                 ["Nebraska State Capitol", "Lincoln", "Nebraska", 0, "Sightseeing", True, 4.5],
@@ -212,6 +220,7 @@ state_dropdown.bind("<<ComboboxSelected>>", pick_cities)
 cities_dropdown = ttk.Combobox(window, width = 16, values = ["Select a State First"])
 cities_dropdown.current(0)
 cities_dropdown.place(x = 10, y = 110)
+cities_dropdown.configure(state = 'disabled')
 
 # creates the dropdown where users select their type of attraction
 type_dropdown = ttk.Combobox(window, width = 16, value = type_options)
@@ -228,7 +237,7 @@ max_price_slider.place(x = 10, y = 250)
 max_price_slider.set(300)
 max_price_slider.configure(background = 'white')
 
-max_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 9)
+max_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 9, font = ("Arial", 10))
 max_text.place(x = 10, y = 230)
 max_text.insert('end', 'Max Price')
 max_text.configure(state = 'disabled')
@@ -238,19 +247,33 @@ rating_slider = Scale(window, variable = rating_choice, from_ = 0, to = 5, orien
 rating_slider.place(x = 10, y = 320)
 rating_slider.configure(background = 'white')
 
-rating_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 14)
+rating_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 14, font = ("Arial", 10))
 rating_text.place(x = 10, y = 300)
 rating_text.insert('end', 'Minimum Rating')
 rating_text.configure(state = 'disabled')
 
-
 # creates the button users click to search once they have finished their entering
-search_button = Button(window, text='Search', command=search)
+search_button = Button(window, text = 'Search', command = search)
 search_button.place(x = 50, y = 420)
 
 # separates the sidebar from the main display
-separator = ttk.Separator(window, orient='vertical')
+separator = ttk.Separator(window, orient = 'vertical')
 separator.place(relx=0.2, rely=0, relwidth=.001, relheight=1)
+
+# next and back button to go through matching attractions
+next_button = Button(window, text = "Next >", command = next)
+next_button.place(x = 675, y = 20)
+
+back_button = Button(window, text = "< Back", command = back)
+back_button.place(x = 175, y = 20)
+
+# text box to show the title of the shown attraction
+title_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
+title_text.place(x = 225, y = 20)
+title_text.insert('end', 'Daytona 500 International Speedway')
+title_text.configure(state = 'disabled')
+
+
 
 window.mainloop()
 
