@@ -2,65 +2,113 @@ from tkinter import *
 from tkinter import ttk
 import copy
 
-#creates the window of tkinter
+# creates the window of tkinter
 window = Tk()
 window.configure(background='white')
 window.title('Thing')
 window.geometry("750x500")
 
-# this function runs whenever the "search" button is presse
+
+# this function runs whenever the "search" button is pressed
 def search():
+
+    # clears the lists of matches and attractions in the selected city
+    matches = []
+    in_city = []
+
     # gets all of the data and makes sure it's valid
     state = state_dropdown.get()
     state_boolean = not (state == "Select a State")
     city = cities_dropdown.get()
-    city_boolean = not (city == "Select a State First" or city == "")
-    min_p = min_price_slider.get()
+    city_boolean = not (city == "Select a State First" or city == "Select a City")
     max_p = max_price_slider.get()
     type = type_dropdown.get()
-    type_boolean = not (type == "Select a Type")
+    type_boolean = not (type == "Select a Type" or type == "Any")
     rating = rating_slider.get()
     inside = 1 == inside_choice.get()
 
-    print(city, state, min_p, max_p, type, rating, inside, state_boolean, city_boolean, type_boolean)
-
     # checks if data entered is valid and then searches through the data to find acceptable places based on input
-    if (state_boolean and city_boolean and type_boolean):
+    if (inside):
         for i in attractions:
-            if(i[1] == city and i[2] == state):
-                in_city.append(i)
+            match_counter = 0
+            non_matches = []
+            if((i[1] == city or (not city_boolean)) and (i[2] == state or (not state_boolean))):
+                if(i[3] <= max_p):
+                    match_counter += 1
+                else:
+                    non_matches.append("Price")
+
+                if(i[4] == type or (not type_boolean)):
+                    match_counter += 1
+                else:
+                    non_matches.append("Type")
+
+                if(i[5]):
+                    match_counter += 1
+                else:
+                    non_matches.append("Inside")
+
+                if(i[6] >= rating):
+                    match_counter += 1
+                else:
+                    non_matches.append("Rating")
+
+                in_city.append([i, match_counter, non_matches])
             
-            if(i[1] == city and i[2] == state and i[3] >= min_p and i[3] <= max_p and i[4] == type and i[5] == inside and i[6] >= rating):
+            
+            if((i[1] == city or (not city_boolean)) and (i[2] == state or (not state_boolean)) and (i[3] <= max_p) and (i[4] == type or (not type_boolean)) and (i[5]) and (i[6] >= rating)):
                 matches.append(i)
-                print(i)
+    else:
+        for i in attractions:
+            match_counter = 1
+            non_matches = []
+            if((i[1] == city or (not city_boolean)) and (i[2] == state or (not state_boolean))):
+                if(i[3] <= max_p):
+                    match_counter += 1
+                else:
+                    non_matches.append("Price")
+
+                if(i[4] == type or (not type_boolean)):
+                    match_counter += 1
+                else:
+                    non_matches.append("Type")
+
+                if(i[6] >= rating):
+                    match_counter += 1
+                else:
+                    non_matches.append("Rating")
+
+                in_city.append([i, match_counter, non_matches])
+            
+            if((i[1] == city or (not city_boolean)) and (i[2] == state or (not state_boolean)) and (i[3] <= max_p) and (i[4] == type or (not type_boolean)) and (i[6] >= rating)):
+                matches.append(i)
+
+
 
 # changes the possible selections of the city based on which state the user picked
 def pick_cities(e):
     state = state_dropdown.get()
     if(state == "Nebraska"):
-        cities_dropdown['values'] = ne_cities
-        cities_dropdown.current(0)
+        cities_dropdown['values'] = ne_cities   
     elif(state == "California"):
         cities_dropdown['values'] = ca_cities
-        cities_dropdown.current(0)
     elif(state == "New York"):
         cities_dropdown['values'] = ny_cities
-        cities_dropdown.current(0)
     elif(state == "Texas"):
         cities_dropdown['values'] = tx_cities
-        cities_dropdown.current(0)
     elif(state == "Florida"):
         cities_dropdown['values'] = fl_cities
-        cities_dropdown.current(0)
+
+    cities_dropdown.set("Select a City")
     
 # initializes all the city and state options for each state
 states_options = ["Nebraska", "California", "New York", "Texas", "Florida"]
-ne_cities = ["", "Lincoln", "Omaha"]
-ca_cities = ["", "San Francisco", "Los Angeles", "San Jose", "Anaheim", "Sacramento"]
-ny_cities = ["", "New York City", "Broadway", "Brooklyn"]
-tx_cities = ["", "Houston", "Dallas", "Austin"]
-fl_cities = ["", "Miami", "Orlando"]
-type_options = ["Education", "Sightseeing", "Nature", "Pleasure"]
+ne_cities = ["Lincoln", "Omaha", "Scottsbluff", "North Platt"]
+ca_cities = ["San Francisco", "Los Angeles", "San Jose", "Anaheim"]
+ny_cities = ["New York City"]
+tx_cities = ["Houston", "Dallas", "Austin", "San Antonio", "Fort Worth"]
+fl_cities = ["Miami", "Orlando", "Tampa", "Key West"]
+type_options = ["Any", "Educational", "Sightseeing", "Nature", "Pleasure"]
 
 # stores the data for the possible places to go
 attractions = [["Golden State Bridge", "San Francisco", "California", 0, "Sightseeing", False, 4.8],
@@ -140,13 +188,9 @@ attractions = [["Golden State Bridge", "San Francisco", "California", 0, "Sights
 # creates backup of the attractions list
 attractions_backup = copy.deepcopy(attractions)
 
-matches = []
-in_city = []
-
 # initializes variables to store user's input
 state_choice= StringVar(window)
 city_choice = StringVar(window)
-min_price = DoubleVar(window)
 max_price = DoubleVar(window)
 type_choice = StringVar(window)
 rating_choice = DoubleVar(window)
@@ -173,28 +217,23 @@ type_dropdown.set("Select a Type")
 type_dropdown.place(x = 10, y = 150)
 
 # creates the dropdown where users select wheter or not they want to be outside
-inside_check = Checkbutton(window, text = "Inside", variable = inside_choice)
+inside_check = Checkbutton(window, text = "Inside Only", variable = inside_choice)
 inside_check.place(x = 10, y = 190)
 
-# creates the slider where users decide the minimum price of their attraction
-min_price_slider = Scale(window, variable = min_price, from_ = 0, to = 50, orient = HORIZONTAL, resolution = 5)
-min_price_slider.place(x = 10, y = 240)
-min_price_slider.configure(background = 'white')
-
 # creates the slider where users decide the maximum price of their attraction
-max_price_slider = Scale(window, variable = max_price, from_ = 50, to = 300, orient = HORIZONTAL, resolution = 5)
-max_price_slider.place(x = 10, y = 290)
+max_price_slider = Scale(window, variable = max_price, from_ = 0, to = 300, orient = HORIZONTAL, resolution = 5)
+max_price_slider.place(x = 10, y = 240)
 max_price_slider.set(300)
 max_price_slider.configure(background = 'white')
 
 # creates the slider where users decide the rating they want their attraction to be
 rating_slider = Scale(window, variable = rating_choice, from_ = 0, to = 5, orient = HORIZONTAL, resolution = 0.1)
-rating_slider.place(x = 10, y = 340)
+rating_slider.place(x = 10, y = 290)
 rating_slider.configure(background = 'white')
 
 # creates the button users click to search once they have finished their entering
 search_button = Button(window, text='Search', command=search)
-search_button.place(x = 50, y = 400)
+search_button.place(x = 50, y = 350)
 
 # separates the sidebar from the main display
 separator = ttk.Separator(window, orient='vertical')
