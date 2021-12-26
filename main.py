@@ -366,10 +366,10 @@ rating_slider = Scale(window, variable = rating_choice, from_ = 0, to = 5, orien
 rating_slider.place(x = 10, y = 320)
 rating_slider.configure(background = 'white')
 
-rating_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 14, font = ("Arial", 10))
-rating_text.place(x = 10, y = 300)
-rating_text.insert('end', 'Minimum Rating')
-rating_text.configure(state = 'disabled')
+ratings_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 14, font = ("Arial", 10))
+ratings_text.place(x = 10, y = 300)
+ratings_text.insert('end', 'Minimum Rating')
+ratings_text.configure(state = 'disabled')
 
 # creates the button users click to search once they have finished their entering
 search_button = Button(window, text = 'Search', command = search)
