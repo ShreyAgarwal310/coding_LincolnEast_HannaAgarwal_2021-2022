@@ -1,5 +1,3 @@
-
-   
 from tkinter import *
 from tkinter import ttk
 import copy
@@ -45,10 +43,10 @@ rating_text.place(x = 225, y = 200)
 rating_text.insert('end', "Rating: 4.7")
 rating_text.configure(state = 'disabled')
 
-matches = []
 # this function runs whenever the "search" button is pressed
 def search():
     # clears the lists of matches and attractions in the selected city
+    global matches
     matches = []
     in_city = []
 
@@ -280,7 +278,7 @@ def next():
     print(matches)
     print(len(matches))
     if screenNum < len(matches):
-        print("next2")
+        next_button.place(x = 675, y = 20)
         title_text.configure(state = "normal")
         title_text.delete("1.0", "end")
         title_text.insert('end', matches[screenNum - 1][0])
@@ -312,9 +310,7 @@ def next():
         rating_text.insert('end', "Rating: " + str(matches[screenNum - 1][6]))
         rating_text.configure(state = 'disabled')
     else:
-        print("next didn't work")
         next_button.place_forget()
-
 
 def back():
     print("back")
