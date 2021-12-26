@@ -10,37 +10,37 @@ window.geometry("750x500")
 
 numAttractions_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
 numAttractions_text.place(x = 225, y = 20)
-numAttractions_text.insert('end', 'We found 1 attraction(s)')
+numAttractions_text.insert('end', '')
 numAttractions_text.configure(state = 'disabled')
 
 title_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
 title_text.place(x = 225, y = 50)
-title_text.insert('end', 'Daytona 500 International Speedway')
+title_text.insert('end', '')
 title_text.configure(state = 'disabled')
 
 location_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
 location_text.place(x = 225, y = 80)
-location_text.insert('end', "Location: Orlando, Florida")
+location_text.insert('end', "")
 location_text.configure(state = 'disabled')
 
 price_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
 price_text.place(x = 225, y = 110)
-price_text.insert('end', "Price: 20")
+price_text.insert('end', "")
 price_text.configure(state = 'disabled')
 
 type_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
 type_text.place(x = 225, y = 140)
-type_text.insert('end', "Type: Sightseeing")
+type_text.insert('end', "")
 type_text.configure(state = 'disabled')
 
 indoor_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
 indoor_text.place(x = 225, y = 170)
-indoor_text.insert('end', 'This attraction is not indoors')
+indoor_text.insert('end', '')
 indoor_text.configure(state = 'disabled')
 
 rating_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
 rating_text.place(x = 225, y = 200)
-rating_text.insert('end', "Rating: 4.7")
+rating_text.insert('end', "")
 rating_text.configure(state = 'disabled')
 
 # this function runs whenever the "search" button is pressed
