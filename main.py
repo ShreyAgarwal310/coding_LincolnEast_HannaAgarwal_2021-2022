@@ -164,6 +164,8 @@ def back():
     # subtract 1 to convert screenNum starting at 1 to an index starting at 0
     update_screen(screenNum - 1)
 
+def about():
+    print("about")
     
 # initializes all options for state and type
 states_options = ["Nebraska", "California", "New York", "Texas", "Florida"]
