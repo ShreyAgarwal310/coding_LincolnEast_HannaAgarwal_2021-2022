@@ -3,6 +3,7 @@
 # ADVENTOUR
 
 # Description
+Required Libraries: tKinter, copy
 
 This project was made for the Nebraska FBLA SLC 2021-2022 Coding and Programming event. 
 The main purpose of the program is to provide the user with possible places to visit based on six criteria: city, state, cost, type, indoor/outdoor, rating (based on Google Reviews)
