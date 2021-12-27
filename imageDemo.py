@@ -5,17 +5,16 @@ import requests
 
 window = tkinter.Tk()
 
-url = "https://s.yimg.com/os/weather/1.0.1/shadow_icon/60x60/partly_cloudy_night@2x.png"
+url = "https://lumiere-a.akamaihd.net/v1/images/cg_parks_wdw_50thcelebration_specialoffers_21943_25454ec0.jpeg?region=0,0,800,800"
 r = requests.get(url)
 
 pilImage = Image.open(BytesIO(r.content))
-pilImage.mode = 'RGBA'
 pilImage = pilImage.resize((200, 200), Image.ANTIALIAS)
+
 
 image = ImageTk.PhotoImage(pilImage)
 
 label = tkinter.Label(image=image)
-label.place(x = 400, y = 400)
-label.image = image
+label.pack()
 
 window.mainloop()
