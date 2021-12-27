@@ -84,6 +84,11 @@ def search():
     print(matches)
     print(len(matches))
     
+    if(about_showing):
+        about_text.place_forget()
+        about_button["text"] = "About"
+        about_button.place(x=51, y=430)
+
     # sets the screen to the first match if there are matches
     if len(matches) > 0:
         update_screen(0)
@@ -125,7 +130,7 @@ def update_screen(new_screen):
     location_text.configure(state='disabled')
     price_text.configure(state="normal")
     price_text.delete("1.0", "end")
-    price_text.insert('end', f"Price: {matches[new_screen][3]}$")
+    price_text.insert('end', f"Price: ${matches[new_screen][3]}")
     price_text.configure(state='disabled')
     type_text.configure(state="normal")
     type_text.delete("1.0", "end")
@@ -150,7 +155,6 @@ def next():
     # increments screenNum to go to the next screen
     global screenNum
     screenNum += 1
-    print("next")
     # subtract 1 to convert screenNum starting at 1 to an index starting at 0
     update_screen(screenNum - 1)
 
@@ -160,24 +164,22 @@ def back():
     # increments screenNum down one to go to the previous screen
     global screenNum
     screenNum -= 1
-    print("back")
     # subtract 1 to convert screenNum starting at 1 to an index starting at 0
     update_screen(screenNum - 1)
 
-about_Bool = False
 def about():
-    global about_Bool
-    print('about')
-    if not about_Bool:
-        print("ran if")
+    global about_showing
+    if not about_showing:
         about_text.place(x=152, y=0)
         about_button["text"] = "Close About"
+        about_button.place(x=35, y=430)
     else:
-        print("ran else")
         about_text.place_forget()
         about_button["text"] = "About"
+        about_button.place(x=51, y=430)
+
     
-    about_Bool = not about_Bool
+    about_showing = not about_showing
     
 # initializes all options for state and type
 states_options = ["Nebraska", "California", "New York", "Texas", "Florida"]
@@ -268,6 +270,7 @@ attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightse
                 ["Carhenge", "Scottsbluff", "Nebraska", 0, "Sightseeing", False, 4.6]]
 
 screenNum = 1
+about_showing = False
 inside_choice = IntVar()
 
 # creates backup of the attractions list
@@ -321,7 +324,10 @@ ratings_text.configure(state='disabled')
 
 # creates the button users click to search once they have finished their entering
 search_button = Button(window, text='Search', command=search)
-search_button.place(x=50, y=420)
+search_button.place(x=50, y=390)
+
+about_button = Button(window, text="About", command=about)
+about_button.place(x=51, y=430)
 
 # separates the sidebar from the main display
 separator = ttk.Separator(window, orient='vertical')
@@ -330,8 +336,6 @@ separator.place(relx=0.2, rely=0, relwidth=.001, relheight=1)
 # next and back button to go through matching attractions
 next_button = Button(window, text="Next >", command=next)
 back_button = Button(window, text="< Back", command=back)
-about_button = Button(window, text="About", command=about)
-about_button.place(x=50, y=450)
 
 title_text = Text(window, background='white', 
                   borderwidth=0, height=1, 
