@@ -1,5 +1,8 @@
 from tkinter import *
 from tkinter import ttk
+from PIL import Image, ImageTk
+from io import BytesIO
+import requests
 import copy
 
 # creates the window of tkinter
@@ -149,6 +152,15 @@ def update_screen(new_screen):
     screenNum_text.insert('end', f"{screenNum} / {len(matches)}")
     screenNum_text.configure(state='disabled')
 
+    url = matches[new_screen][7]
+    print(url)
+    r = requests.get(url)
+    pil_image = Image.open(BytesIO(r.content))
+    pil_image = pil_image.resize((200, 200), Image.ANTIALIAS)
+    image = ImageTk.PhotoImage(pil_image)
+    image_label = Label(image=image)
+    image_label.place(x=500, y=200)
+
 
 # runs when the next button is pressed to show the next attraction
 def next():
@@ -227,6 +239,7 @@ state_city_dict = {
 }
 
 # stores the data for the possible places to go
+# name, city, state, price, type, inside, rating, photo link
 attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightseeing", False, 4.8, "https://www.history.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTY1Mzg0OTc4NTIyMjUyNzU0/golden-gate-bridge-gettyimages-671734928.jpg"],
                 ["Yosemite National Park", "San Franciso", "California", 15, "Nature", False, 4.8, "https://44hwtb1ramg42tavjo3od08v-wpengine.netdna-ssl.com/wp-content/uploads/2020/07/DSC00217-1-1200x1200-cropped.jpg"],
                 ["Disneyland", "Anaheim", "California", 250, "Pleasure", False, 4.8, "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/1600/90/media/abd/refresh/north-america/hollywood-disneyland-tour/abd-north-america-hollywood-disneyland-slideshow-1-sleeping-beauty-castle-1x1.jpg?cb=4"],
@@ -246,7 +259,7 @@ attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightse
                 ["Rockefeller Center", "New York City", "New York", 40, "Sightseeing", True, 4.7, "https://cdn.sanity.io/images/bs9rmafh/main/e58a153f0d183f4dc165199e4e8ba0a3e300bc50-1840x2002.jpg?w=800&h=870&fit=crop"],
                 ["Metropolitan Museum of Art", "New York City", "New York", 25, "Educational", True, 4.8, "http://www.metmuseum.org/-/media/images/visit/met-fifth-avenue/fifthave_teaser.jpg?sc_lang=en"],
                 ["Broadway", "New York City", "New York", 100, "Sightseeing", False, 4.5, "https://static01.nyt.com/images/2020/04/09/arts/00virus-broadway-1/00virus-broadway-1-mediumSquareAt3X-v2.jpg"],
-                ["Empire State Building", "New York City", "New York", 36, "Sightseeing", True, 4.7, "https://marvel-b1-cdn.bc0a.com/f00000000179470/www.esbnyc.com/sites/default/files/styles/small_feature/public/2020-02/Green%20lights.jpg?itok=eesKOaKH"]
+                ["Empire State Building", "New York City", "New York", 36, "Sightseeing", True, 4.7, "https://marvel-b1-cdn.bc0a.com/f00000000179470/www.esbnyc.com/sites/default/files/styles/small_feature/public/2020-02/Green%20lights.jpg?itok=eesKOaKH"],
                 ["9/11 Memorial", "New York City", "New York", 30, "Educational", False, 4.9, "https://d3iso9mq9tb10q.cloudfront.net/catalog/product/cache/191a57bb001f092e9eec8a49199fc081/b/b/bbt_product_attractions_new-york_911-memorial_1.jpg"],
                 ["High Line", "New York City", "New York", 0, "Sightseeing", False, 4.7, "https://edc.nyc/sites/default/files/styles/1x1_md/public/2019-06/projects-the-highline-photo-brittany-petronella-nyc-and-company-05.jpg?h=56d0ca2e&itok=l-7KQn_B"],
                 ["Times Square", "New York City", "New York", 0, "Sightseeing", False, 4.7, "https://www.tripsavvy.com/thmb/rFlaG5E709ir4EWJ21N8E3cRuUc=/3126x3126/smart/filters:no_upscale()/times-square-at-dusk-534858417-59b71eae798a49c4838c1507ec6bbffb.jpg"],
@@ -408,7 +421,7 @@ screenNum_text = Text(window, background='white', borderwidth=0, height=1, width
 screenNum_text.place(x=425, y=450)
 screenNum_text.configure(state='disabled')
 
-about_text = Text(window, background='white', borderwidth=0, height=21, width=53, font=("Arial", 14))
+about_text = Text(window, background='white', borderwidth=0, height=23, width=53, font=("Arial", 14))
 about_text.insert("1.0", "The Adventour App is designed to create recommendations for users\n" +
                           "based on entered criteria. \n \n" +
                           "To use to the app, \n \n" +
@@ -420,7 +433,7 @@ about_text.insert("1.0", "The Adventour App is designed to create recommendation
                           "minimum rating. Once finished entered, click the search button.\n \n" +
                           "2. Use the back and next button to toggle through the attractions. At \n" +
                           "the bottom of the screen, you can see how many attractions match \n" +
-                          "your criteria. \n \n " +
+                          "your criteria. \n \n" +
                           "3. Enjoy the attraction you choose! \n \n" +
                           "Credits: Nixon Hanna, Shrey Agarwal")
 about_text.configure(state='disabled')
