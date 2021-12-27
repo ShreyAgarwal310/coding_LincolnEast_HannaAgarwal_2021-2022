@@ -368,8 +368,21 @@ screenNum_text = Text(window, background='white', borderwidth=0, height=1, width
 screenNum_text.place(x=425, y=450)
 screenNum_text.configure(state='disabled')
 
-about_text = Text(window, background='black', borderwidth=0, height=21, width=50, font=("Arial", 16))
-about_text.insert("1.0", "The Adventour App is designed to create recommendations for users based on entered criteria. \n \n To use to the app, \n \n 1. Enter your desired criteria. The top dropdown decides the state, the second dropdown decides the city, and the third dropdown decides the top of attraction. The check mark indicates whether the attraction is indoor (checked) or outdoors (unchecked). The next slider is the maximum price and the bottommost slider is the minimum rating. Once finished entered, click the search button.\n \n 2. Use the back and next button to toggle through the attractions. At the bottom of the screen, you can see how many attractions match your criteria. \n \n 3. Enjoy the attraction you choose! \n \n Credits: Nixon Hanna, Shrey Agarwal")
+about_text = Text(window, background='white', borderwidth=0, height=21, width=53, font=("Arial", 14))
+about_text.insert("1.0", "The Adventour App is designed to create recommendations for users\n" +
+                          "based on entered criteria. \n \n" +
+                          "To use to the app, \n \n" +
+                          "1. Enter your desired criteria. The top dropdown decides the state, \n" +
+                          "the second dropdown decides the city, and the third dropdown \n" +
+                          "decides the top of attraction. The check mark indicates whether the \n" +
+                          "attraction is indoor (checked) or outdoors (unchecked). The next \n" +
+                          "slider is the maximum price and the bottommost slider is the \n" +
+                          "minimum rating. Once finished entered, click the search button.\n \n" +
+                          "2. Use the back and next button to toggle through the attractions. At \n" +
+                          "the bottom of the screen, you can see how many attractions match \n" +
+                          "your criteria. \n \n " +
+                          "3. Enjoy the attraction you choose! \n \n" +
+                          "Credits: Nixon Hanna, Shrey Agarwal")
 about_text.configure(state='disabled')
 
 window.mainloop()
