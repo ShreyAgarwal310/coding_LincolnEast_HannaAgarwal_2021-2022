@@ -109,6 +109,19 @@ def search():
 
         if len(matches) > 1:
             next_button.place(x=675, y=20)
+        
+        url = matches[new_screen][7]
+        r = requests.get(url)
+
+        pilImage = Image.open(BytesIO(r.content))
+        pilImage = pilImage.resize((200, 200), Image.ANTIALIAS)
+
+        image = ImageTk.PhotoImage(pilImage)
+
+        label = ttk.Label(image=image)
+        label.place(x=500, y=200)
+
+        window.mainloop()
 
 
 # changes the possible selections of the city based on which state the user picked
