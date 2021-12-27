@@ -5,7 +5,7 @@ import copy
 # creates the window of tkinter
 window = Tk()
 window.configure(background='white')
-window.title('Thing')
+window.title('Adventour')
 window.geometry("750x500")
 window.resizable(0, 0)
 
@@ -93,8 +93,7 @@ def search():
         print("none")
 
     if len(matches) > 1:
-        next_button.place(x = 675, y = 20)
-
+        next_button.place(x=675, y=20)
 
 
 # changes the possible selections of the city based on which state the user picked
@@ -111,7 +110,7 @@ def pick_cities(e):
     elif(state == "Florida"):
         cities_dropdown['values'] = fl_cities
 
-    cities_dropdown.configure(state = 'normal')
+    cities_dropdown.configure(state='normal')
     cities_dropdown.set("Select a City")
 
     
@@ -215,39 +214,38 @@ def update_screen(new_screen):
     else:
         back_button.place_forget()
 
-    title_text.configure(state = "normal")
+    title_text.configure(state="normal")
     title_text.delete("1.0", "end")
     title_text.insert('end', matches[new_screen][0])
     title_text.tag_add("center_title", "1.0", "end")
-    title_text.configure(state = 'disabled')
-    location_text.configure(state = "normal")
+    title_text.configure(state='disabled')
+    location_text.configure(state="normal")
     location_text.delete("1.0", "end")
-    location_text.insert('end', "Location: " + matches[new_screen][1] + ", " + matches[new_screen][2])
-    location_text.configure(state = 'disabled')
-    price_text.configure(state = "normal")
+    location_text.insert('end', f"Location: {matches[new_screen][1]}, {matches[new_screen][2]}")
+    location_text.configure(state='disabled')
+    price_text.configure(state="normal")
     price_text.delete("1.0", "end")
-    price_text.insert('end', "Price: " + str(matches[new_screen][3]))
-    price_text.configure(state = 'disabled')
-    type_text.configure(state = "normal")
+    price_text.insert('end', f"Price: {matches[new_screen][3]}")
+    price_text.configure(state='disabled')
+    type_text.configure(state="normal")
     type_text.delete("1.0", "end")
-    type_text.insert('end', "Type: " + matches[new_screen][4])
-    type_text.configure(state = 'disabled')
-    indoor_text.configure(state = "normal")
+    type_text.insert('end', f"Type: {matches[new_screen][4]}")
+    type_text.configure(state='disabled')
+    indoor_text.configure(state="normal")
     indoor_text.delete("1.0", "end")
     if matches[new_screen][5]:  
         indoor_text.insert('end', 'This attraction is indoors')
     else:
         indoor_text.insert('end', 'This attraction is not indoors')
-    indoor_text.configure(state = 'disabled')
-    rating_text.configure(state = "normal")
+    indoor_text.configure(state='disabled')
+    rating_text.configure(state="normal")
     rating_text.delete("1.0", "end")
-    rating_text.insert('end', "Rating: " + str(matches[new_screen][6]))
-    rating_text.configure(state = 'disabled')
-    screenNum_text.configure(state = "normal")
+    rating_text.insert('end', f"Rating: {matches[new_screen][6]}")
+    rating_text.configure(state='disabled')
+    screenNum_text.configure(state="normal")
     screenNum_text.delete("1.0", "end")
     screenNum_text.insert('end', f"{screenNum} / {len(matches)}")
-    screenNum_text.configure(state = 'disabled')
-
+    screenNum_text.configure(state='disabled')
 
 
 # runs when the next button is pressed to show the next attraction
@@ -259,6 +257,7 @@ def next():
     # subtract 1 to convert screenNum starting at 1 to an index starting at 0
     update_screen(screenNum - 1)
 
+
 # runs when the back button is pressed to show the previous attraction
 def back():
     # increments screenNum down one to go to the previous screen
@@ -267,6 +266,7 @@ def back():
     print("back")
     # subtract 1 to convert screenNum starting at 1 to an index starting at 0
     update_screen(screenNum - 1)
+
 
 # initializes variables to store user's input
 state_choice= StringVar(window)
@@ -277,92 +277,92 @@ rating_choice = DoubleVar(window)
 inside_choice = IntVar()
 
 # creates the dropdown where users select their state
-state_dropdown = ttk.Combobox(window, width = 16, textvariable = state_choice)
+state_dropdown = ttk.Combobox(window, width=16, textvariable=state_choice)
 state_dropdown['values'] = states_options
 state_dropdown.set("Select a State")
-state_dropdown.place(x = 10, y = 70)  
+state_dropdown.place(x=10, y=70)  
 state_dropdown.bind("<<ComboboxSelected>>", pick_cities)
 
 # creates the dropdown where users select their city
-cities_dropdown = ttk.Combobox(window, width = 16, values = ["Select a State First"])
+cities_dropdown = ttk.Combobox(window, width=16, values=["Select a State First"])
 cities_dropdown.current(0)
-cities_dropdown.place(x = 10, y = 110)
-cities_dropdown.configure(state = 'disabled')
+cities_dropdown.place(x=10, y=110)
+cities_dropdown.configure(state='disabled')
 
 # creates the dropdown where users select their type of attraction
-type_dropdown = ttk.Combobox(window, width = 16, value = type_options)
+type_dropdown = ttk.Combobox(window, width=16, value=type_options)
 type_dropdown.set("Select a Type")
-type_dropdown.place(x = 10, y = 150)
+type_dropdown.place(x=10, y=150)
 
 # creates the dropdown where users select wheter or not they want to be outside
-inside_check = Checkbutton(window, text = "Inside Only", variable = inside_choice, background='white')
-inside_check.place(x = 10, y = 190)
+inside_check = Checkbutton(window, text="Inside Only", variable=inside_choice, background='white')
+inside_check.place(x=10, y=190)
 
 # creates the slider where users decide the maximum price of their attraction
-max_price_slider = Scale(window, variable = max_price, from_ = 0, to = 300, orient = HORIZONTAL, resolution=5)
-max_price_slider.place(x = 10, y = 250)
+max_price_slider = Scale(window, variable=max_price, from_=0, to=300, orient=HORIZONTAL, resolution=5)
+max_price_slider.place(x=10, y=250)
 max_price_slider.set(300)
-max_price_slider.configure(background = 'white')
+max_price_slider.configure(background='white')
 
-max_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 9, font = ("Arial", 10))
-max_text.place(x = 10, y = 230)
+max_text = Text(window, background='white', borderwidth=0, height=1, width=9, font=("Arial", 10))
+max_text.place(x=10, y=230)
 max_text.insert('end', 'Max Price')
-max_text.configure(state = 'disabled')
+max_text.configure(state='disabled')
 
 # creates the slider where users decide the rating they want their attraction to be
-rating_slider = Scale(window, variable = rating_choice, from_ = 0, to = 5, orient = HORIZONTAL, resolution = 0.1)
-rating_slider.place(x = 10, y = 320)
-rating_slider.configure(background = 'white')
+rating_slider = Scale(window, variable=rating_choice, from_=0, to=5, orient=HORIZONTAL, resolution=0.1)
+rating_slider.place(x=10, y=320)
+rating_slider.configure(background='white')
 
-ratings_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 14, font = ("Arial", 10))
-ratings_text.place(x = 10, y = 300)
+ratings_text = Text(window, background='white', borderwidth=0, height=1, width=14, font=("Arial", 10))
+ratings_text.place(x=10, y=300)
 ratings_text.insert('end', 'Minimum Rating')
-ratings_text.configure(state = 'disabled')
+ratings_text.configure(state='disabled')
 
 # creates the button users click to search once they have finished their entering
-search_button = Button(window, text = 'Search', command = search)
-search_button.place(x = 50, y = 420)
+search_button = Button(window, text='Search', command=search)
+search_button.place(x=50, y=420)
 
 # separates the sidebar from the main display
-separator = ttk.Separator(window, orient = 'vertical')
+separator = ttk.Separator(window, orient='vertical')
 separator.place(relx=0.2, rely=0, relwidth=.001, relheight=1)
 
 # next and back button to go through matching attractions
-next_button = Button(window, text = "Next >", command = next)
-
-back_button = Button(window, text = "< Back", command = back)
-#back_button.place(x = 175, y = 20)
+next_button = Button(window, text="Next >", command=next)
+back_button = Button(window, text="< Back", command=back)
 
 title_text = Text(window, background='white', 
-                  borderwidth=0, height = 1, 
-                  width = 32, font = ("Arial", 19))
+                  borderwidth=0, height=1, 
+                  width=32, font=("Arial", 19))
 title_text.place(x=223, y=18)
 title_text.tag_configure("center_title", justify='center')
 title_text.configure(state='disabled')
 
-location_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-location_text.place(x = 225, y = 80)
-location_text.configure(state = 'disabled')
+location_text = Text(window, background='white', borderwidth=0, height=1, width=37, font=("Arial", 16))
+location_text.place(x=225, y=80)
+location_text.configure(state='disabled')
 
-price_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-price_text.place(x = 225, y = 110)
-price_text.configure(state = 'disabled')
+price_text = Text(window, background='white', borderwidth=0, height=1, width=37, font=("Arial", 16))
+price_text.place(x=225, y=110)
+price_text.configure(state='disabled')
 
-type_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-type_text.place(x = 225, y = 140)
-type_text.configure(state = 'disabled')
+type_text = Text(window, background='white', borderwidth=0, height=1, width=37, font=("Arial", 16))
+type_text.place(x=225, y=140)
+type_text.configure(state='disabled')
 
-indoor_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-indoor_text.place(x = 225, y = 170)
-indoor_text.configure(state = 'disabled')
+indoor_text = Text(window, background='white', borderwidth=0, height=1, width=37, font=("Arial", 16))
+indoor_text.place(x=225, y=170)
+indoor_text.configure(state='disabled')
 
-rating_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-rating_text.place(x = 225, y = 200)
-rating_text.configure(state = 'disabled')
+rating_text = Text(window, background='white', borderwidth=0, height=1, width=37, font=("Arial", 16))
+rating_text.place(x=225, y=200)
+rating_text.configure(state='disabled')
 
-screenNum_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 7, font = ("Arial", 14))
-screenNum_text.place(x = 425, y = 450)
-screenNum_text.configure(state = 'disabled')
+screenNum_text = Text(window, background='white', borderwidth=0, height=1, width=7, font=("Arial", 14))
+screenNum_text.place(x=425, y=450)
+screenNum_text.configure(state='disabled')
 
 
 window.mainloop()
+
+
