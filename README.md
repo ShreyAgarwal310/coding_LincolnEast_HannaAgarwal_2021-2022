@@ -12,8 +12,11 @@ We used the library tKinter for the app window
 We used the programming language Python for our code and developed it in VSCode
 
 Some challenges we faced were:
+
   How to input the attractions into a list, 
+  
   Search through the list if the user didn't input all the info, 
+  
   Show the cities within each of the states based on the original user input of state, 
   
 Features we hope to implement in the future:
