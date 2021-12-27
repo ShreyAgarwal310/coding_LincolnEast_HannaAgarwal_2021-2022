@@ -178,9 +178,41 @@ def about():
         about_button["text"] = "About"
         about_button.place(x=51, y=430)
 
-    
     about_showing = not about_showing
     
+
+def search_hover(e):
+    search_button.config(background='white')
+
+
+def search_leave(e):
+    search_button.config(background= 'SystemButtonFace')
+    
+
+def about_hover(e):
+    about_button.config(background='white')
+    
+
+def about_leave(e):
+    about_button.config(background= 'SystemButtonFace')
+    
+
+def back_hover(e):
+    back_button.config(background='white')
+    
+
+def back_leave(e):
+    back_button.config(background= 'SystemButtonFace')
+    
+
+def next_hover(e):
+    next_button.config(background='white')
+    
+
+def next_leave(e):
+    next_button.config(background= 'SystemButtonFace')
+    
+
 # initializes all options for state and type
 states_options = ["Nebraska", "California", "New York", "Texas", "Florida"]
 type_options = ["Any", "Educational", "Sightseeing", "Nature", "Pleasure"]
@@ -325,9 +357,13 @@ ratings_text.configure(state='disabled')
 # creates the button users click to search once they have finished their entering
 search_button = Button(window, text='Search', command=search)
 search_button.place(x=50, y=390)
+search_button.bind('<Enter>', search_hover)
+search_button.bind('<Leave>', search_leave)
 
 about_button = Button(window, text="About", command=about)
 about_button.place(x=51, y=430)
+about_button.bind('<Enter>', about_hover)
+about_button.bind('<Leave>', about_leave)
 
 # separates the sidebar from the main display
 separator = ttk.Separator(window, orient='vertical')
@@ -336,6 +372,10 @@ separator.place(relx=0.2, rely=0, relwidth=.001, relheight=1)
 # next and back button to go through matching attractions
 next_button = Button(window, text="Next >", command=next)
 back_button = Button(window, text="< Back", command=back)
+next_button.bind('<Enter>', next_hover)
+next_button.bind('<Leave>', next_leave)
+back_button.bind('<Enter>', back_hover)
+back_button.bind('<Leave>', back_leave)
 
 title_text = Text(window, background='white', 
                   borderwidth=0, height=1, 
