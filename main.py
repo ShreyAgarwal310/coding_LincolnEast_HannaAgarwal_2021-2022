@@ -7,6 +7,7 @@ window = Tk()
 window.configure(background='white')
 window.title('Thing')
 window.geometry("750x500")
+window.resizable(0, 0)
 
 # this function runs whenever the "search" button is pressed
 def search():
@@ -86,41 +87,7 @@ def search():
     
     # sets the screen to the first match if there are matches
     if len(matches) > 0:
-        screenNum_text.configure(state = "normal")
-        screenNum_text.delete("1.0", "end")
-        screenNum_text.insert('end', f"1 / {len(matches)}")
-        screenNum_text.configure(state = 'disabled')
-        title_text.configure(state = "normal")
-        title_text.delete("1.0", "end")
-        title_text.insert('end', matches[0][0])
-        title_text.tag_add("center_title", "1.0", "end")
-        title_text.configure(state = 'disabled')
-        location_text.configure(state = "normal")
-        location_text.delete("1.0", "end")
-        location_text.insert('end', "Location: " + matches[0][1] + ", " + matches[0][2])
-        location_text.configure(state = 'disabled')
-        price_text.configure(state = "normal")
-        price_text.delete("1.0", "end")
-        price_text.insert('end', "Price: " + str(matches[0][3]))
-        price_text.configure(state = 'disabled')
-        type_text.configure(state = "normal")
-        type_text.delete("1.0", "end")
-        type_text.insert('end', "Type: " + matches[0][4])
-        type_text.configure(state = 'disabled')
-        if matches[0][5]:
-            indoor_text.configure(state = "normal")
-            indoor_text.delete("1.0", "end")
-            indoor_text.insert('end', 'This attraction is indoors')
-            indoor_text.configure(state = 'disabled')
-        else:
-            indoor_text.configure(state = "normal")
-            indoor_text.delete("1.0", "end")
-            indoor_text.insert('end', 'This attraction is not indoors')
-            indoor_text.configure(state = 'disabled')
-        rating_text.configure(state = "normal")
-        rating_text.delete("1.0", "end")
-        rating_text.insert('end', "Rating: " + str(matches[0][6]))
-        rating_text.configure(state = 'disabled')
+        update_screen(0)
     # if there aren't matches, it says there aren't any matches
     else:
         print("none")
@@ -232,12 +199,22 @@ attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightse
                 ["Golden Spike Tower", "North Platte", "Nebraska", 10, "Sightseeing", False, 4.7],
                 ["Carhenge", "Scottsbluff", "Nebraska", 0, "Sightseeing", False, 4.6]]
 
-screenNum = 0
+screenNum = 1
 
 # creates backup of the attractions list
 attractions_backup = copy.deepcopy(attractions)
 
 def update_screen(new_screen):
+    if(new_screen + 1 < len(matches)):
+        next_button.place(x=675, y=20)
+    else:
+        next_button.place_forget()
+
+    if(new_screen > 0):
+        back_button.place(x=175, y=20)
+    else:
+        back_button.place_forget()
+
     title_text.configure(state = "normal")
     title_text.delete("1.0", "end")
     title_text.insert('end', matches[new_screen][0])
@@ -268,32 +245,28 @@ def update_screen(new_screen):
     rating_text.configure(state = 'disabled')
     screenNum_text.configure(state = "normal")
     screenNum_text.delete("1.0", "end")
-    screenNum_text.insert('end', f"{screenNum + 1} / {len(matches)}")
+    screenNum_text.insert('end', f"{screenNum} / {len(matches)}")
     screenNum_text.configure(state = 'disabled')
 
 
 
 # runs when the next button is pressed to show the next attraction
 def next():
-    # intializes variable to keep track of the screen number
+    # increments screenNum to go to the next screen
     global screenNum
     screenNum += 1
     print("next")
-    back_button.place(x = 175, y = 20)
-    # updates the screens if there is another possible screen
-    if screenNum < len(matches):
-        update_screen(screenNum)
-    # if there isn't another possible screen, the next button disappears
-    else:
-        next_button.place_forget()
+    # subtract 1 to convert screenNum starting at 1 to an index starting at 0
+    update_screen(screenNum - 1)
 
+# runs when the back button is pressed to show the previous attraction
 def back():
-    title_text.configure(state = "normal")
-    title_text.delete("1.0", "end")
-    title_text.insert('end', 'nebraska')
-    title_text.tag_add("center_title", "1.0", "end")
-    title_text.configure(state = 'disabled')
+    # increments screenNum down one to go to the previous screen
+    global screenNum
+    screenNum -= 1
     print("back")
+    # subtract 1 to convert screenNum starting at 1 to an index starting at 0
+    update_screen(screenNum - 1)
 
 # initializes variables to store user's input
 state_choice= StringVar(window)
@@ -303,13 +276,10 @@ type_choice = StringVar(window)
 rating_choice = DoubleVar(window)
 inside_choice = IntVar()
 
-# sets the default dropdown option
-state_choice.set("Select a State")
-city_choice.set("Select a City")
-
 # creates the dropdown where users select their state
 state_dropdown = ttk.Combobox(window, width = 16, textvariable = state_choice)
 state_dropdown['values'] = states_options
+state_dropdown.set("Select a State")
 state_dropdown.place(x = 10, y = 70)  
 state_dropdown.bind("<<ComboboxSelected>>", pick_cities)
 
@@ -369,7 +339,6 @@ title_text = Text(window, background='white',
 title_text.place(x=223, y=18)
 title_text.tag_configure("center_title", justify='center')
 title_text.configure(state='disabled')
-
 
 location_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
 location_text.place(x = 225, y = 80)
