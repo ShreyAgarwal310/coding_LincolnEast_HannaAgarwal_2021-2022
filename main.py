@@ -348,6 +348,10 @@ screenNum_text = Text(window, background='white', borderwidth=0, height=1, width
 screenNum_text.place(x=425, y=450)
 screenNum_text.configure(state='disabled')
 
+about_text = Text(window, background='black', borderwidth=0, height=5, width=37, font=("Arial, 16"))
+about_text.place(x=200, y=10)
+about_text.insert()
+about_text.configure(state='disabled')
 
 window.mainloop()
 
