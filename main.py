@@ -164,9 +164,20 @@ def back():
     # subtract 1 to convert screenNum starting at 1 to an index starting at 0
     update_screen(screenNum - 1)
 
+about_Bool = False
 def about():
-    about_text.place(x=152, y=0)
-    print("about")
+    global about_Bool
+    print('about')
+    if not about_Bool:
+        print("ran if")
+        about_text.place(x=152, y=0)
+        about_button["text"] = "Close About"
+    else:
+        print("ran else")
+        about_text.place_forget()
+        about_button["text"] = "About"
+    
+    about_Bool = not about_Bool
     
 # initializes all options for state and type
 states_options = ["Nebraska", "California", "New York", "Texas", "Florida"]
@@ -320,7 +331,7 @@ separator.place(relx=0.2, rely=0, relwidth=.001, relheight=1)
 next_button = Button(window, text="Next >", command=next)
 back_button = Button(window, text="< Back", command=back)
 about_button = Button(window, text="About", command=about)
-
+about_button.place(x=50, y=450)
 
 title_text = Text(window, background='white', 
                   borderwidth=0, height=1, 
@@ -358,4 +369,3 @@ about_text = Text(window, background='black', borderwidth=0, height=21, width=50
 about_text.configure(state='disabled')
 
 window.mainloop()
-
