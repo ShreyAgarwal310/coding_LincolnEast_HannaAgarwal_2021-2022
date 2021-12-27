@@ -84,8 +84,7 @@ def search():
             
             if((i[1] == city or (not city_boolean)) and (i[2] == state or (not state_boolean)) and (i[3] <= max_p) and (i[4] == type or (not type_boolean)) and (i[6] >= rating)):
                 matches.append(i)
-    print(matches)
-    print(len(matches))
+
     
     if(about_showing):
         about_text.place_forget()
@@ -97,7 +96,7 @@ def search():
         update_screen(0)
     # if there aren't matches, it says there aren't any matches
     else:
-        print("none")
+        continue
 
     if len(matches) > 1:
         next_button.place(x=675, y=20)
@@ -151,15 +150,6 @@ def update_screen(new_screen):
     screenNum_text.delete("1.0", "end")
     screenNum_text.insert('end', f"{screenNum} / {len(matches)}")
     screenNum_text.configure(state='disabled')
-
-    url = matches[new_screen][7]
-    print(url)
-    r = requests.get(url)
-    pil_image = Image.open(BytesIO(r.content))
-    pil_image = pil_image.resize((200, 200), Image.ANTIALIAS)
-    image = ImageTk.PhotoImage(pil_image)
-    image_label = Label(image=image)
-    image_label.place(x=500, y=200)
 
 
 # runs when the next button is pressed to show the next attraction
