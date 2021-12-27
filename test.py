@@ -7,12 +7,15 @@ window = Tk()
 window.configure(background='white')
 window.title('Thing')
 window.geometry("750x500")
-window.resizable(0, 0)
+
+# declares current_attraction_index, a variable to keep track of which screen we are on
+current_attraction_index = 0
+
 
 # this function runs whenever the "search" button is pressed
 def search():
+
     # clears the lists of matches and attractions in the selected city
-    global matches
     matches = []
     in_city = []
 
@@ -82,18 +85,33 @@ def search():
             
             if((i[1] == city or (not city_boolean)) and (i[2] == state or (not state_boolean)) and (i[3] <= max_p) and (i[4] == type or (not type_boolean)) and (i[6] >= rating)):
                 matches.append(i)
-    print(matches)
-    print(len(matches))
-    
-    # sets the screen to the first match if there are matches
-    if len(matches) > 0:
-        update_screen(0)
-    # if there aren't matches, it says there aren't any matches
-    else:
-        print("none")
 
-    if len(matches) > 1:
-        next_button.place(x = 675, y = 20)
+    print(matches)    
+
+
+
+def update_attraction(index):
+    if (index == 0):
+        back_button.place_forget()
+    
+    if (index == len(matches) - 1):
+        next_button.place_forget()
+
+    print("update", current_attraction_index)
+
+# runs when the next button is pressed to show the next attraction
+def next():
+    global current_attraction_index
+    current_attraction_index += 1
+    print("next")
+    update_attraction(current_attraction_index)
+    
+
+def back():
+    global current_attraction_index
+    current_attraction_index -= 1
+    print("back")
+    update_attraction(current_attraction_index)
 
 
 
@@ -125,7 +143,7 @@ fl_cities = ["Any", "Miami", "Orlando", "Tampa", "Key West"]
 type_options = ["Any", "Educational", "Sightseeing", "Nature", "Pleasure"]
 
 # stores the data for the possible places to go
-attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightseeing", False, 4.8],
+attractions = [["Golden State Bridge", "San Francisco", "California", 0, "Sightseeing", False, 4.8],
                 ["Yosemite National Park", "San Franciso", "California", 15, "Nature", False, 4.8],
                 ["Disneyland", "Anaheim", "California", 250, "Pleasure", False, 4.8],
                 ["Death Valley National Park", "Los Angeles", "California", 30, "Nature", False, 4.7],
@@ -199,74 +217,13 @@ attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightse
                 ["Golden Spike Tower", "North Platte", "Nebraska", 10, "Sightseeing", False, 4.7],
                 ["Carhenge", "Scottsbluff", "Nebraska", 0, "Sightseeing", False, 4.6]]
 
-screenNum = 1
+matches = []
+in_city = []
+current_attraction_index = 0
+
 
 # creates backup of the attractions list
 attractions_backup = copy.deepcopy(attractions)
-
-def update_screen(new_screen):
-    if(new_screen + 1 < len(matches)):
-        next_button.place(x=675, y=20)
-    else:
-        next_button.place_forget()
-
-    if(new_screen > 0):
-        back_button.place(x=175, y=20)
-    else:
-        back_button.place_forget()
-
-    title_text.configure(state = "normal")
-    title_text.delete("1.0", "end")
-    title_text.insert('end', matches[new_screen][0])
-    title_text.tag_add("center_title", "1.0", "end")
-    title_text.configure(state = 'disabled')
-    location_text.configure(state = "normal")
-    location_text.delete("1.0", "end")
-    location_text.insert('end', "Location: " + matches[new_screen][1] + ", " + matches[new_screen][2])
-    location_text.configure(state = 'disabled')
-    price_text.configure(state = "normal")
-    price_text.delete("1.0", "end")
-    price_text.insert('end', "Price: " + str(matches[new_screen][3]))
-    price_text.configure(state = 'disabled')
-    type_text.configure(state = "normal")
-    type_text.delete("1.0", "end")
-    type_text.insert('end', "Type: " + matches[new_screen][4])
-    type_text.configure(state = 'disabled')
-    indoor_text.configure(state = "normal")
-    indoor_text.delete("1.0", "end")
-    if matches[new_screen][5]:  
-        indoor_text.insert('end', 'This attraction is indoors')
-    else:
-        indoor_text.insert('end', 'This attraction is not indoors')
-    indoor_text.configure(state = 'disabled')
-    rating_text.configure(state = "normal")
-    rating_text.delete("1.0", "end")
-    rating_text.insert('end', "Rating: " + str(matches[new_screen][6]))
-    rating_text.configure(state = 'disabled')
-    screenNum_text.configure(state = "normal")
-    screenNum_text.delete("1.0", "end")
-    screenNum_text.insert('end', f"{screenNum} / {len(matches)}")
-    screenNum_text.configure(state = 'disabled')
-
-
-
-# runs when the next button is pressed to show the next attraction
-def next():
-    # increments screenNum to go to the next screen
-    global screenNum
-    screenNum += 1
-    print("next")
-    # subtract 1 to convert screenNum starting at 1 to an index starting at 0
-    update_screen(screenNum - 1)
-
-# runs when the back button is pressed to show the previous attraction
-def back():
-    # increments screenNum down one to go to the previous screen
-    global screenNum
-    screenNum -= 1
-    print("back")
-    # subtract 1 to convert screenNum starting at 1 to an index starting at 0
-    update_screen(screenNum - 1)
 
 # initializes variables to store user's input
 state_choice= StringVar(window)
@@ -295,11 +252,11 @@ type_dropdown.set("Select a Type")
 type_dropdown.place(x = 10, y = 150)
 
 # creates the dropdown where users select wheter or not they want to be outside
-inside_check = Checkbutton(window, text = "Inside Only", variable = inside_choice, background='white')
+inside_check = Checkbutton(window, text = "Inside Only", variable = inside_choice)
 inside_check.place(x = 10, y = 190)
 
 # creates the slider where users decide the maximum price of their attraction
-max_price_slider = Scale(window, variable = max_price, from_ = 0, to = 300, orient = HORIZONTAL, resolution=5)
+max_price_slider = Scale(window, variable = max_price, from_ = 0, to = 300, orient = HORIZONTAL, resolution = 5)
 max_price_slider.place(x = 10, y = 250)
 max_price_slider.set(300)
 max_price_slider.configure(background = 'white')
@@ -314,10 +271,10 @@ rating_slider = Scale(window, variable = rating_choice, from_ = 0, to = 5, orien
 rating_slider.place(x = 10, y = 320)
 rating_slider.configure(background = 'white')
 
-ratings_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 14, font = ("Arial", 10))
-ratings_text.place(x = 10, y = 300)
-ratings_text.insert('end', 'Minimum Rating')
-ratings_text.configure(state = 'disabled')
+rating_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 14, font = ("Arial", 10))
+rating_text.place(x = 10, y = 300)
+rating_text.insert('end', 'Minimum Rating')
+rating_text.configure(state = 'disabled')
 
 # creates the button users click to search once they have finished their entering
 search_button = Button(window, text = 'Search', command = search)
@@ -329,40 +286,30 @@ separator.place(relx=0.2, rely=0, relwidth=.001, relheight=1)
 
 # next and back button to go through matching attractions
 next_button = Button(window, text = "Next >", command = next)
+next_button.place(x = 675, y = 20)
 
 back_button = Button(window, text = "< Back", command = back)
-#back_button.place(x = 175, y = 20)
+back_button.place(x = 175, y = 20)
 
+# text box to show the title of the shown attraction
 title_text = Text(window, background='white', 
                   borderwidth=0, height = 1, 
                   width = 32, font = ("Arial", 19))
 title_text.place(x=223, y=18)
 title_text.tag_configure("center_title", justify='center')
+title_text.insert('end', 'Daytona 500 International Speedway')
+title_text.tag_add("center_title", "1.0", "end")
 title_text.configure(state='disabled')
 
-location_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-location_text.place(x = 225, y = 80)
-location_text.configure(state = 'disabled')
+# about text box to give some info about the attraction
+about_text = Text(window, background='white', 
+                  borderwidth=0, height = 10,
+                  width=20, font=("Arial", 14))
+about_text.place(x=220, y = 100)
+# about_text.insert('end', 'Daytona International Speedway is a race track in Daytona Beach, Florida, United States. Since opening in 1959, it has been the home of the Daytona 500, the most prestigious race in NASCAR as well as its season opening event.')
+about_text.configure(state='disabled')
 
-price_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-price_text.place(x = 225, y = 110)
-price_text.configure(state = 'disabled')
-
-type_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-type_text.place(x = 225, y = 140)
-type_text.configure(state = 'disabled')
-
-indoor_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-indoor_text.place(x = 225, y = 170)
-indoor_text.configure(state = 'disabled')
-
-rating_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-rating_text.place(x = 225, y = 200)
-rating_text.configure(state = 'disabled')
-
-screenNum_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 7, font = ("Arial", 14))
-screenNum_text.place(x = 425, y = 450)
-screenNum_text.configure(state = 'disabled')
 
 
 window.mainloop()
+
