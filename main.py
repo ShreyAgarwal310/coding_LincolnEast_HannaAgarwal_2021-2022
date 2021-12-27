@@ -318,6 +318,8 @@ separator.place(relx=0.2, rely=0, relwidth=.001, relheight=1)
 # next and back button to go through matching attractions
 next_button = Button(window, text="Next >", command=next)
 back_button = Button(window, text="< Back", command=back)
+about_button = Button(window, text="About", command=about)
+
 
 title_text = Text(window, background='white', 
                   borderwidth=0, height=1, 
