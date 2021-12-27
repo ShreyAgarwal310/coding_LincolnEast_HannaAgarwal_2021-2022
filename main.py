@@ -8,41 +8,6 @@ window.configure(background='white')
 window.title('Thing')
 window.geometry("750x500")
 
-numAttractions_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-numAttractions_text.place(x = 225, y = 20)
-numAttractions_text.insert('end', '')
-numAttractions_text.configure(state = 'disabled')
-
-title_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-title_text.place(x = 225, y = 50)
-title_text.insert('end', '')
-title_text.configure(state = 'disabled')
-
-location_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-location_text.place(x = 225, y = 80)
-location_text.insert('end', "")
-location_text.configure(state = 'disabled')
-
-price_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-price_text.place(x = 225, y = 110)
-price_text.insert('end', "")
-price_text.configure(state = 'disabled')
-
-type_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-type_text.place(x = 225, y = 140)
-type_text.insert('end', "")
-type_text.configure(state = 'disabled')
-
-indoor_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-indoor_text.place(x = 225, y = 170)
-indoor_text.insert('end', '')
-indoor_text.configure(state = 'disabled')
-
-rating_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
-rating_text.place(x = 225, y = 200)
-rating_text.insert('end', "")
-rating_text.configure(state = 'disabled')
-
 # this function runs whenever the "search" button is pressed
 def search():
     # clears the lists of matches and attractions in the selected city
@@ -121,13 +86,14 @@ def search():
     
     # sets the screen to the first match if there are matches
     if len(matches) > 0:
-        numAttractions_text.configure(state = "normal")
-        numAttractions_text.delete("1.0", "end")
-        numAttractions_text.insert('end', "We found " + str(len(matches)) + " attractions(s)")
-        numAttractions_text.configure(state = 'disabled')
+        screenNum_text.configure(state = "normal")
+        screenNum_text.delete("1.0", "end")
+        screenNum_text.insert('end', f"1 / {len(matches)}")
+        screenNum_text.configure(state = 'disabled')
         title_text.configure(state = "normal")
         title_text.delete("1.0", "end")
         title_text.insert('end', matches[0][0])
+        title_text.tag_add("center_title", "1.0", "end")
         title_text.configure(state = 'disabled')
         location_text.configure(state = "normal")
         location_text.delete("1.0", "end")
@@ -157,10 +123,12 @@ def search():
         rating_text.configure(state = 'disabled')
     # if there aren't matches, it says there aren't any matches
     else:
-        numAttractions_text.configure(state = "normal")
-        numAttractions_text.delete("1.0", "end")
-        numAttractions_text.insert('end', "We found " + str(len(matches)) + " attractions(s)")
-        numAttractions_text.configure(state = 'disabled')    
+        print("none")
+
+    if len(matches) > 1:
+        next_button.place(x = 675, y = 20)
+
+
 
 # changes the possible selections of the city based on which state the user picked
 def pick_cities(e):
@@ -269,7 +237,41 @@ screenNum = 0
 # creates backup of the attractions list
 attractions_backup = copy.deepcopy(attractions)
 
-# ["Daytona 500 International Speedway", "Orlando", "Florida", 20, "Sightseeing", False, 4.7]
+def update_screen(new_screen):
+    title_text.configure(state = "normal")
+    title_text.delete("1.0", "end")
+    title_text.insert('end', matches[new_screen][0])
+    title_text.tag_add("center_title", "1.0", "end")
+    title_text.configure(state = 'disabled')
+    location_text.configure(state = "normal")
+    location_text.delete("1.0", "end")
+    location_text.insert('end', "Location: " + matches[new_screen][1] + ", " + matches[new_screen][2])
+    location_text.configure(state = 'disabled')
+    price_text.configure(state = "normal")
+    price_text.delete("1.0", "end")
+    price_text.insert('end', "Price: " + str(matches[new_screen][3]))
+    price_text.configure(state = 'disabled')
+    type_text.configure(state = "normal")
+    type_text.delete("1.0", "end")
+    type_text.insert('end', "Type: " + matches[new_screen][4])
+    type_text.configure(state = 'disabled')
+    indoor_text.configure(state = "normal")
+    indoor_text.delete("1.0", "end")
+    if matches[new_screen][5]:  
+        indoor_text.insert('end', 'This attraction is indoors')
+    else:
+        indoor_text.insert('end', 'This attraction is not indoors')
+    indoor_text.configure(state = 'disabled')
+    rating_text.configure(state = "normal")
+    rating_text.delete("1.0", "end")
+    rating_text.insert('end', "Rating: " + str(matches[new_screen][6]))
+    rating_text.configure(state = 'disabled')
+    screenNum_text.configure(state = "normal")
+    screenNum_text.delete("1.0", "end")
+    screenNum_text.insert('end', f"{screenNum + 1} / {len(matches)}")
+    screenNum_text.configure(state = 'disabled')
+
+
 
 # runs when the next button is pressed to show the next attraction
 def next():
@@ -277,44 +279,20 @@ def next():
     global screenNum
     screenNum += 1
     print("next")
+    back_button.place(x = 175, y = 20)
     # updates the screens if there is another possible screen
     if screenNum < len(matches):
-        next_button.place(x = 675, y = 20)
-        title_text.configure(state = "normal")
-        title_text.delete("1.0", "end")
-        title_text.insert('end', matches[screenNum][0])
-        title_text.configure(state = 'disabled')
-        location_text.configure(state = "normal")
-        location_text.delete("1.0", "end")
-        location_text.insert('end', "Location: " + matches[screenNum][1] + ", " + matches[screenNum][2])
-        location_text.configure(state = 'disabled')
-        price_text.configure(state = "normal")
-        price_text.delete("1.0", "end")
-        price_text.insert('end', "Price: " + str(matches[screenNum][3]))
-        price_text.configure(state = 'disabled')
-        type_text.configure(state = "normal")
-        type_text.delete("1.0", "end")
-        type_text.insert('end', "Type: " + matches[screenNum][4])
-        type_text.configure(state = 'disabled')
-        if matches[screenNum][5]:
-            indoor_text.configure(state = "normal")
-            indoor_text.delete("1.0", "end")
-            indoor_text.insert('end', 'This attraction is indoors')
-            indoor_text.configure(state = 'disabled')
-        else:
-            indoor_text.configure(state = "normal")
-            indoor_text.delete("1.0", "end")
-            indoor_text.insert('end', 'This attraction is not indoors')
-            indoor_text.configure(state = 'disabled')
-        rating_text.configure(state = "normal")
-        rating_text.delete("1.0", "end")
-        rating_text.insert('end', "Rating: " + str(matches[screenNum][6]))
-        rating_text.configure(state = 'disabled')
+        update_screen(screenNum)
     # if there isn't another possible screen, the next button disappears
     else:
         next_button.place_forget()
 
 def back():
+    title_text.configure(state = "normal")
+    title_text.delete("1.0", "end")
+    title_text.insert('end', 'nebraska')
+    title_text.tag_add("center_title", "1.0", "end")
+    title_text.configure(state = 'disabled')
     print("back")
 
 # initializes variables to store user's input
@@ -347,11 +325,11 @@ type_dropdown.set("Select a Type")
 type_dropdown.place(x = 10, y = 150)
 
 # creates the dropdown where users select wheter or not they want to be outside
-inside_check = Checkbutton(window, text = "Inside Only", variable = inside_choice)
+inside_check = Checkbutton(window, text = "Inside Only", variable = inside_choice, background='white')
 inside_check.place(x = 10, y = 190)
 
 # creates the slider where users decide the maximum price of their attraction
-max_price_slider = Scale(window, variable = max_price, from_ = 0, to = 300, orient = HORIZONTAL, resolution = 5)
+max_price_slider = Scale(window, variable = max_price, from_ = 0, to = 300, orient = HORIZONTAL, resolution=5)
 max_price_slider.place(x = 10, y = 250)
 max_price_slider.set(300)
 max_price_slider.configure(background = 'white')
@@ -381,9 +359,41 @@ separator.place(relx=0.2, rely=0, relwidth=.001, relheight=1)
 
 # next and back button to go through matching attractions
 next_button = Button(window, text = "Next >", command = next)
-next_button.place(x = 675, y = 20)
 
 back_button = Button(window, text = "< Back", command = back)
-back_button.place(x = 175, y = 20)
+#back_button.place(x = 175, y = 20)
+
+title_text = Text(window, background='white', 
+                  borderwidth=0, height = 1, 
+                  width = 32, font = ("Arial", 19))
+title_text.place(x=223, y=18)
+title_text.tag_configure("center_title", justify='center')
+title_text.configure(state='disabled')
+
+
+location_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
+location_text.place(x = 225, y = 80)
+location_text.configure(state = 'disabled')
+
+price_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
+price_text.place(x = 225, y = 110)
+price_text.configure(state = 'disabled')
+
+type_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
+type_text.place(x = 225, y = 140)
+type_text.configure(state = 'disabled')
+
+indoor_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
+indoor_text.place(x = 225, y = 170)
+indoor_text.configure(state = 'disabled')
+
+rating_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 37, font = ("Arial", 16))
+rating_text.place(x = 225, y = 200)
+rating_text.configure(state = 'disabled')
+
+screenNum_text = Text(window, background = 'white', borderwidth = 0, height = 1, width = 7, font = ("Arial", 14))
+screenNum_text.place(x = 425, y = 450)
+screenNum_text.configure(state = 'disabled')
+
 
 window.mainloop()
