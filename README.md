@@ -3,13 +3,13 @@
 # ADVENTOUR
 
 # Description
-Required Libraries: tKinter, copy
+Required Libraries: tkinter, copy
 
 This project was made for the Nebraska FBLA SLC 2021-2022 Coding and Programming event. 
 The main purpose of the program is to provide the user with possible places to visit based on six criteria: city, state, cost, type, indoor/outdoor, rating (based on Google Reviews)
 Based on the user's input, we will recommend as many locations as possible and will include necessary information about each. User don't have to input all criteria, but have the option to
 
-We used the library tKinter for the app window
+We used the library tkinter for the app window
 We used the programming language Python for our code and developed it in VSCode
 
 Some challenges we faced were:
