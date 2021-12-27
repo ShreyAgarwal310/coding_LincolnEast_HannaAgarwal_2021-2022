@@ -109,19 +109,6 @@ def search():
 
         if len(matches) > 1:
             next_button.place(x=675, y=20)
-        
-        url = matches[new_screen][7]
-        r = requests.get(url)
-
-        pilImage = Image.open(BytesIO(r.content))
-        pilImage = pilImage.resize((200, 200), Image.ANTIALIAS)
-
-        image = ImageTk.PhotoImage(pilImage)
-
-        label = ttk.Label(image=image)
-        label.place(x=500, y=200)
-
-        window.mainloop()
 
 
 # changes the possible selections of the city based on which state the user picked
@@ -172,6 +159,17 @@ def update_screen(new_screen):
     screenNum_text.delete("1.0", "end")
     screenNum_text.insert('end', f"{screenNum} / {len(matches)}")
     screenNum_text.configure(state='disabled')
+
+    url = matches[new_screen][7]
+    r = requests.get(url)
+
+    pilImage = Image.open(BytesIO(r.content))
+    pilImage = pilImage.resize((200, 200), Image.ANTIALIAS)
+
+    image = ImageTk.PhotoImage(pilImage)
+
+    label = ttk.Label(image=image)
+    label.place(x=500, y=200)
 
 
 # runs when the next button is pressed to show the next attraction
