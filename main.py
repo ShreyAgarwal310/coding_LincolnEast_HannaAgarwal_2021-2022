@@ -1,7 +1,7 @@
-from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, messagebox
 from PIL import Image, ImageTk
 from io import BytesIO
+from tkinter import *
 import requests
 import copy
 
@@ -21,85 +21,94 @@ def search():
 
     # gets all of the data and makes sure it's valid
     state = state_dropdown.get()
-    state_boolean = not (state == "Select a State")
     city = cities_dropdown.get()
-    city_boolean = not (city == "Select a State First" or city == "Select a City" or city == "Any")
+    city_boolean = not (city == "Select a City" or city == "Any")
     max_p = max_price_slider.get()
     type = type_dropdown.get()
     type_boolean = not (type == "Select a Type" or type == "Any")
     rating = rating_slider.get()
     inside = 1 == inside_choice.get()
 
-    # checks if data entered is valid and then searches through the data to find acceptable places based on input
-    if (inside):
-        for i in attractions:
-            match_counter = 0
-            non_matches = []
-            if((i[1] == city or (not city_boolean)) and (i[2] == state or (not state_boolean))):
-                if(i[3] <= max_p):
-                    match_counter += 1
-                else:
-                    non_matches.append("Price")
-
-                if(i[4] == type or (not type_boolean)):
-                    match_counter += 1
-                else:
-                    non_matches.append("Type")
-
-                if(i[5]):
-                    match_counter += 1
-                else:
-                    non_matches.append("Inside")
-
-                if(i[6] >= rating):
-                    match_counter += 1
-                else:
-                    non_matches.append("Rating")
-
-                in_city.append([i, match_counter, non_matches])
-            
-            if((i[1] == city or (not city_boolean)) and (i[2] == state or (not state_boolean)) and (i[3] <= max_p) and (i[4] == type or (not type_boolean)) and (i[5]) and (i[6] >= rating)):
-                matches.append(i)
+    if not (state in states_options):
+        messagebox.showerror("State Input Error", "Please Input a Valid State")
+        print("state")
+    elif not (city in state_city_dict[state] or city == "Select a City" or city == "Any"):
+        messagebox.showerror("City Input Error", "Please Input a Valid City \nCheck if the City is in the Selected State")    
+        print("city")
+    elif not (type in type_options or type == "Select a Type" or type == "Any"):
+        messagebox.showerror("Type Input Error", "Please Input a Valid Type")    
+        print("type")
     else:
-        for i in attractions:
-            match_counter = 1
-            non_matches = []
-            if((i[1] == city or (not city_boolean)) and (i[2] == state or (not state_boolean))):
-                if(i[3] <= max_p):
-                    match_counter += 1
-                else:
-                    non_matches.append("Price")
+        # searches through the data to find acceptable places based on input
+        if (inside):
+            for i in attractions:
+                match_counter = 0
+                non_matches = []
+                if((i[1] == city or (not city_boolean)) and (i[2] == state)):
+                    if(i[3] <= max_p):
+                        match_counter += 1
+                    else:
+                        non_matches.append("Price")
 
-                if(i[4] == type or (not type_boolean)):
-                    match_counter += 1
-                else:
-                    non_matches.append("Type")
+                    if(i[4] == type or (not type_boolean)):
+                        match_counter += 1
+                    else:
+                        non_matches.append("Type")
 
-                if(i[6] >= rating):
-                    match_counter += 1
-                else:
-                    non_matches.append("Rating")
+                    if(i[5]):
+                        match_counter += 1
+                    else:
+                        non_matches.append("Inside")
 
-                in_city.append([i, match_counter, non_matches])
-            
-            if((i[1] == city or (not city_boolean)) and (i[2] == state or (not state_boolean)) and (i[3] <= max_p) and (i[4] == type or (not type_boolean)) and (i[6] >= rating)):
-                matches.append(i)
+                    if(i[6] >= rating):
+                        match_counter += 1
+                    else:
+                        non_matches.append("Rating")
 
-    
-    if(about_showing):
-        about_text.place_forget()
-        about_button["text"] = "About"
-        about_button.place(x=51, y=430)
+                    in_city.append([i, match_counter, non_matches])
+                
+                if((i[1] == city or (not city_boolean)) and (i[2] == state) and (i[3] <= max_p) and (i[4] == type or (not type_boolean)) and (i[5]) and (i[6] >= rating)):
+                    matches.append(i)
+        else:
+            for i in attractions:
+                match_counter = 1
+                non_matches = []
+                if((i[1] == city or (not city_boolean)) and (i[2] == state)):
+                    if(i[3] <= max_p):
+                        match_counter += 1
+                    else:
+                        non_matches.append("Price")
 
-    # sets the screen to the first match if there are matches
-    if len(matches) > 0:
-        update_screen(0)
-    # if there aren't matches, it says there aren't any matches
-    else:
-        continue
+                    if(i[4] == type or (not type_boolean)):
+                        match_counter += 1
+                    else:
+                        non_matches.append("Type")
 
-    if len(matches) > 1:
-        next_button.place(x=675, y=20)
+                    if(i[6] >= rating):
+                        match_counter += 1
+                    else:
+                        non_matches.append("Rating")
+
+                    in_city.append([i, match_counter, non_matches])
+                
+                if((i[1] == city or (not city_boolean)) and (i[2] == state) and (i[3] <= max_p) and (i[4] == type or (not type_boolean)) and (i[6] >= rating)):
+                    matches.append(i)
+
+        
+        if(about_showing):
+            about_text.place_forget()
+            about_button["text"] = "About"
+            about_button.place(x=51, y=430)
+
+        # sets the screen to the first match if there are matches
+        if len(matches) > 0:
+            update_screen(0)
+        # if there aren't matches, it says there aren't any matches
+        else:
+            print("none")
+
+        if len(matches) > 1:
+            next_button.place(x=675, y=20)
 
 
 # changes the possible selections of the city based on which state the user picked
