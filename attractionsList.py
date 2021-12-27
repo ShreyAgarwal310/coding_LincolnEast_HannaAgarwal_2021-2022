@@ -41,7 +41,7 @@ attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightse
                 ["SeaWorld Orlando", "Orlando", "Florida", 80, "Educational", False, 4.5, "https://www.bestoforlando.com/common_resources/resize_library/seaworld-orlando-square-logo-210x210.jpg"],
                 ["Busch Gardens Tampa", "Tampa", "Florida", 15, "Pleasure", False, 4.5, "https://www.bestoforlando.com/common_resources/resize_library/busch-gardens-tampa-square-logo-210x210.jpg"],
                 ["Duval Street", "Key West", "Florida", 0, "Sightseeing", False, 4.6, "https://fastly.4sqi.net/img/general/600x600/1235885_RMB3oa6XTNOpWrVLGna_kp9AJO5t14XG6oNhRHyYSD4.jpg"],
-                ["St. Augustine's Historic District", "Key West", "Flordia", 0, "Sightseeing", False, 1, "https://upload.travelawaits.com/ta/uploads/2021/04/downtown-st-augustine-flori6636a2.jpg"],
+                ["St. Augustine's Historic District", "Key West", "Florida", 0, "Sightseeing", False, 1, "https://upload.travelawaits.com/ta/uploads/2021/04/downtown-st-augustine-flori6636a2.jpg"],
                 ["Edison and Ford Winter Estates", "Miami", "Florida", 20, "Sightseeing", True, 4.7, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVIaLPelb7GLbBlmhgtWl5PaTUP_Khe_pTsg&usqp=CAU"],
                 ["Salvador Dali Museum", "Tampa", "Florida", 20, "Educational", True, 4.7, "https://www.mustdo.com/wp-content/uploads/2016/12/Dali-Museum-St.-Petersburg-Florida.jpg"],
                 ["Big Bend National Park", "San Antonio", "Texas", 15, "Nature", False, 4.8, "https://i.pinimg.com/474x/67/4e/66/674e66639f652f4c119b80c534acf3eb.jpg"],
