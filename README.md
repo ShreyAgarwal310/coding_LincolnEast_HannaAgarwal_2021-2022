@@ -22,14 +22,11 @@ Features we hope to implement in the future:
   
 # Instructions
 
-Open the app
+1. Enter your desired criteria. The top dropdown decides the state, the second dropdown decides the city, and the third dropdown decides the top of attraction. The check mark indicates whether the attraction is indoor (checked) or outdoors (unchecked). The next slider is the maximum price and the bottommost slider is the minimum rating. Once finished entered, click the search button.
 
-Input your wanted criteria and then click submit.
-  State, city, type are dropdowns, 
-  Cost is a drag (top bar is min price, middle bar is max price), 
-  Required rating is the bottomost drag bar (0-5)
-  
-Next, click search to view attractions and decide which one is best for you!
+2. Use the back and next button to toggle through the attractions. At the bottom of the screen, you can see how many attractions match your criteria.
+
+3. Enjoy the attraction you choose!
 
 # Credits
 
