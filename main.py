@@ -12,6 +12,7 @@ window.title('Adventour')
 window.geometry("750x500")
 window.resizable(0, 0)
 
+
 # this function runs whenever the "search" button is pressed
 def search():
     # clears the lists of matches and attractions in the selected city and resets the screen number
@@ -201,7 +202,6 @@ def about():
         about_button.place(x=51, y=430)
 
     about_showing = not about_showing
-    
 
 def search_hover(e):
     search_button.config(background='white')
@@ -336,55 +336,55 @@ state_dropdown = ttk.Combobox(window, width=16)
 
 state_dropdown['values'] = states_options
 state_dropdown.set("Select a State")
-state_dropdown.place(x=10, y=70)  
+state_dropdown.place(x=10, y=140)  
 state_dropdown.bind("<<ComboboxSelected>>", change_city_dropdown)
 
 # creates the dropdown where users select their city
 cities_dropdown = ttk.Combobox(window, width=16, values=["Select a State First"])
 cities_dropdown.current(0)
-cities_dropdown.place(x=10, y=110)
+cities_dropdown.place(x=10, y=180)
 cities_dropdown.configure(state='disabled')
 
 # creates the dropdown where users select their type of attraction
 type_dropdown = ttk.Combobox(window, width=16, value=type_options)
 type_dropdown.set("Select a Type")
-type_dropdown.place(x=10, y=150)
+type_dropdown.place(x=10, y=220)
 
 # creates the dropdown where users select whether or not they want to be outside
 inside_check = Checkbutton(window, text="Inside Only", variable=inside_choice, background='white')
-inside_check.place(x=10, y=190)
+inside_check.place(x=10, y=250)
 
 # creates the slider where users decide the maximum price of their attraction
 max_price_slider = Scale(window, from_=0, to=300, orient=HORIZONTAL, resolution=5)
 
-max_price_slider.place(x=10, y=250)
+max_price_slider.place(x=10, y=300)
 max_price_slider.set(300)
 max_price_slider.configure(background='white')
 
 max_text = Text(window, background='white', borderwidth=0, height=1, width=9, font=("Arial", 10))
-max_text.place(x=10, y=230)
+max_text.place(x=10, y=280)
 max_text.insert('end', 'Max Price')
 max_text.configure(state='disabled')
 
 # creates the slider where users decide the rating they want their attraction to be
 rating_slider = Scale(window, from_=0, to=5, orient=HORIZONTAL, resolution=0.1)
 
-rating_slider.place(x=10, y=320)
+rating_slider.place(x=10, y=370)
 rating_slider.configure(background='white')
 
 ratings_text = Text(window, background='white', borderwidth=0, height=1, width=14, font=("Arial", 10))
-ratings_text.place(x=10, y=300)
+ratings_text.place(x=10, y=350)
 ratings_text.insert('end', 'Minimum Rating')
 ratings_text.configure(state='disabled')
 
 # creates the button users click to search once they have finished their entering
 search_button = Button(window, text='Search', command=search)
-search_button.place(x=50, y=390)
+search_button.place(x=50, y=420)
 search_button.bind('<Enter>', search_hover)
 search_button.bind('<Leave>', search_leave)
 
 about_button = Button(window, text="About", command=about)
-about_button.place(x=51, y=430)
+about_button.place(x=51, y=460)
 about_button.bind('<Enter>', about_hover)
 about_button.bind('<Leave>', about_leave)
 
@@ -447,5 +447,17 @@ about_text.insert("1.0", "The Adventour App is designed to create recommendation
                           "3. Enjoy the attraction you choose! \n \n" +
                           "Credits: Nixon Hanna, Shrey Agarwal")
 about_text.configure(state='disabled')
+
+# Read the Image
+logo = Image.open("adventour_logo_white.jpg")
+ 
+# Resize the image using resize() method
+resize_logo = logo.resize((130, 130))
+img_logo = ImageTk.PhotoImage(resize_logo)
+ 
+# create label and add resize image
+logo_label = Label(image=img_logo, borderwidth=0)
+logo_label.image = img_logo
+logo_label.place(x=10, y=5)
 
 window.mainloop()
