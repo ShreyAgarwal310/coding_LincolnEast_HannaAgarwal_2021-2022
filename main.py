@@ -171,6 +171,8 @@ def update_screen(new_screen):
     label = ttk.Label(image=image)
     label.place(x=500, y=200)
 
+    window.mainloop()
+
 
 # runs when the next button is pressed to show the next attraction
 def next():
