@@ -17,7 +17,7 @@ window.iconbitmap(r'adventour_logo_icon.ico')
 # this function runs whenever the "search" button is pressed
 def search():
     # clears the lists of matches and attractions in the selected city and resets the screen number
-    global matches, screen_num
+    global matches, screen_num, in_city
     screen_num = 1
     matches = []
     in_city = []
@@ -105,7 +105,12 @@ def search():
             update_screen(0)
         # if there aren't matches, it says there aren't any matches
         else:
-            print("none")
+            response = messagebox.askokcancel(
+                "No Matches Found", "Unfortunately, we weren't able to find any attractions that fit your selected criteria. \n\nWould you like to see other attractions in your selected location? \n\nIf not just click cancel and edit your criteria.")
+            if (response):
+                update_screen_no_matches(0)
+            else:
+                clear_screen()
 
         if len(matches) > 1:
             next_button.place(x=675, y=20)
@@ -117,6 +122,89 @@ def change_city_dropdown(e):
     cities_dropdown['values'] = state_city_dict[state]
     cities_dropdown.configure(state='normal')
     cities_dropdown.set("Select a City")
+
+
+def update_screen_no_matches(new_screen):
+    global in_city, image_label, screen_num
+    if(new_screen + 1 < len(in_city)):
+        next_button.place(x=675, y=20)
+    else:
+        next_button.place_forget()
+
+    if(new_screen > 0):
+        back_button.place(x=175, y=20)
+    else:
+        back_button.place_forget()
+
+    title_text.configure(state="normal")
+    title_text.delete("1.0", "end")
+    title_text.insert('end', in_city[new_screen][0][0])
+    title_text.tag_add("center_title", "1.0", "end")
+    title_text.configure(state='disabled')
+    location_text.configure(state="normal")
+    location_text.delete("1.0", "end")
+    location_text.insert(
+        'end', f"Location: {in_city[new_screen][0][1]}, {in_city[new_screen][0][2]}")
+    location_text.configure(state='disabled')
+    price_text.configure(state="normal")
+    price_text.delete("1.0", "end")
+    price_text.insert('end', f"Price: ${in_city[new_screen][0][3]}")
+    price_text.configure(state='disabled')
+    type_text.configure(state="normal")
+    type_text.delete("1.0", "end")
+    type_text.insert('end', f"Type: {in_city[new_screen][0][4]}")
+    type_text.configure(state='disabled')
+    indoor_text.configure(state="normal")
+    indoor_text.delete("1.0", "end")
+    indoor_text.insert('end', 'This attraction is indoors') if in_city[new_screen][0][5] else indoor_text.insert(
+        'end', 'This attraction is not indoors')
+    indoor_text.configure(state='disabled')
+    rating_text.configure(state="normal")
+    rating_text.delete("1.0", "end")
+    rating_text.insert('end', f"Rating: {in_city[new_screen][0][6]}")
+    rating_text.configure(state='disabled')
+    screen_num_text.configure(state="normal")
+    screen_num_text.delete("1.0", "end")
+    screen_num_text.insert('end', f"{screen_num} / {len(in_city)}")
+    screen_num_text.configure(state='disabled')
+
+    url = in_city[new_screen][0][7]
+    print(url)
+    r = requests.get(url)
+    pil_image = Image.open(BytesIO(r.content))
+    pil_image = pil_image.resize((200, 200), Image.ANTIALIAS)
+    image = ImageTk.PhotoImage(pil_image)
+    image_label = ttk.Label(image=image)
+    image_label.place(x=500, y=200)
+    window.mainloop()
+
+
+def clear_screen():
+    global image_label
+    title_text.configure(state="normal")
+    title_text.delete("1.0", "end")
+    title_text.configure(state='disabled')
+    location_text.configure(state="normal")
+    location_text.delete("1.0", "end")
+    location_text.configure(state='disabled')
+    price_text.configure(state="normal")
+    price_text.delete("1.0", "end")
+    price_text.configure(state='disabled')
+    type_text.configure(state="normal")
+    type_text.delete("1.0", "end")
+    type_text.configure(state='disabled')
+    indoor_text.configure(state="normal")
+    indoor_text.delete("1.0", "end")
+    indoor_text.configure(state='disabled')
+    rating_text.configure(state="normal")
+    rating_text.delete("1.0", "end")
+    rating_text.configure(state='disabled')
+    screen_num_text.configure(state="normal")
+    screen_num_text.delete("1.0", "end")
+    screen_num_text.configure(state='disabled')
+    image_label.place_forget()
+    next_button.place_forget()
+    back_button.place_forget()
 
 
 def update_screen(new_screen):
@@ -179,7 +267,10 @@ def next():
     global screen_num
     screen_num += 1
     # subtract 1 to convert screen_num starting at 1 to an index starting at 0
-    update_screen(screen_num - 1)
+    if(len(matches) == 0):
+        update_screen_no_matches(screen_num - 1)
+    else:
+        update_screen(screen_num - 1)
 
 
 # runs when the back button is pressed to show the previous attraction
@@ -188,7 +279,10 @@ def back():
     global screen_num
     screen_num -= 1
     # subtract 1 to convert screen_num starting at 1 to an index starting at 0
-    update_screen(screen_num - 1)
+    if(len(matches) == 0):
+        update_screen_no_matches(screen_num - 1)
+    else:
+        update_screen(screen_num - 1)
 
 
 def about():
