@@ -31,13 +31,10 @@ def search():
 
     if not (state in states_options):
         messagebox.showerror("State Input Error", "Please Input a Valid State")
-        print("state")
     elif not (city in state_city_dict[state] or city == "Select a City" or city == "Any"):
         messagebox.showerror("City Input Error", "Please Input a Valid City \nCheck if the City is in the Selected State")    
-        print("city")
     elif not (type in type_options or type == "Select a Type" or type == "Any"):
         messagebox.showerror("Type Input Error", "Please Input a Valid Type")    
-        print("type")
     else:
         # searches through the data to find acceptable places based on input
         if (inside):
@@ -156,15 +153,15 @@ def update_screen(new_screen):
     rating_text.delete("1.0", "end")
     rating_text.insert('end', f"Rating: {matches[new_screen][6]}")
     rating_text.configure(state='disabled')
-    screenNum_text.configure(state="normal")
-    screenNum_text.delete("1.0", "end")
-    screenNum_text.insert('end', f"{screenNum} / {len(matches)}")
-    screenNum_text.configure(state='disabled')
+    screen_num_text.configure(state="normal")
+    screen_num_text.delete("1.0", "end")
+    screen_num_text.insert('end', f"{screen_num} / {len(matches)}")
+    screen_num_text.configure(state='disabled')
 
     url = matches[new_screen][7]
     r = requests.get(url)
-    pilImage = Image.open(BytesIO(r.content))
-    pilImage = pilImage.resize((200, 200), Image.ANTIALIAS)
+    pil_image = Image.open(BytesIO(r.content))
+    pil_image = pil_image.resize((200, 200), Image.ANTIALIAS)
     image = ImageTk.PhotoImage(pilImage)
     image_label = ttk.Label(image=image)
     image_label.place(x=500, y=200)
@@ -173,20 +170,20 @@ def update_screen(new_screen):
 
 # runs when the next button is pressed to show the next attraction
 def next():
-    # increments screenNum to go to the next screen
-    global screenNum
-    screenNum += 1
-    # subtract 1 to convert screenNum starting at 1 to an index starting at 0
-    update_screen(screenNum - 1)
+    # increments screen_num to go to the next screen
+    global screen_num
+    screen_num += 1
+    # subtract 1 to convert screen_num starting at 1 to an index starting at 0
+    update_screen(screen_num - 1)
 
 
 # runs when the back button is pressed to show the previous attraction
 def back():
-    # increments screenNum down one to go to the previous screen
-    global screenNum
-    screenNum -= 1
-    # subtract 1 to convert screenNum starting at 1 to an index starting at 0
-    update_screen(screenNum - 1)
+    # increments screen_num down one to go to the previous screen
+    global screen_num
+    screen_num -= 1
+    # subtract 1 to convert screen_num starting at 1 to an index starting at 0
+    update_screen(screen_num - 1)
 
 def about():
     global image_label
@@ -325,7 +322,7 @@ attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightse
                 ["Golden Spike Tower", "North Platte", "Nebraska", 10, "Sightseeing", False, 4.7, "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/b9/03/73/entrance.jpg?w=1200&h=1200&s=1"],
                 ["Carhenge", "Scottsbluff", "Nebraska", 0, "Sightseeing", False, 4.6, "https://s3-media0.fl.yelpcdn.com/bphoto/v0XSjKbca-cx0tOXHN3pJw/348s.jpg"]]
 
-screenNum = 1
+screen_num = 1
 about_showing = False
 inside_choice = IntVar()
 
@@ -428,9 +425,9 @@ rating_text = Text(window, background='white', borderwidth=0, height=1, width=37
 rating_text.place(x=225, y=200)
 rating_text.configure(state='disabled')
 
-screenNum_text = Text(window, background='white', borderwidth=0, height=1, width=7, font=("Arial", 14))
-screenNum_text.place(x=425, y=450)
-screenNum_text.configure(state='disabled')
+screen_num_text = Text(window, background='white', borderwidth=0, height=1, width=7, font=("Arial", 14))
+screen_num_text.place(x=425, y=450)
+screen_num_text.configure(state='disabled')
 
 about_text = Text(window, background='white', borderwidth=0, height=23, width=53, font=("Arial", 14))
 about_text.insert("1.0", "The Adventour App is designed to create recommendations for users\n" +
