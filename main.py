@@ -102,7 +102,6 @@ def search():
 
         # sets the screen to the first match if there are matches
         if len(matches) > 0:
-            print("reseting screen")
             update_screen(0)
         # if there aren't matches, it says there aren't any matches
         else:
@@ -161,7 +160,6 @@ def update_screen(new_screen):
     rating_text.configure(state='disabled')
     screen_num_text.configure(state="normal")
     screen_num_text.delete("1.0", "end")
-    print("updating text at bottom", screen_num, len(matches))
     screen_num_text.insert('end', f"{screen_num} / {len(matches)}")
     screen_num_text.configure(state='disabled')
 
