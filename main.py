@@ -11,6 +11,7 @@ window.configure(background='white')
 window.title('Adventour')
 window.geometry("750x500")
 window.resizable(0, 0)
+window.iconbitmap(r'adventour_logo_white_icon.ico')
 
 
 # this function runs whenever the "search" button is pressed
@@ -285,7 +286,7 @@ attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightse
                 ["Carnegie Hall", "New York City", "New York", 300, "Sightseeing", True, 4.7, "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-50606902-1556557421.jpg?crop=0.668xw:1.00xh;0.0689xw,0&resize=640:*"],
                 ["Bryant Park", "New York City", "New York", 0, "Sightseeing", False, 4.7, "https://static01.nyt.com/images/2021/04/15/arts/14bryant-live/merlin_177032124_68f3d4cb-62d6-47ec-8cb8-fa67f1570a53-mediumSquareAt3X.jpg"],
                 ["Walt Disney World", "Orlando", "Florida", 110, "Pleasure", False, 4.7, "https://lumiere-a.akamaihd.net/v1/images/cg_parks_wdw_50thcelebration_specialoffers_21943_25454ec0.jpeg?region=0,0,800,800"],
-                ["Kennedy Space Center", "Orlando", "Florida", 50, "Educational", False, 4, "https://www.kennedyspacecenter.com/-/media/DNC/KSCVC/Attraction-Images/Apollo-Saturn-V-Zone/moon-tree-garden-square.ashx?h=900&w=900&la=en&hash=E579E03ADEC1D0E632712E04A670435F2AA4EA64"],
+                ["Kennedy Space Center", "Orlando", "Florida", 50, "Educational", False, 4, "https://visitbayareahouston.com/wp-content/uploads/2021/09/spacecenter-1024x1017.png"],
                 ["Universal Studios", "Orlando", "Florida", 110, "Pleasure", False, 4.7, "https://travelmamas.com/wp-content/uploads/2018/08/universal_hollywood_entrance_family2_square.jpg"],
                 ["Miami Beach", "Miami", "Florida", 0, "Pleasure", False, 4.4, "https://images.squarespace-cdn.com/content/v1/5830e824c534a5539424a2ce/1619372362752-XAVBUXSZTEQID74SMF1E/577F3A76-EE1E-4680-A2ED-9516FB813818.jpg?format=1000w"],
                 ["Everglades National Park", "Miami", "Florida", 0, "Nature", False, 4.6, "https://i.natgeofe.com/n/f3cb2ae5-53e1-44d3-ab69-6b3efa0ccbf7/2026_square.jpg"],
