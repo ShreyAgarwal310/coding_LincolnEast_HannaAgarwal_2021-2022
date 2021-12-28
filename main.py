@@ -1,7 +1,7 @@
 from tkinter import ttk, messagebox
+from tkinter import *
 from PIL import Image, ImageTk
 from io import BytesIO
-from tkinter import *
 import requests
 import copy
 
@@ -120,6 +120,7 @@ def change_city_dropdown(e):
 
 
 def update_screen(new_screen):
+    global image_label
     if(new_screen + 1 < len(matches)):
         next_button.place(x=675, y=20)
     else:
@@ -162,15 +163,11 @@ def update_screen(new_screen):
 
     url = matches[new_screen][7]
     r = requests.get(url)
-
     pilImage = Image.open(BytesIO(r.content))
     pilImage = pilImage.resize((200, 200), Image.ANTIALIAS)
-
     image = ImageTk.PhotoImage(pilImage)
-
-    label = ttk.Label(image=image)
-    label.place(x=500, y=200)
-
+    image_label = ttk.Label(image=image)
+    image_label.place(x=500, y=200)
     window.mainloop()
 
 
@@ -192,8 +189,10 @@ def back():
     update_screen(screenNum - 1)
 
 def about():
+    global image_label
     global about_showing
     if not about_showing:
+        image_label.place_forget()
         about_text.place(x=152, y=0)
         about_button["text"] = "Close About"
         about_button.place(x=35, y=430)
