@@ -11,7 +11,7 @@ window.configure(background='white')
 window.title('Adventour')
 window.geometry("750x500")
 window.resizable(0, 0)
-window.iconbitmap(r'adventour_logo_white_icon.ico')
+window.iconbitmap(r'adventour_logo_icon.ico')
 
 
 # this function runs whenever the "search" button is pressed
@@ -450,7 +450,7 @@ about_text.insert("1.0", "The Adventour App is designed to create recommendation
 about_text.configure(state='disabled')
 
 # Read the Image
-logo = Image.open("adventour_logo_white.jpg")
+logo = Image.open("adventour_logo.jpg")
  
 # Resize the image using resize() method
 resize_logo = logo.resize((130, 130))

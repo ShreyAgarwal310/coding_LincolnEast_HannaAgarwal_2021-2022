@@ -449,7 +449,7 @@ about_text.insert("1.0", "The Adventour App is designed to create recommendation
 about_text.configure(state='disabled')
 
 # Read the Image
-image = Image.open("adventour_logo.png")
+image = Image.open("adventour_logo.jpg")
  
 # Resize the image using resize() method
 resize_image = image.resize((55, 55))
