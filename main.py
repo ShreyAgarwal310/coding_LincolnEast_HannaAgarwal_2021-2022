@@ -14,8 +14,9 @@ window.resizable(0, 0)
 
 # this function runs whenever the "search" button is pressed
 def search():
-    # clears the lists of matches and attractions in the selected city
-    global matches
+    # clears the lists of matches and attractions in the selected city and resets the screen number
+    global matches, screen_num
+    screen_num = 1
     matches = []
     in_city = []
 
@@ -99,6 +100,7 @@ def search():
 
         # sets the screen to the first match if there are matches
         if len(matches) > 0:
+            print("reseting screen")
             update_screen(0)
         # if there aren't matches, it says there aren't any matches
         else:
@@ -117,7 +119,7 @@ def change_city_dropdown(e):
 
 
 def update_screen(new_screen):
-    global image_label
+    global image_label, screen_num
     if(new_screen + 1 < len(matches)):
         next_button.place(x=675, y=20)
     else:
@@ -155,6 +157,7 @@ def update_screen(new_screen):
     rating_text.configure(state='disabled')
     screen_num_text.configure(state="normal")
     screen_num_text.delete("1.0", "end")
+    print("updating text at bottom", screen_num, len(matches))
     screen_num_text.insert('end', f"{screen_num} / {len(matches)}")
     screen_num_text.configure(state='disabled')
 
@@ -162,7 +165,7 @@ def update_screen(new_screen):
     r = requests.get(url)
     pil_image = Image.open(BytesIO(r.content))
     pil_image = pil_image.resize((200, 200), Image.ANTIALIAS)
-    image = ImageTk.PhotoImage(pilImage)
+    image = ImageTk.PhotoImage(pil_image)
     image_label = ttk.Label(image=image)
     image_label.place(x=500, y=200)
     window.mainloop()
@@ -186,8 +189,7 @@ def back():
     update_screen(screen_num - 1)
 
 def about():
-    global image_label
-    global about_showing
+    global image_label, about_showing
     if not about_showing:
         image_label.place_forget()
         about_text.place(x=152, y=0)
@@ -258,14 +260,14 @@ attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightse
                 ["Redwood National Park", "San Francisco", "California", 0, "Nature", False, 4.8, "https://www.nps.gov/common/uploads/grid_builder/redw/crop1_1/60D0481D-BDC1-4F54-49342D5FB4C8D60E.jpg?width=640&quality=90&mode=crop"],
                 ["Joshua Tree National Park", "Los Angeles", "California", 30, "Nature", False, 4.8, "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,g_xy_center,h_297,q_65,w_315,x_889,y_402/v1/clients/palmsprings/joshua_tree_ecedb690-b210-454b-8203-f807e2448036.jpg"],
                 ["Universal Studios Hollywood", "Los Angeles", "California", 110, "Pleasure", False, 4.6, "https://www.universalstudioshollywood.com/tridiondata/ush/en/us/files/images/ush-universal-arch-red-carpet-welcome-back-m.jpg?imwidth=580"],
-                ["Hearst Castle", "San Francisco", "California", 35, "Educational", True, 4.6, "https://cambriainns.com/wp-content/uploads/2015/03/hearst1.jpg"],
+                ["Hearst Castle", "San Francisco", "California", 35, "Educational", True, 4.6, "https://upload.travelawaits.com/ta/uploads/2021/04/06ca25982abcd8e52b86d2d7526d206ca25-scaled.jpg"],
                 ["Santa Catalina Island", "Los Angeles", "California", 0, "Sightseeing", False, 4.6, "https://www.tripsavvy.com/thmb/QiDO05SKkNsLrQVzCnwWRI7jSCQ=/1000x1000/smart/filters:no_upscale()/20090516__0069-1000x1500-58c39fe83df78c353cf97bfc.jpg"],
                 ["Channel Islands National Park", "Los Angeles", "California", 0, "Sightseeing", False, 4.7, "https://www.venturaharborvillage.com/wp-content/uploads/channel-islands-national-park.jpg"],
                 ["The Getty Center", "Los Angeles", "California", 0, "Educational", True, 4.8, "https://c8.alamy.com/comp/E2AM05/united-states-california-los-angeles-brentwood-hill-jpaul-getty-museum-E2AM05.jpg"],
                 ["Statue of Liberty", "New York City", "New York", 0, "Sightseeing", False, 4.7, "https://media.newyorker.com/photos/60df663b833fa66507c7515e/1:1/w_1679,h_1679,c_limit/Gopnik-Little-Liberty.jpg"],
                 ["Central Park", "New York City", "New York", 0, "Nature", False, 4.8, "https://static01.nyt.com/images/2021/03/07/nyregion/07travel-central-park-11/07travel-central-park-11-mobileMasterAt3x-v2.jpg"],
                 ["Rockefeller Center", "New York City", "New York", 40, "Sightseeing", True, 4.7, "https://cdn.sanity.io/images/bs9rmafh/main/e58a153f0d183f4dc165199e4e8ba0a3e300bc50-1840x2002.jpg?w=800&h=870&fit=crop"],
-                ["Metropolitan Museum of Art", "New York City", "New York", 25, "Educational", True, 4.8, "http://www.metmuseum.org/-/media/images/visit/met-fifth-avenue/fifthave_teaser.jpg?sc_lang=en"],
+                ["Metropolitan Museum of Art", "New York City", "New York", 25, "Educational", True, 4.8, "https://static01.nyt.com/images/2020/04/01/arts/30virus-met-pix/merlin_170961942_70c85c06-e92b-4dbd-b91e-d32688493352-mediumSquareAt3X.jpg"],
                 ["Broadway", "New York City", "New York", 100, "Sightseeing", False, 4.5, "https://static01.nyt.com/images/2020/04/09/arts/00virus-broadway-1/00virus-broadway-1-mediumSquareAt3X-v2.jpg"],
                 ["Empire State Building", "New York City", "New York", 36, "Sightseeing", True, 4.7, "https://marvel-b1-cdn.bc0a.com/f00000000179470/www.esbnyc.com/sites/default/files/styles/small_feature/public/2020-02/Green%20lights.jpg?itok=eesKOaKH"],
                 ["9/11 Memorial", "New York City", "New York", 30, "Educational", False, 4.9, "https://d3iso9mq9tb10q.cloudfront.net/catalog/product/cache/191a57bb001f092e9eec8a49199fc081/b/b/bbt_product_attractions_new-york_911-memorial_1.jpg"],
@@ -288,8 +290,8 @@ attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightse
                 ["Miami Beach", "Miami", "Florida", 0, "Pleasure", False, 4.4, "https://images.squarespace-cdn.com/content/v1/5830e824c534a5539424a2ce/1619372362752-XAVBUXSZTEQID74SMF1E/577F3A76-EE1E-4680-A2ED-9516FB813818.jpg?format=1000w"],
                 ["Everglades National Park", "Miami", "Florida", 0, "Nature", False, 4.6, "https://i.natgeofe.com/n/f3cb2ae5-53e1-44d3-ab69-6b3efa0ccbf7/2026_square.jpg"],
                 ["Daytona 500 International Speedway", "Orlando", "Florida", 20, "Sightseeing", False, 4.7, "https://frcs.pro/assets/img/track/daytona-international-speedway.jpg"],
-                ["SeaWorld Orlando", "Orlando", "Florida", 80, "Educational", False, 4.5, "https://www.bestoforlando.com/common_resources/resize_library/seaworld-orlando-square-logo-210x210.jpg"],
-                ["Busch Gardens Tampa", "Tampa", "Florida", 15, "Pleasure", False, 4.5, "https://www.bestoforlando.com/common_resources/resize_library/busch-gardens-tampa-square-logo-210x210.jpg"],
+                ["SeaWorld Orlando", "Orlando", "Florida", 80, "Educational", False, 4.5, "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,g_xy_center,h_640,q_75,w_640,x_322,y_381/v1/clients/orlandofl/gcm_seaworld_now_open_hero_640x640_251dfb49-9c01-489f-817f-6300b36ab8f5.jpg"],
+                ["Busch Gardens Tampa", "Tampa", "Florida", 15, "Pleasure", False, 4.5, "https://www.tripsavvy.com/thmb/HUh2PmxHTJYe271myRX5m6SlMl4=/2028x2028/smart/filters:no_upscale()/rides-at-busch-gardens-526986822-5b0bfe75119fa80037139afc.jpg"],
                 ["Duval Street", "Key West", "Florida", 0, "Sightseeing", False, 4.6, "https://fastly.4sqi.net/img/general/600x600/1235885_RMB3oa6XTNOpWrVLGna_kp9AJO5t14XG6oNhRHyYSD4.jpg"],
                 ["St. Augustine's Historic District", "Key West", "Florida", 0, "Sightseeing", False, 1, "https://upload.travelawaits.com/ta/uploads/2021/04/downtown-st-augustine-flori6636a2.jpg"],
                 ["Edison and Ford Winter Estates", "Miami", "Florida", 20, "Sightseeing", True, 4.7, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVIaLPelb7GLbBlmhgtWl5PaTUP_Khe_pTsg&usqp=CAU"],
@@ -314,9 +316,9 @@ attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightse
                 ["Strategic Air and Space Museum", "Omaha", "Nebraska", 15, "Educational", True, 4.7, "https://www.roadsideamerica.com/attract/images/ne/NEASHsac_5272ks.jpg"],
                 ["Chimney Rock Historic Site", "Scottsbluff", "Nebraska", 0, "Sightseeing", False, 4.2, "https://www.chimneyrockpark.com/wp-content/uploads/2016/05/chimneyrock_state.jpg"],
                 ["Haymarket District in Lincoln", "Lincoln", "Nebraska", 0, "Sightseeing", False, 4.7, "https://bloximages.chicago2.vip.townnews.com/journalstar.com/content/tncms/assets/v3/editorial/1/47/147575ea-1ec9-5d45-a3c6-bbaa639d3124/5a84f250e0c5d.image.jpg?crop=999%2C999%2C250%2C0&resize=1200%2C1200&order=crop%2Cresize"],
-                ["Nebraska State Capitol", "Lincoln", "Nebraska", 0, "Sightseeing", True, 4.5, "https://upload.wikimedia.org/wikipedia/commons/c/cc/Nebraska_State_Capitol_aerial.jpg"],
+                ["Nebraska State Capitol", "Lincoln", "Nebraska", 0, "Sightseeing", True, 4.5, "https://upload.wikimedia.org/wikipedia/commons/b/b1/Nebraska_State_Capitol_Highsmith.jpeg"],
                 ["Lied Center", "Lincoln", "Nebraska", 50, "Pleasure", True, 4.3, "https://www.liedcenter.org/sites/default/files/styles/event_listing/public/teasers/andrew_and_kamerin_on_lied_stage.jpg?itok=0monEkvb"],
-                ["Sheldon Museum of Art", "Lincoln", "Nebraska", 0, "Educational", True, 4.5, "https://lh3.googleusercontent.com/proxy/YFxuCWN2KJZBEr5vB-Fdb6cLXY8zqnxwn0isFPHh1MM8e0rbzuU5qCyyRzdQbdx5OgGTvtbZxkeWSQk5jFVbPmpaEahYocIGMKGYotLWnd55wGAg"],
+                ["Sheldon Museum of Art", "Lincoln", "Nebraska", 0, "Educational", True, 4.5, "https://s3-media0.fl.yelpcdn.com/bphoto/ov1polHXXSH0eymPNuwzlg/348s.jpg"],
                 ["National Museum of Roller Skating", "Lincoln", "Nebraska", 0, "Educational", True, 3.9, "https://ghosty-production.s3.amazonaws.com/fotospot_spots/National-Museum-of-Rollerskating-Fotospot_dd70d6d30b310a43650607af29155fb5/large.jpg"],
                 ["Scottsbluff National Monument", "Scottsbluff", "Nebraska", 0, "Sightseeing", False, 4.8, "https://bloximages.chicago2.vip.townnews.com/theindependent.com/content/tncms/assets/v3/editorial/8/c3/8c3df7d2-2748-11e6-9262-676e98c59aed/574db531f1144.image.jpg?crop=1175%2C1175%2C294%2C0&resize=1200%2C1200&order=crop%2Cresize"],
                 ["Golden Spike Tower", "North Platte", "Nebraska", 10, "Sightseeing", False, 4.7, "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/b9/03/73/entrance.jpg?w=1200&h=1200&s=1"],
