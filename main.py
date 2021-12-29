@@ -99,7 +99,7 @@ def search():
         if(about_showing):
             about_text.place_forget()
             about_button["text"] = "About"
-            about_button.place(x=51, y=430)
+            about_button.place(x=51, y=460)
 
         # sets the screen to the first match if there are matches
         if len(matches) > 0:
@@ -304,19 +304,23 @@ def back():
 
 
 def about():
-    global image_label, about_showing
+    global image_label, about_showing, link_label
     if not about_showing:
         try:
             image_label.place_forget()
         except NameError:
             pass
+        try:
+            link_label.place_forget()
+        except NameError:
+            pass
         about_text.place(x=152, y=0)
         about_button["text"] = "Close About"
-        about_button.place(x=35, y=430)
+        about_button.place(x=35, y=460)
     else:
         about_text.place_forget()
         about_button["text"] = "About"
-        about_button.place(x=51, y=430)
+        about_button.place(x=51, y=460)
 
     about_showing = not about_showing
 
