@@ -375,7 +375,7 @@ state_city_dict = {
 attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightseeing", False, 4.8,
                 "https://www.history.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTY1Mzg0OTc4NTIyMjUyNzU0/golden-gate-bridge-gettyimages-671734928.jpg",
                "https://en.wikipedia.org/wiki/Golden_Gate_Bridge"],
-               ["Yosemite National Park", "San Franciso", "California", 15, "Nature", False, 4.8,
+               ["Yosemite National Park", "San Francisco", "California", 15, "Nature", False, 4.8,
                "https://44hwtb1ramg42tavjo3od08v-wpengine.netdna-ssl.com/wp-content/uploads/2020/07/DSC00217-1-1200x1200-cropped.jpg",
                 "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
                ["Disneyland", "Anaheim", "California", 250, "Pleasure", False, 4.8,
@@ -683,27 +683,27 @@ title_text.configure(state='disabled')
 
 location_text = Text(window, background='white', borderwidth=0,
                      height=1, width=37, font=("Avenir Next", 16))
-location_text.place(x=225, y=80)
+location_text.place(x=200, y=80)
 location_text.configure(state='disabled')
 
 price_text = Text(window, background='white', borderwidth=0,
                   height=1, width=37, font=("Avenir Next", 16))
-price_text.place(x=225, y=110)
+price_text.place(x=200, y=110)
 price_text.configure(state='disabled')
 
 type_text = Text(window, background='white', borderwidth=0,
                  height=1, width=37, font=("Avenir Next", 16))
-type_text.place(x=225, y=140)
+type_text.place(x=200, y=140)
 type_text.configure(state='disabled')
 
 indoor_text = Text(window, background='white', borderwidth=0,
                    height=1, width=37, font=("Avenir Next", 16))
-indoor_text.place(x=225, y=170)
+indoor_text.place(x=200, y=170)
 indoor_text.configure(state='disabled')
 
 rating_text = Text(window, background='white', borderwidth=0,
                    height=1, width=37, font=("Avenir Next", 16))
-rating_text.place(x=225, y=200)
+rating_text.place(x=200, y=200)
 rating_text.configure(state='disabled')
 
 screen_num_text = Text(window, background='white',
