@@ -99,7 +99,7 @@ def search():
         if(about_showing):
             about_text.place_forget()
             about_button["text"] = "About"
-            about_button.place(x=51, y=460)
+            about_button.place(x=63, y=460)
 
         # sets the screen to the first match if there are matches
         if len(matches) > 0:
@@ -137,7 +137,7 @@ def update_screen_no_matches(new_screen):
         next_button.place_forget()
 
     if(new_screen > 0):
-        back_button.place(x=175, y=20)
+        back_button.place(x=200, y=20)
     else:
         back_button.place_forget()
 
@@ -225,7 +225,7 @@ def update_screen(new_screen):
         next_button.place_forget()
 
     if(new_screen > 0):
-        back_button.place(x=175, y=20)
+        back_button.place(x=200, y=20)
     else:
         back_button.place_forget()
 
@@ -316,11 +316,11 @@ def about():
             pass
         about_text.place(x=200, y=0)
         about_button["text"] = "Close About"
-        about_button.place(x=35, y=460)
+        about_button.place(x=45, y=460)
     else:
         about_text.place_forget()
         about_button["text"] = "About"
-        about_button.place(x=51, y=460)
+        about_button.place(x=63, y=460)
 
     about_showing = not about_showing
 
@@ -570,7 +570,7 @@ attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightse
                "https://bloximages.chicago2.vip.townnews.com/journalstar.com/content/tncms/assets/v3/editorial/1/47/147575ea-1ec9-5d45-a3c6-bbaa639d3124/5a84f250e0c5d.image.jpg?crop=999%2C999%2C250%2C0&resize=1200%2C1200&order=crop%2Cresize",
                 "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
                ["Nebraska State Capitol", "Lincoln", "Nebraska", 0, "Sightseeing", True, 4.5,
-               "https://upload.wikimedia.org/wikipedia/commons/b/b1/Nebraska_State_Capitol_Highsmith.jpeg",
+               "https://images.skyscrapercenter.com/building/nebraskastatecapitol_ext-overall.jpg",
                 "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
                ["Lied Center", "Lincoln", "Nebraska", 50, "Pleasure", True, 4.3,
                "https://www.liedcenter.org/sites/default/files/styles/event_listing/public/teasers/andrew_and_kamerin_on_lied_stage.jpg?itok=0monEkvb",
@@ -629,36 +629,36 @@ inside_check.place(x=10, y=250)
 max_price_slider = Scale(window, from_=0, to=300,
                          orient=HORIZONTAL, resolution=5)
 
-max_price_slider.place(x=10, y=300)
+max_price_slider.place(x=35, y=300)
 max_price_slider.set(300)
 max_price_slider.configure(background='white')
 
 max_text = Text(window, background='white', borderwidth=0,
                 height=1, width=9, font=("Avenir Next", 10))
-max_text.place(x=10, y=280)
+max_text.place(x=60, y=280)
 max_text.insert('end', 'Max Price')
 max_text.configure(state='disabled')
 
 # creates the slider where users decide the rating they want their attraction to be
 rating_slider = Scale(window, from_=0, to=5, orient=HORIZONTAL, resolution=0.1)
 
-rating_slider.place(x=10, y=370)
+rating_slider.place(x=35, y=370)
 rating_slider.configure(background='white')
 
 ratings_text = Text(window, background='white', borderwidth=0,
                     height=1, width=14, font=("Avenir Next", 10))
-ratings_text.place(x=10, y=350)
+ratings_text.place(x=40, y=350)
 ratings_text.insert('end', 'Minimum Rating')
 ratings_text.configure(state='disabled')
 
 # creates the button users click to search once they have finished their entering
 search_button = Button(window, text='Search', command=search)
-search_button.place(x=50, y=420)
+search_button.place(x=60, y=430)
 search_button.bind('<Enter>', search_hover)
 search_button.bind('<Leave>', search_leave)
 
 about_button = Button(window, text="About", command=about)
-about_button.place(x=51, y=460)
+about_button.place(x=63, y=460)
 about_button.bind('<Enter>', about_hover)
 about_button.bind('<Leave>', about_leave)
 
@@ -677,7 +677,7 @@ back_button.bind('<Leave>', back_leave)
 title_text = Text(window, background='white',
                   borderwidth=0, height=1,
                   width=32, font=("Avenir Next", 19))
-title_text.place(x=223, y=18)
+title_text.place(x=275, y=15)
 title_text.tag_configure("center_title", justify='center')
 title_text.configure(state='disabled')
 
@@ -712,7 +712,7 @@ screen_num_text.place(x=425, y=450)
 screen_num_text.configure(state='disabled')
 
 about_text = Text(window, background='white', borderwidth=0,
-                  height=23, width=53, font=("Avenir Next", 14))
+                  height=23, width=60, font=("Avenir Next", 14))
 about_text.insert("1.0", "The Adventour App is designed to create recommendations for users\n" +
                   "based on entered criteria. \n \n" +
                   "To use to the app, \n \n" +
@@ -733,12 +733,12 @@ about_text.configure(state='disabled')
 logo = Image.open("adventour_logo.jpg")
 
 # Resize the image using resize() method
-resize_logo = logo.resize((130, 130))
+resize_logo = logo.resize((120, 120))
 img_logo = ImageTk.PhotoImage(resize_logo)
 
 # create label and add resize image
 logo_label = Label(image=img_logo, borderwidth=0)
 logo_label.image = img_logo
-logo_label.place(x=10, y=5)
+logo_label.place(x=33.5, y=5)
 
 window.mainloop()
