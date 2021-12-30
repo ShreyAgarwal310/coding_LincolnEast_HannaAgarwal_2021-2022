@@ -174,7 +174,6 @@ def update_screen_no_matches(new_screen):
     screen_num_text.configure(state='disabled')
 
     url = in_city[new_screen][0][7]
-    print(url)
     r = requests.get(url)
     pil_image = Image.open(BytesIO(r.content))
     pil_image = pil_image.resize((250, 250), Image.ANTIALIAS)
@@ -270,7 +269,6 @@ def update_screen(new_screen):
     image_label.place(x=480, y=75)
 
     link_url = matches[new_screen][8]
-    print(link_url)
     link_label = Label(window, text='website', font=(
         'Avenir Next', 12), fg='sky blue', bg='white')
     link_label.place(x=590, y=330)
@@ -409,7 +407,8 @@ attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightse
                "https://www.tripsavvy.com/thmb/QiDO05SKkNsLrQVzCnwWRI7jSCQ=/1000x1000/smart/filters:no_upscale()/20090516__0069-1000x1500-58c39fe83df78c353cf97bfc.jpg",
                 "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
                ["Channel Islands National Park", "Los Angeles", "California", 0, "Sightseeing", False, 4.7,
-               "https://www.venturaharborvillage.com/wp-content/uploads/channel-islands-national-park.jpg"],
+               "https://www.venturaharborvillage.com/wp-content/uploads/channel-islands-national-park.jpg",
+                "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
                ["The Getty Center", "Los Angeles", "California", 0, "Educational", True, 4.8,
                "https://c8.alamy.com/comp/E2AM05/united-states-california-los-angeles-brentwood-hill-jpaul-getty-museum-E2AM05.jpg",
                 "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
