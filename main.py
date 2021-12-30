@@ -113,8 +113,11 @@ def search():
             else:
                 clear_screen()
 
-        if len(matches) > 1 and (not next_button.winfo_viewable()):
-            next_button.place(x=675, y=20)
+        try:
+            if len(matches) > 1 and (not next_button.winfo_viewable()):
+                next_button.place(x=675, y=20)
+        except TclError:
+            pass
 
 
 # changes the possible selections of the city based on which state the user picked
@@ -748,7 +751,7 @@ logo_label.place(x=10, y=5)
 # function to shutdown window to avoid '_tkinter.TclError' after program exits
 def shutdown_ttk_repeat():
     window.eval('::ttk::CancelRepeat')
-    window.quit()
+    window.destroy()
 
 
 window.protocol("WM_DELETE_WINDOW", shutdown_ttk_repeat)
