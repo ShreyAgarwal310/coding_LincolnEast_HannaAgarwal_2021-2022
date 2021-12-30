@@ -178,7 +178,7 @@ def update_screen_no_matches(new_screen):
     pil_image = Image.open(BytesIO(r.content))
     pil_image = pil_image.resize((250, 250), Image.ANTIALIAS)
     image = ImageTk.PhotoImage(pil_image)
-    image_label = ttk.Label(image=image)
+    image_label['image'] = image
     image_label.place(x=480, y=75)
     window.mainloop()
 
@@ -265,12 +265,11 @@ def update_screen(new_screen):
     pil_image = Image.open(BytesIO(r.content))
     pil_image = pil_image.resize((250, 250), Image.ANTIALIAS)
     image = ImageTk.PhotoImage(pil_image)
-    image_label = ttk.Label(image=image)
+    image_label['image'] = image
     image_label.place(x=480, y=75)
 
     link_url = matches[new_screen][8]
-    link_label = Label(window, text='website', font=(
-        'Avenir Next', 12), fg='sky blue', bg='white')
+    link_label['text'] = "website"
     link_label.place(x=590, y=330)
     link_label.bind("<Button-1>", lambda e: pull_up_link(link_url))
 
@@ -517,8 +516,8 @@ attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightse
                ["San Antonio's River Walk", "San Antonio", "Texas", 0, "Sightseeing", False, 4.7,
                "https://upload.travelawaits.com/ta/uploads/2021/04/the-san-antonio-river-walk-inb5a0a4.jpg",
                 "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
-               ["Space Center Houston", "Houston", "Texas", 30, "Educational", False, 4.6,
-               "https://upload.wikimedia.org/wikipedia/en/thumb/c/ce/Space_Center_Houston_Color_Stacked.svg/1200px-Space_Center_Houston_Color_Stacked.svg.png",
+               ["Johnson Space Center", "Houston", "Texas", 30, "Educational", False, 4.6,
+               "https://www.tripsavvy.com/thmb/Zh8L1Zq0Xwj0dtnJPr5Mw-eqX4M=/3332x2499/smart/filters:no_upscale()/us-space-history-apollo-1152683403-d27ff1ecee084f1f9ee753f3cc1928d2.jpg",
                 "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
                ["Padre Island National Seashore", "San Antonio", "Texas", 20, "Nature", False, 4.4,
                "https://render.fineartamerica.com/images/rendered/small/print/images/artworkimages/square/2/padre-island-national-seashore-yinyang.jpg",
@@ -709,6 +708,11 @@ screen_num_text = Text(window, background='white',
                        borderwidth=0, height=1, width=7, font=("Avenir Next", 14))
 screen_num_text.place(x=425, y=450)
 screen_num_text.configure(state='disabled')
+
+image_label = ttk.Label()
+
+link_label = Label(window, font=(
+    'Avenir Next', 12), fg='sky blue', bg='white')
 
 about_text = Text(window, background='white', borderwidth=0,
                   height=23, width=53, font=("Avenir Next", 14))
