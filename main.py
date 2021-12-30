@@ -113,7 +113,7 @@ def search():
             else:
                 clear_screen()
 
-        if len(matches) > 1:
+        if len(matches) > 1 and (not next_button.winfo_viewable()):
             next_button.place(x=675, y=20)
 
 
@@ -743,5 +743,15 @@ img_logo = ImageTk.PhotoImage(resize_logo)
 logo_label = Label(image=img_logo, borderwidth=0)
 logo_label.image = img_logo
 logo_label.place(x=10, y=5)
+
+
+# function to shutdown window to avoid '_tkinter.TclError' after program exits
+def shutdown_ttk_repeat():
+    window.eval('::ttk::CancelRepeat')
+    window.quit()
+
+
+window.protocol("WM_DELETE_WINDOW", shutdown_ttk_repeat)
+
 
 window.mainloop()
