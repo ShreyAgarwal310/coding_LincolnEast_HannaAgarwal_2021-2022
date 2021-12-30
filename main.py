@@ -684,27 +684,27 @@ title_text.configure(state='disabled')
 
 location_text = Text(window, background='white', borderwidth=0,
                      height=1, width=37, font=("Avenir Next", 16))
-location_text.place(x=225, y=80)
+location_text.place(x=160, y=80)
 location_text.configure(state='disabled')
 
 price_text = Text(window, background='white', borderwidth=0,
                   height=1, width=37, font=("Avenir Next", 16))
-price_text.place(x=225, y=110)
+price_text.place(x=160, y=110)
 price_text.configure(state='disabled')
 
 type_text = Text(window, background='white', borderwidth=0,
                  height=1, width=37, font=("Avenir Next", 16))
-type_text.place(x=225, y=140)
+type_text.place(x=160, y=140)
 type_text.configure(state='disabled')
 
 indoor_text = Text(window, background='white', borderwidth=0,
                    height=1, width=37, font=("Avenir Next", 16))
-indoor_text.place(x=225, y=170)
+indoor_text.place(x=160, y=170)
 indoor_text.configure(state='disabled')
 
 rating_text = Text(window, background='white', borderwidth=0,
                    height=1, width=37, font=("Avenir Next", 16))
-rating_text.place(x=225, y=200)
+rating_text.place(x=160, y=200)
 rating_text.configure(state='disabled')
 
 screen_num_text = Text(window, background='white',
