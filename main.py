@@ -727,7 +727,8 @@ about_text.insert("1.0", "The Adventour App is designed to create recommendation
                   "decides the top of attraction. The check mark indicates whether the \n" +
                   "attraction is indoor (checked) or outdoors (unchecked). The next \n" +
                   "slider is the maximum price and the bottommost slider is the \n" +
-                  "minimum rating. Once finished entered, click the search button.\n \n" +
+                  "minimum rating. The only required field is state, you can leave \n" +
+                  "everything else as default. Then just click the search button.\n \n" +
                   "2. Use the back and next button to toggle through the attractions. At \n" +
                   "the bottom of the screen, you can see how many attractions match \n" +
                   "your criteria. \n \n" +
