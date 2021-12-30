@@ -217,7 +217,7 @@ def clear_screen():
 
 
 def update_screen(new_screen):
-    global image_label, screen_num
+    global image_label, screen_num, link_label
     if(new_screen + 1 < len(matches)):
         next_button.place(x=675, y=20)
     else:
