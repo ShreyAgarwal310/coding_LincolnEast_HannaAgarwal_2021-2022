@@ -60,9 +60,9 @@ class ExampleApp(tk.Tk):
         self.canvas.create_line(self.points_recorded[0][0], self.points_recorded[0][1],
                                 self.x, self.points_recorded[0][1], fill="yellow")
         self.canvas.create_line(self.x, self.points_recorded[0][1],
-                                self.x, self.y, fill="yellow")
+                                self.x, self.y + 1, fill="yellow")
         self.canvas.create_line(self.points_recorded[0][0], self.y,
-                                self.x, self.y, fill="yellow")
+                                self.x + 1, self.y, fill="yellow")
         initial_x = self.points_recorded[0][0]
         initial_y = self.points_recorded[0][1]
         final_x = self.x
