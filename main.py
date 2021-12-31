@@ -14,8 +14,9 @@ window.geometry("750x500")
 window.resizable(0, 0)
 window.iconbitmap(r'adventour_logo_icon.ico')
 
-
 # this function runs whenever the "search" button is pressed
+
+
 def search():
     # clears the lists of matches and attractions in the selected city and resets the screen number
     global matches, screen_num, in_city
