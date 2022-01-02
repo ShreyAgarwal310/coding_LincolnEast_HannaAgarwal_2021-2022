@@ -129,6 +129,20 @@ def change_city_dropdown(e):
     cities_dropdown.set("Select a City")
 
 
+def change_city_map(e):
+    city = cities_dropdown.get()
+    print(city)
+    if (city == "Los Angeles"):
+        map_canvas.place(x=150, y=0)
+
+        # r = requests.get(
+        #     'https://cdn.discordapp.com/attachments/888482468175417365/926700508738101298/unknown.png')
+        # pil_image = Image.open(BytesIO(r.content))
+        # map_img = ImageTk.PhotoImage(pil_image)
+        # map_canvas.create_image(0, 0, anchor=NW, image=map_img)
+        print("la")
+
+
 def pull_up_link(url):
     webbrowser.open_new_tab(url)
 
@@ -324,6 +338,41 @@ def about():
         about_button.place(x=51, y=460)
 
     about_showing = not about_showing
+
+
+def find_locations(event):
+    global previous_x, previous_y
+    previous_x = event.x
+    previous_y = event.y
+
+
+def draw_square(event):
+    global previous_x, previous_y
+    if points_recorded:
+        points_recorded.pop()
+        points_recorded.pop()
+    x = event.x
+    y = event.y
+    points_recorded.append([previous_x, previous_y])
+    points_recorded.append(x)
+    points_recorded.append(x)
+    previous_x = x
+    previous_y = y
+    map_canvas.delete("all")
+    map_canvas.create_line(
+        points_recorded[0][0], points_recorded[0][1], points_recorded[0][0], y, fill="red")
+    map_canvas.create_line(
+        points_recorded[0][0], points_recorded[0][1], x, points_recorded[0][1], fill="red")
+    map_canvas.create_line(x, points_recorded[0][1], x, y + 1, fill="red")
+    map_canvas.create_line(points_recorded[0][0], y, x + 1, y, fill="red")
+    initial_x = points_recorded[0][0]
+    initial_y = points_recorded[0][1]
+    final_x = x
+    final_y = y
+
+
+def reset_square(e):
+    points_recorded[:] = []
 
 
 def search_hover(e):
@@ -598,6 +647,7 @@ attractions = [["Golden Gate Bridge", "San Francisco", "California", 0, "Sightse
 screen_num = 1
 about_showing = False
 inside_choice = IntVar()
+points_recorded = []
 
 # creates backup of the attractions list
 attractions_backup = copy.deepcopy(attractions)
@@ -616,6 +666,8 @@ cities_dropdown = ttk.Combobox(window, width=16, values=[
 cities_dropdown.current(0)
 cities_dropdown.place(x=10, y=180)
 cities_dropdown.configure(state='disabled')
+cities_dropdown.bind("<<ComboboxSelected>>", change_city_map)
+
 
 # creates the dropdown where users select their type of attraction
 type_dropdown = ttk.Combobox(window, width=16, value=type_options)
@@ -748,6 +800,12 @@ img_logo = ImageTk.PhotoImage(resize_logo)
 logo_label = Label(image=img_logo, borderwidth=0)
 logo_label.image = img_logo
 logo_label.place(x=10, y=5)
+
+# creates canvas to draw region on
+map_canvas = Canvas(window, width='600', height='500', cursor='cross')
+map_canvas.bind("<Motion>", find_locations)
+map_canvas.bind("<B1-Motion>", draw_square)
+map_canvas.bind("<ButtonRelease>", reset_square)
 
 
 # function to shutdown window to avoid '_tkinter.TclError' after program exits
