@@ -131,16 +131,10 @@ def change_city_dropdown(e):
 
 def change_city_map(e):
     city = cities_dropdown.get()
-    print(city)
-    if (city == "Los Angeles"):
-        map_canvas.place(x=150, y=0)
-
-        # r = requests.get(
-        #     'https://cdn.discordapp.com/attachments/888482468175417365/926700508738101298/unknown.png')
-        # pil_image = Image.open(BytesIO(r.content))
-        # map_img = ImageTk.PhotoImage(pil_image)
-        # map_canvas.create_image(0, 0, anchor=NW, image=map_img)
-        print("la")
+    # print(city)
+    # if (city == "Los Angeles"):
+    #     map_canvas.place(x=150, y=0)
+    #     print("la")
 
 
 def pull_up_link(url):
@@ -159,6 +153,7 @@ def update_screen_no_matches(new_screen):
     else:
         back_button.place_forget()
 
+    map_canvas.place_forget()
     title_text.configure(state="normal")
     title_text.delete("1.0", "end")
     title_text.insert('end', in_city[new_screen][0][0])
@@ -198,12 +193,13 @@ def update_screen_no_matches(new_screen):
     image = ImageTk.PhotoImage(pil_image)
     image_label['image'] = image
     image_label.place(x=480, y=75)
-    window.mainloop()
 
-    # link_url = in_city[new_screen][0[8]
-    # link_label = Label(window, text='website', font=('Avenir Next', 14), fg='sky blue')
-    # link_label.place(x=500, y=350)
-    # link_label.bind("<Button-1", lambda e: pull_up_link(link_url))
+    link_url = in_city[new_screen][0][8]
+    link_label['text'] = "website"
+    link_label.place(x=590, y=330)
+    link_label.bind("<Button-1>", lambda e: pull_up_link(link_url))
+
+    window.mainloop()
 
 
 def clear_screen():
@@ -246,6 +242,7 @@ def update_screen(new_screen):
     else:
         back_button.place_forget()
 
+    # map_canvas.place_forget()
     title_text.configure(state="normal")
     title_text.delete("1.0", "end")
     title_text.insert('end', matches[new_screen][0])
@@ -803,9 +800,9 @@ logo_label.place(x=10, y=5)
 
 # creates canvas to draw region on
 map_canvas = Canvas(window, width='600', height='500', cursor='cross')
-map_canvas.bind("<Motion>", find_locations)
-map_canvas.bind("<B1-Motion>", draw_square)
-map_canvas.bind("<ButtonRelease>", reset_square)
+# map_canvas.bind("<Motion>", find_locations)
+# map_canvas.bind("<B1-Motion>", draw_square)
+# map_canvas.bind("<ButtonRelease>", reset_square)
 
 
 # function to shutdown window to avoid '_tkinter.TclError' after program exits
