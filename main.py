@@ -118,7 +118,7 @@ def search():
 
         try:
             if len(matches) > 1 and (not next_button.winfo_viewable()):
-                next_button.place(x=675, y=20)
+                next_button.place(x=681, y=20)
         except TclError:
             pass
 
@@ -146,12 +146,12 @@ def pull_up_link(url):
 def update_screen_no_matches(new_screen):
     global in_city, image_label, screen_num
     if(new_screen + 1 < len(in_city)):
-        next_button.place(x=675, y=20)
+        next_button.place(x=681, y=20)
     else:
         next_button.place_forget()
 
     if(new_screen > 0):
-        back_button.place(x=175, y=20)
+        back_button.place(x=174, y=20)
     else:
         back_button.place_forget()
 
@@ -235,12 +235,12 @@ def clear_screen():
 def update_screen(new_screen):
     global image_label, screen_num, link_label
     if(new_screen + 1 < len(matches)):
-        next_button.place(x=675, y=20)
+        next_button.place(x=681, y=20)
     else:
         next_button.place_forget()
 
     if(new_screen > 0):
-        back_button.place(x=175, y=20)
+        back_button.place(x=174, y=20)
     else:
         back_button.place_forget()
 
@@ -514,8 +514,8 @@ back_button.bind('<Leave>', back_leave)
 
 title_text = Text(window, background='white',
                   borderwidth=0, height=1,
-                  width=32, font=("Gill Sans MT", 19))
-title_text.place(x=223, y=18)
+                  width=29, font=("Gill Sans MT", 19))
+title_text.place(x=260, y=15)
 title_text.tag_configure("center_title", justify='center')
 title_text.configure(state='disabled')
 
