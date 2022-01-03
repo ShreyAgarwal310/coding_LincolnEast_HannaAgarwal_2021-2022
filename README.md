@@ -14,31 +14,37 @@ We used the programming language Python for our code and developed it in VSCode
 
 Some challenges we faced were:
 
-  How to input the attractions into a list, 
-  
-  Search through the list if the user didn't input all the info, 
-  
-  Show the cities within each of the states based on the original user input of state, 
+  1. How to input the attractions into a list, 
+  2. Search through the list if the user didn't input all the info, 
+  3. Show the cities within each of the states based on the original user input of state, 
+  4. How to show images as URLs,
+  5. Use PyInstaller,
+  6. Fixing lots of bugs with the about page
   
 Features we hope to implement in the future:
-  
-  A link to the websites so users can have more information, 
-  
-  A map feature allowing users to narrow in what they want
-  
-# Instructions
 
-1. Enter your desired criteria. The top dropdown decides the state, the second dropdown decides the city, and the third dropdown decides the top of attraction. The check mark indicates whether the attraction is indoor (checked) or outdoors (unchecked). The next slider is the maximum price and the bottommost slider is the minimum rating. Once finished entered, click the search button.
+  1. Add a map feature,
+  2. Add the about feature back to the Mac part,
+  3. Add a description and latitude marking to each attraction
+  
+# Installation Instructions
 
-2. Use the back and next button to toggle through the attractions. At the bottom of the screen, you can see how many attractions match your criteria.
+  1. 
 
-3. Enjoy the attraction you choose!
+# Usage Instructions
+
+  1. Enter your desired criteria. The top dropdown decides the state, the second dropdown decides the city, and the third dropdown decides the top of attraction.  
+     The check mark indicates whether the attraction is indoor (checked) or outdoors (unchecked). The next slider is the maximum price and the bottommost slider is      the minimum rating. Once finished entered, click the search button.
+  2. Use the back and next button to toggle through the attractions. At the bottom of the screen, you can see how many attractions match your criteria.
+  3. Enjoy the attraction you choose!
 
 # Credits
 
-This program was written by Nixon Hanna (nhanna95) and Shrey Agarwal (ShreyAgarwal310). Our FBLA advisor is Lori Anderson-Stowe
+This program was written by Nixon Hanna (nhanna95) and Shrey Agarwal (ShreyAgarwal310). Our FBLA advisor is Lori Anderson-Stowe. Bhushit Agarwal helped us fix bugs and gave us the ideas for PyInstaller and how to use images. Darian Kauk designed the Adventour logo.
 
 # License
+
+MIT License
 
 Copyright (c) 2021 Nixon Hanna, Shrey Agarwal
 
