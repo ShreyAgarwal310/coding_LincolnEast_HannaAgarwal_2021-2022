@@ -472,7 +472,7 @@ max_price_slider.set(300)
 max_price_slider.configure(background='white')
 
 max_text = Text(window, background='white', borderwidth=0,
-                height=1, width=9, font=("Avenir Next", 10))
+                height=1, width=9, font=("Gill Sans MT", 10))
 max_text.place(x=10, y=280)
 max_text.insert('end', 'Max Price')
 max_text.configure(state='disabled')
@@ -484,7 +484,7 @@ rating_slider.place(x=10, y=370)
 rating_slider.configure(background='white')
 
 ratings_text = Text(window, background='white', borderwidth=0,
-                    height=1, width=14, font=("Avenir Next", 10))
+                    height=1, width=14, font=("Gill Sans MT", 10))
 ratings_text.place(x=10, y=350)
 ratings_text.insert('end', 'Minimum Rating')
 ratings_text.configure(state='disabled')
@@ -514,48 +514,48 @@ back_button.bind('<Leave>', back_leave)
 
 title_text = Text(window, background='white',
                   borderwidth=0, height=1,
-                  width=32, font=("Avenir Next", 19))
+                  width=32, font=("Gill Sans MT", 19))
 title_text.place(x=223, y=18)
 title_text.tag_configure("center_title", justify='center')
 title_text.configure(state='disabled')
 
 location_text = Text(window, background='white', borderwidth=0,
-                     height=1, width=37, font=("Avenir Next", 16))
+                     height=1, width=37, font=("Gill Sans MT", 16))
 location_text.place(x=160, y=80)
 location_text.configure(state='disabled')
 
 price_text = Text(window, background='white', borderwidth=0,
-                  height=1, width=37, font=("Avenir Next", 16))
+                  height=1, width=37, font=("Gill Sans MT", 16))
 price_text.place(x=160, y=110)
 price_text.configure(state='disabled')
 
 type_text = Text(window, background='white', borderwidth=0,
-                 height=1, width=37, font=("Avenir Next", 16))
+                 height=1, width=37, font=("Gill Sans MT", 16))
 type_text.place(x=160, y=140)
 type_text.configure(state='disabled')
 
 indoor_text = Text(window, background='white', borderwidth=0,
-                   height=1, width=37, font=("Avenir Next", 16))
+                   height=1, width=37, font=("Gill Sans MT", 16))
 indoor_text.place(x=160, y=170)
 indoor_text.configure(state='disabled')
 
 rating_text = Text(window, background='white', borderwidth=0,
-                   height=1, width=37, font=("Avenir Next", 16))
+                   height=1, width=37, font=("Gill Sans MT", 16))
 rating_text.place(x=160, y=200)
 rating_text.configure(state='disabled')
 
 screen_num_text = Text(window, background='white',
-                       borderwidth=0, height=1, width=7, font=("Avenir Next", 14))
+                       borderwidth=0, height=1, width=7, font=("Gill Sans MT", 14))
 screen_num_text.place(x=425, y=450)
 screen_num_text.configure(state='disabled')
 
 image_label = ttk.Label()
 
 link_label = Label(window, font=(
-    'Avenir Next', 12), fg='sky blue', bg='white')
+    'Gill Sans MT', 12), fg='sky blue', bg='white')
 
 about_text = Text(window, background='white', borderwidth=0,
-                  height=23, width=53, font=("Avenir Next", 14))
+                  height=23, width=53, font=("Gill Sans MT", 14))
 about_text.insert("1.0", "The Adventour App is designed to create recommendations for users\n" +
                   "based on entered criteria. \n \n" +
                   "To use to the app, \n \n" +
