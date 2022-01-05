@@ -59,10 +59,22 @@ class ExampleApp(tk.Tk):
                                 self.points_recorded[0][0], self.y, fill="yellow")
         self.canvas.create_line(self.points_recorded[0][0], self.points_recorded[0][1],
                                 self.x, self.points_recorded[0][1], fill="yellow")
-        self.canvas.create_line(self.x, self.points_recorded[0][1],
-                                self.x, self.y + 1, fill="yellow")
-        self.canvas.create_line(self.points_recorded[0][0], self.y,
-                                self.x + 1, self.y, fill="yellow")
+
+        # checks final location relative to inital to fix the corner by adding/subtracting 1
+        if (self.y < self.points_recorded[0][1]):
+            self.canvas.create_line(self.x, self.points_recorded[0][1],
+                                    self.x, self.y - 1, fill="yellow")
+        else:
+            self.canvas.create_line(self.x, self.points_recorded[0][1],
+                                    self.x, self.y + 1, fill="yellow")
+
+        if (self.x < self.points_recorded[0][0]):
+            self.canvas.create_line(self.points_recorded[0][0], self.y,
+                                    self.x - 1, self.y, fill="yellow")
+        else:
+            self.canvas.create_line(self.points_recorded[0][0], self.y,
+                                    self.x + 1, self.y, fill="yellow")
+
         initial_x = self.points_recorded[0][0]
         initial_y = self.points_recorded[0][1]
         final_x = self.x
