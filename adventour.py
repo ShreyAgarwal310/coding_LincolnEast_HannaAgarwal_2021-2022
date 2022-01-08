@@ -16,9 +16,8 @@ window.geometry("750x500")
 window.resizable(0, 0)
 window.iconbitmap(r'adventour_logo_icon.ico')
 
+
 # this function runs whenever the "search" button is pressed
-
-
 def search():
     # clears the lists of matches and attractions in the selected city and resets the screen number
     global matches, screen_num, in_city
@@ -124,19 +123,81 @@ def search():
 
 
 # changes the possible selections of the city based on which state the user picked
-def change_city_dropdown(e):
+def change_city_dropdown(e=None):
+    global state
     state = state_dropdown.get()
     cities_dropdown['values'] = state_city_dict[state]
     cities_dropdown.configure(state='normal')
     cities_dropdown.set("Select a City")
 
 
-def change_city_map(e):
+def change_city_dropdown_return(e=None):
+    global state
+    state = (state_dropdown.get()).title()
+    try:
+        cities_dropdown['values'] = state_city_dict[state]
+        state_dropdown.set(state)
+        cities_dropdown.configure(state='normal')
+        cities_dropdown.set('')
+        cities_dropdown.focus_set()
+    except KeyError:
+        messagebox.showerror("State Input Error", "Please Input a Valid State")
+        state_dropdown.set('')
+
+
+def city_selected(e=None):
     city = cities_dropdown.get()
-    # print(city)
-    # if (city == "Los Angeles"):
-    #     map_canvas.place(x=150, y=0)
-    #     print("la")
+    # update map
+
+
+def city_selected_return(e=None):
+    global state
+    city = (cities_dropdown.get()).title()
+    if city == "":
+        cities_dropdown.set("Any")
+        type_dropdown.set('')
+        type_dropdown.focus_set()
+    else:
+        if not city in state_city_dict[state]:
+            messagebox.showerror(
+                "City Input Error", "Please Input a Valid City \nCheck if the City is in the Selected State")
+            cities_dropdown.set('')
+        else:
+            cities_dropdown.set(city)
+            type_dropdown.set('')
+            type_dropdown.focus_set()
+    # update map
+
+
+def type_selected(e=None):
+    inside_check.focus_set()
+
+
+def type_selected_return(e=None):
+    type = (type_dropdown.get()).title()
+    if type == "":
+        type_dropdown.set("Any")
+        inside_check.focus_set()
+    else:
+        if not type in type_options:
+            messagebox.showerror("Type Input Error",
+                                 "Please Input a Valid Type")
+            type_dropdown.set('')
+        else:
+            type_dropdown.set(type)
+            inside_check.focus_set()
+
+
+def inside_check_return(e=None):
+    max_price_slider.focus_set()
+
+
+def max_slider_return(e=None):
+    rating_slider.focus_set()
+
+
+def rating_return(e=None):
+    search_button.focus_set()
 
 
 def pull_up_link(url):
@@ -391,41 +452,41 @@ def show_map():
     map_canvas.create_image(0, 0, anchor=NW, image=img)
 
 
-def reset_square(e):
+def reset_square(e=None):
     global initial_x, initial_y, final_x, final_y
     print(initial_x, initial_y, final_x, final_y)
     points_recorded[:] = []
 
 
-def search_hover(e):
+def search_hover(e=None):
     search_button.config(background='white')
 
 
-def search_leave(e):
+def search_leave(e=None):
     search_button.config(background='SystemButtonFace')
 
 
-def about_hover(e):
+def about_hover(e=None):
     about_button.config(background='white')
 
 
-def about_leave(e):
+def about_leave(e=None):
     about_button.config(background='SystemButtonFace')
 
 
-def back_hover(e):
+def back_hover(e=None):
     back_button.config(background='white')
 
 
-def back_leave(e):
+def back_leave(e=None):
     back_button.config(background='SystemButtonFace')
 
 
-def next_hover(e):
+def next_hover(e=None):
     next_button.config(background='white')
 
 
-def next_leave(e):
+def next_leave(e=None):
     next_button.config(background='SystemButtonFace')
 
 
@@ -466,6 +527,8 @@ state_dropdown['values'] = states_options
 state_dropdown.set("Select a State")
 state_dropdown.place(x=10, y=140)
 state_dropdown.bind("<<ComboboxSelected>>", change_city_dropdown)
+state_dropdown.bind("<Return>", change_city_dropdown_return)
+
 
 # creates the dropdown where users select their city
 cities_dropdown = ttk.Combobox(window, width=16, values=[
@@ -473,26 +536,32 @@ cities_dropdown = ttk.Combobox(window, width=16, values=[
 cities_dropdown.current(0)
 cities_dropdown.place(x=10, y=180)
 cities_dropdown.configure(state='disabled')
-cities_dropdown.bind("<<ComboboxSelected>>", change_city_map)
+cities_dropdown.bind("<<ComboboxSelected>>", city_selected)
+cities_dropdown.bind("<Return>", city_selected_return)
 
 
 # creates the dropdown where users select their type of attraction
 type_dropdown = ttk.Combobox(window, width=16, value=type_options)
 type_dropdown.set("Select a Type")
 type_dropdown.place(x=10, y=220)
+type_dropdown.bind("<<ComboboxSelected>>", type_selected)
+type_dropdown.bind("<Return>", type_selected_return)
+
 
 # creates the dropdown where users select whether or not they want to be outside
 inside_check = Checkbutton(window, text="Inside Only",
                            variable=inside_choice, background='white')
 inside_check.place(x=10, y=250)
+inside_check.bind("<Return>", inside_check_return)
+
 
 # creates the slider where users decide the maximum price of their attraction
 max_price_slider = Scale(window, from_=0, to=300,
                          orient=HORIZONTAL, resolution=5)
-
 max_price_slider.place(x=10, y=300)
 max_price_slider.set(300)
 max_price_slider.configure(background='white')
+max_price_slider.bind("<Return>", max_slider_return)
 
 max_text = Text(window, background='white', borderwidth=0,
                 height=1, width=9, font=("Gill Sans MT", 10))
@@ -500,11 +569,12 @@ max_text.place(x=10, y=280)
 max_text.insert('end', 'Max Price')
 max_text.configure(state='disabled')
 
+
 # creates the slider where users decide the rating they want their attraction to be
 rating_slider = Scale(window, from_=0, to=5, orient=HORIZONTAL, resolution=0.1)
-
 rating_slider.place(x=10, y=370)
 rating_slider.configure(background='white')
+rating_slider.bind("<Return>", rating_return)
 
 ratings_text = Text(window, background='white', borderwidth=0,
                     height=1, width=14, font=("Gill Sans MT", 10))
@@ -517,6 +587,7 @@ search_button = Button(window, text='Search', command=search)
 search_button.place(x=50, y=420)
 search_button.bind('<Enter>', search_hover)
 search_button.bind('<Leave>', search_leave)
+search_button.bind('<Return>', lambda event=None: search_button.invoke())
 
 about_button = Button(window, text="About", command=about)
 about_button.place(x=51, y=460)
