@@ -503,7 +503,7 @@ state_city_dict = {
     "Florida": ["Any", "Miami", "Orlando", "Tampa", "Key West"]
 }
 
-# stores the data for the possible places to go
+# stores the data for all the possible places to go
 # name, city, state, price, type, inside, rating, photo link
 
 attractions = list(csv.reader(open("attractions.csv")))
@@ -522,13 +522,11 @@ attractions_backup = copy.deepcopy(attractions)
 
 # creates the dropdown where users select their state
 state_dropdown = ttk.Combobox(window, width=16)
-
 state_dropdown['values'] = states_options
 state_dropdown.set("Select a State")
 state_dropdown.place(x=10, y=140)
 state_dropdown.bind("<<ComboboxSelected>>", change_city_dropdown)
 state_dropdown.bind("<Return>", change_city_dropdown_return)
-
 
 # creates the dropdown where users select their city
 cities_dropdown = ttk.Combobox(window, width=16, values=[
@@ -539,7 +537,6 @@ cities_dropdown.configure(state='disabled')
 cities_dropdown.bind("<<ComboboxSelected>>", city_selected)
 cities_dropdown.bind("<Return>", city_selected_return)
 
-
 # creates the dropdown where users select their type of attraction
 type_dropdown = ttk.Combobox(window, width=16, value=type_options)
 type_dropdown.set("Select a Type")
@@ -547,13 +544,11 @@ type_dropdown.place(x=10, y=220)
 type_dropdown.bind("<<ComboboxSelected>>", type_selected)
 type_dropdown.bind("<Return>", type_selected_return)
 
-
 # creates the dropdown where users select whether or not they want to be outside
 inside_check = Checkbutton(window, text="Inside Only",
                            variable=inside_choice, background='white')
 inside_check.place(x=10, y=250)
 inside_check.bind("<Return>", inside_check_return)
-
 
 # creates the slider where users decide the maximum price of their attraction
 max_price_slider = Scale(window, from_=0, to=300,
@@ -568,7 +563,6 @@ max_text = Text(window, background='white', borderwidth=0,
 max_text.place(x=10, y=280)
 max_text.insert('end', 'Max Price')
 max_text.configure(state='disabled')
-
 
 # creates the slider where users decide the rating they want their attraction to be
 rating_slider = Scale(window, from_=0, to=5, orient=HORIZONTAL, resolution=0.1)
@@ -683,17 +677,15 @@ logo_label.place(x=10, y=5)
 map_button = Button(window, text='m', command=show_map)
 map_button.place(x=0, y=480)
 
-
 # creates canvas to draw region on
-map_image_label = ttk.Label()
-
 map_canvas = Canvas(window, width='600', height='500', cursor='cross')
 map_canvas.bind("<Motion>", find_locations)
 map_canvas.bind("<B1-Motion>", draw_square)
 map_canvas.bind("<ButtonRelease>", reset_square)
 
-
 # function to shutdown window to avoid '_tkinter.TclError' after program exits
+
+
 def shutdown_ttk_repeat():
     window.eval('::ttk::CancelRepeat')
     window.destroy()
