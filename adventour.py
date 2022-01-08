@@ -426,18 +426,14 @@ def draw_square(event):
         points_recorded[0][0], points_recorded[0][1], x, points_recorded[0][1], fill="red")
 
     if (y < points_recorded[0][1]):
-        map_canvas.create_line(x, points_recorded[0][1],
-                               x, y - 1, fill="red")
+        map_canvas.create_line(x, points_recorded[0][1], x, y - 1, fill="red")
     else:
-        map_canvas.create_line(x, points_recorded[0][1],
-                               x, y + 1, fill="red")
+        map_canvas.create_line(x, points_recorded[0][1], x, y + 1, fill="red")
 
     if (x < points_recorded[0][0]):
-        map_canvas.create_line(points_recorded[0][0], y,
-                               x - 1, y, fill="red")
+        map_canvas.create_line(points_recorded[0][0], y, x - 1, y, fill="red")
     else:
-        map_canvas.create_line(points_recorded[0][0], y,
-                               x + 1, y, fill="red")
+        map_canvas.create_line(points_recorded[0][0], y, x + 1, y, fill="red")
 
     initial_x = points_recorded[0][0]
     initial_y = points_recorded[0][1]
@@ -446,7 +442,6 @@ def draw_square(event):
 
 
 def show_map():
-    print("map")
     map_canvas.place(x=150, y=0)
     img = ImageTk.PhotoImage(Image.open("lincoln_map.ppm"))
     map_canvas.create_image(0, 0, anchor=NW, image=img)
@@ -530,7 +525,7 @@ state_dropdown.bind("<Return>", change_city_dropdown_return)
 
 # creates the dropdown where users select their city
 cities_dropdown = ttk.Combobox(window, width=16, values=[
-    "Select a State First"])
+                               "Select a State First"])
 cities_dropdown.current(0)
 cities_dropdown.place(x=10, y=180)
 cities_dropdown.configure(state='disabled')
@@ -600,9 +595,8 @@ next_button.bind('<Leave>', next_leave)
 back_button.bind('<Enter>', back_hover)
 back_button.bind('<Leave>', back_leave)
 
-title_text = Text(window, background='white',
-                  borderwidth=0, height=1,
-                  width=29, font=("Gill Sans MT", 19))
+title_text = Text(window, background='white', borderwidth=0,
+                  height=1, width=29, font=("Gill Sans MT", 19))
 title_text.place(x=260, y=15)
 title_text.tag_configure("center_title", justify='center')
 title_text.configure(state='disabled')
@@ -632,15 +626,15 @@ rating_text = Text(window, background='white', borderwidth=0,
 rating_text.place(x=160, y=200)
 rating_text.configure(state='disabled')
 
-screen_num_text = Text(window, background='white',
-                       borderwidth=0, height=1, width=7, font=("Gill Sans MT", 14))
+screen_num_text = Text(window, background='white', borderwidth=0,
+                       height=1, width=7, font=("Gill Sans MT", 14))
 screen_num_text.place(x=425, y=450)
 screen_num_text.configure(state='disabled')
 
 image_label = ttk.Label()
 
-link_label = Label(window, font=(
-    'Gill Sans MT', 12), fg='sky blue', bg='white')
+link_label = Label(window, font=('Gill Sans MT', 12),
+                   fg='sky blue', bg='white')
 
 about_text = Text(window, background='white', borderwidth=0,
                   height=23, width=53, font=("Gill Sans MT", 14))
