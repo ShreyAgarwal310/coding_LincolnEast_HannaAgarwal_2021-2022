@@ -98,6 +98,7 @@ def search():
                 if((i[1] == city or (not city_boolean)) and (i[2] == state) and (i[3] <= max_p) and (i[4] == type or (not type_boolean)) and (i[6] >= rating)):
                     matches.append(i)
 
+        # Checks if about is showing and clears it if it is
         if(about_showing):
             about_text.place_forget()
             about_button["text"] = "About"
@@ -131,6 +132,7 @@ def change_city_dropdown(e=None):
     cities_dropdown.set("Select a City")
 
 
+# changes the city dropdown depending on the selected state and sets focus on the dropdown for city
 def change_city_dropdown_return(e=None):
     global state
     state = (state_dropdown.get()).title()
@@ -145,6 +147,7 @@ def change_city_dropdown_return(e=None):
         state_dropdown.set('')
 
 
+# sets focus to type dropdown and makes sure user inputs valid city
 def city_selected_return(e=None):
     global state
     city = (cities_dropdown.get()).title()
@@ -163,10 +166,12 @@ def city_selected_return(e=None):
             type_dropdown.focus_set()
 
 
+# sets focus on inside_check after user selected type
 def type_selected(e=None):
     inside_check.focus_set()
 
 
+# makes sure type input is valid and then sets focus on inside check
 def type_selected_return(e=None):
     type = (type_dropdown.get()).title()
     if type == "":
@@ -182,22 +187,27 @@ def type_selected_return(e=None):
             inside_check.focus_set()
 
 
+# sets focus to the max price slider
 def inside_check_return(e=None):
     max_price_slider.focus_set()
 
 
+# sets focus to minimum rating slider
 def max_slider_return(e=None):
     rating_slider.focus_set()
 
 
+# sets focus on search button
 def rating_return(e=None):
     search_button.focus_set()
 
 
+# pulls up website link in user's browser
 def pull_up_link(url):
     webbrowser.open_new_tab(url)
 
 
+# updates screen in case that there is no matches
 def update_screen_no_matches(new_screen):
     global in_city, image_label, screen_num
     if(new_screen + 1 < len(in_city)):
@@ -258,6 +268,7 @@ def update_screen_no_matches(new_screen):
     window.mainloop()
 
 
+# clears screen by getting rid of all text
 def clear_screen():
     global image_label
     title_text.configure(state="normal")
@@ -286,6 +297,7 @@ def clear_screen():
     back_button.place_forget()
 
 
+# updates screen when there are matches
 def update_screen(new_screen):
     global image_label, screen_num, link_label
     if(new_screen + 1 < len(matches)):
@@ -370,6 +382,7 @@ def back():
         update_screen(screen_num - 1)
 
 
+# shows about page if not showing and hides when it is
 def about():
     global image_label, about_showing, link_label
     if not about_showing:
@@ -392,34 +405,42 @@ def about():
     about_showing = not about_showing
 
 
+# add hover animation
 def search_hover(e=None):
     search_button.config(background='white')
 
 
+# add hover animation
 def search_leave(e=None):
     search_button.config(background='SystemButtonFace')
 
 
+# add hover animation
 def about_hover(e=None):
     about_button.config(background='white')
 
 
+# add hover animation
 def about_leave(e=None):
     about_button.config(background='SystemButtonFace')
 
 
+# add hover animation
 def back_hover(e=None):
     back_button.config(background='white')
 
 
+# add hover animation
 def back_leave(e=None):
     back_button.config(background='SystemButtonFace')
 
 
+# add hover animation
 def next_hover(e=None):
     next_button.config(background='white')
 
 
+# add hover animation
 def next_leave(e=None):
     next_button.config(background='SystemButtonFace')
 
@@ -532,6 +553,7 @@ next_button.bind('<Leave>', next_leave)
 back_button.bind('<Enter>', back_hover)
 back_button.bind('<Leave>', back_leave)
 
+# all text boxes for main display
 title_text = Text(window, background='white', borderwidth=0,
                   height=1, width=29, font=("Gill Sans MT", 19))
 title_text.place(x=260, y=15)
@@ -568,11 +590,14 @@ screen_num_text = Text(window, background='white', borderwidth=0,
 screen_num_text.place(x=425, y=450)
 screen_num_text.configure(state='disabled')
 
+# label to show image of attraction
 image_label = ttk.Label()
 
+# label for link to website
 link_label = Label(window, font=('Gill Sans MT', 12),
                    fg='sky blue', bg='white')
 
+# textbox for about page
 about_text = Text(window, background='white', borderwidth=0,
                   height=23, width=53, font=("Gill Sans MT", 14))
 about_text.insert("1.0", "The Adventour App is designed to create recommendations for users\n" +
@@ -605,8 +630,6 @@ logo_label.image = img_logo
 logo_label.place(x=10, y=5)
 
 # function to shutdown window to avoid '_tkinter.TclError' after program exits
-
-
 def shutdown_ttk_repeat():
     window.eval('::ttk::CancelRepeat')
     window.destroy()
