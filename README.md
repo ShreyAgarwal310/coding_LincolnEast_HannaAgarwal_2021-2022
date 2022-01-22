@@ -18,8 +18,7 @@ Some challenges we faced were:
   2. Search through the list if the user didn't input all the info, 
   3. Show the cities within each of the states based on the original user input of state, 
   4. How to show images as URLs,
-  5. Use PyInstaller,
-  6. Fixing lots of bugs with the about page
+  5. Fixing lots of bugs with the about page
   
 Features we hope to implement in the future:
 
