@@ -145,11 +145,6 @@ def change_city_dropdown_return(e=None):
         state_dropdown.set('')
 
 
-def city_selected(e=None):
-    city = cities_dropdown.get()
-    # update map
-
-
 def city_selected_return(e=None):
     global state
     city = (cities_dropdown.get()).title()
@@ -166,7 +161,6 @@ def city_selected_return(e=None):
             cities_dropdown.set(city)
             type_dropdown.set('')
             type_dropdown.focus_set()
-    # update map
 
 
 def type_selected(e=None):
@@ -216,7 +210,6 @@ def update_screen_no_matches(new_screen):
     else:
         back_button.place_forget()
 
-    map_canvas.place_forget()
     title_text.configure(state="normal")
     title_text.delete("1.0", "end")
     title_text.insert('end', in_city[new_screen][0][0])
@@ -255,11 +248,11 @@ def update_screen_no_matches(new_screen):
     pil_image = pil_image.resize((250, 250), Image.ANTIALIAS)
     image = ImageTk.PhotoImage(pil_image)
     image_label['image'] = image
-    image_label.place(x=480, y=75)
+    image_label.place(x=480, y=110)
 
     link_url = in_city[new_screen][0][8]
     link_label['text'] = "website"
-    link_label.place(x=590, y=330)
+    link_label.place(x=590, y=365)
     link_label.bind("<Button-1>", lambda e: pull_up_link(link_url))
 
     window.mainloop()
@@ -305,7 +298,6 @@ def update_screen(new_screen):
     else:
         back_button.place_forget()
 
-    # map_canvas.place_forget()
     title_text.configure(state="normal")
     title_text.delete("1.0", "end")
     title_text.insert('end', matches[new_screen][0])
@@ -331,7 +323,7 @@ def update_screen(new_screen):
     indoor_text.configure(state='disabled')
     rating_text.configure(state="normal")
     rating_text.delete("1.0", "end")
-    rating_text.insert('end', f"Rating: {matches[new_screen][6]}")
+    rating_text.insert('end', f"Rating: {matches[new_screen][6]} / 5.0")
     rating_text.configure(state='disabled')
     screen_num_text.configure(state="normal")
     screen_num_text.delete("1.0", "end")
@@ -344,11 +336,11 @@ def update_screen(new_screen):
     pil_image = pil_image.resize((250, 250), Image.ANTIALIAS)
     image = ImageTk.PhotoImage(pil_image)
     image_label['image'] = image
-    image_label.place(x=480, y=75)
+    image_label.place(x=480, y=110)
 
     link_url = matches[new_screen][8]
     link_label['text'] = "website"
-    link_label.place(x=590, y=330)
+    link_label.place(x=590, y=365)
     link_label.bind("<Button-1>", lambda e: pull_up_link(link_url))
 
     window.mainloop()
@@ -398,59 +390,6 @@ def about():
         about_button.place(x=51, y=460)
 
     about_showing = not about_showing
-
-
-def find_locations(event):
-    global previous_x, previous_y
-    previous_x = event.x
-    previous_y = event.y
-
-
-def draw_square(event):
-    global previous_x, previous_y, initial_x, initial_y, final_x, final_y
-    if points_recorded:
-        points_recorded.pop()
-        points_recorded.pop()
-    x = max(0, min(event.x, 600))
-    y = max(0, min(event.y, 500))
-
-    points_recorded.append([previous_x, previous_y])
-    points_recorded.append(x)
-    points_recorded.append(x)
-    previous_x = x
-    previous_y = y
-    map_canvas.delete("all")
-    map_canvas.create_line(
-        points_recorded[0][0], points_recorded[0][1], points_recorded[0][0], y, fill="red")
-    map_canvas.create_line(
-        points_recorded[0][0], points_recorded[0][1], x, points_recorded[0][1], fill="red")
-
-    if (y < points_recorded[0][1]):
-        map_canvas.create_line(x, points_recorded[0][1], x, y - 1, fill="red")
-    else:
-        map_canvas.create_line(x, points_recorded[0][1], x, y + 1, fill="red")
-
-    if (x < points_recorded[0][0]):
-        map_canvas.create_line(points_recorded[0][0], y, x - 1, y, fill="red")
-    else:
-        map_canvas.create_line(points_recorded[0][0], y, x + 1, y, fill="red")
-
-    initial_x = points_recorded[0][0]
-    initial_y = points_recorded[0][1]
-    final_x = x
-    final_y = y
-
-
-def show_map():
-    map_canvas.place(x=150, y=0)
-    img = ImageTk.PhotoImage(Image.open("lincoln_map.ppm"))
-    map_canvas.create_image(0, 0, anchor=NW, image=img)
-
-
-def reset_square(e=None):
-    global initial_x, initial_y, final_x, final_y
-    print(initial_x, initial_y, final_x, final_y)
-    points_recorded[:] = []
 
 
 def search_hover(e=None):
@@ -510,7 +449,6 @@ for i in attractions:
 screen_num = 1
 about_showing = False
 inside_choice = IntVar()
-points_recorded = []
 
 # creates backup of the attractions list
 attractions_backup = copy.deepcopy(attractions)
@@ -529,7 +467,6 @@ cities_dropdown = ttk.Combobox(window, width=16, values=[
 cities_dropdown.current(0)
 cities_dropdown.place(x=10, y=180)
 cities_dropdown.configure(state='disabled')
-cities_dropdown.bind("<<ComboboxSelected>>", city_selected)
 cities_dropdown.bind("<Return>", city_selected_return)
 
 # creates the dropdown where users select their type of attraction
@@ -666,16 +603,6 @@ img_logo = ImageTk.PhotoImage(resize_logo)
 logo_label = Label(image=img_logo, borderwidth=0)
 logo_label.image = img_logo
 logo_label.place(x=10, y=5)
-
-# add button to work on map
-map_button = Button(window, text='m', command=show_map)
-map_button.place(x=0, y=480)
-
-# creates canvas to draw region on
-map_canvas = Canvas(window, width='600', height='500', cursor='cross')
-map_canvas.bind("<Motion>", find_locations)
-map_canvas.bind("<B1-Motion>", draw_square)
-map_canvas.bind("<ButtonRelease>", reset_square)
 
 # function to shutdown window to avoid '_tkinter.TclError' after program exits
 
