@@ -28,7 +28,13 @@ Features we hope to implement in the future:
   
 # Installation Instructions
 
-  1. 
+## Windows
+
+  1. Click on the Green Code Button on the top right of the repository and choose Download Zip
+  2. Open file and extract all
+  3. Open new folder in the command line by either alt clicking on folder and clicking "Open in Windows Terminal" or by first opening the terminal and type path name to downloaded folder
+  4. Run `pip install -r requirements.txt`
+  5. Lastly run `python adventour.py`
 
 # Usage Instructions
 
