@@ -1,7 +1,7 @@
 from tkinter import ttk, messagebox
 from tkinter import *
-from PIL import Image, ImageTk
 from io import BytesIO
+from PIL import Image, ImageTk
 import webbrowser
 import requests
 import copy
@@ -161,16 +161,15 @@ def update_screen_no_matches(new_screen):
     title_text.configure(state='disabled')
     location_text.configure(state="normal")
     location_text.delete("1.0", "end")
-    location_text.insert(
-        'end', f"Location: {in_city[new_screen][0][1]}, {in_city[new_screen][0][2]}")
+    location_text.insert('end', "Location: " + in_city[new_screen][0][1] + ", " + in_city[new_screen][0][2])
     location_text.configure(state='disabled')
     price_text.configure(state="normal")
     price_text.delete("1.0", "end")
-    price_text.insert('end', f"Price: ${in_city[new_screen][0][3]}")
+    price_text.insert('end', "Price: " + in_city[new_screen][0][3])
     price_text.configure(state='disabled')
     type_text.configure(state="normal")
     type_text.delete("1.0", "end")
-    type_text.insert('end', f"Type: {in_city[new_screen][0][4]}")
+    type_text.insert('end', "Type: " + in_city[new_screen][0][4])
     type_text.configure(state='disabled')
     indoor_text.configure(state="normal")
     indoor_text.delete("1.0", "end")
@@ -179,11 +178,11 @@ def update_screen_no_matches(new_screen):
     indoor_text.configure(state='disabled')
     rating_text.configure(state="normal")
     rating_text.delete("1.0", "end")
-    rating_text.insert('end', f"Rating: {in_city[new_screen][0][6]}")
+    rating_text.insert('end', "Rating: " + in_city[new_screen][0][6])
     rating_text.configure(state='disabled')
     screen_num_text.configure(state="normal")
     screen_num_text.delete("1.0", "end")
-    screen_num_text.insert('end', f"{screen_num} / {len(in_city)}")
+    screen_num_text.insert('end', screen_num + " / " + len(in_city))
     screen_num_text.configure(state='disabled')
 
     url = in_city[new_screen][0][7]
@@ -249,15 +248,15 @@ def update_screen(new_screen):
     location_text.configure(state="normal")
     location_text.delete("1.0", "end")
     location_text.insert(
-        'end', f"Location: {matches[new_screen][1]}, {matches[new_screen][2]}")
+        'end', "Location: " + matches[new_screen][1] + ", " + matches[new_screen][2])
     location_text.configure(state='disabled')
     price_text.configure(state="normal")
     price_text.delete("1.0", "end")
-    price_text.insert('end', f"Price: ${matches[new_screen][3]}")
+    price_text.insert('end', "Price: " + matches[new_screen][3])
     price_text.configure(state='disabled')
     type_text.configure(state="normal")
     type_text.delete("1.0", "end")
-    type_text.insert('end', f"Type: {matches[new_screen][4]}")
+    type_text.insert('end', "Type: " + matches[new_screen][4])
     type_text.configure(state='disabled')
     indoor_text.configure(state="normal")
     indoor_text.delete("1.0", "end")
@@ -266,11 +265,11 @@ def update_screen(new_screen):
     indoor_text.configure(state='disabled')
     rating_text.configure(state="normal")
     rating_text.delete("1.0", "end")
-    rating_text.insert('end', f"Rating: {matches[new_screen][6]}")
+    rating_text.insert('end', "Rating: " + matches[new_screen][6])
     rating_text.configure(state='disabled')
     screen_num_text.configure(state="normal")
     screen_num_text.delete("1.0", "end")
-    screen_num_text.insert('end', f"{screen_num} / {len(matches)}")
+    screen_num_text.insert('end', screen_num + " / " + len(matches))
     screen_num_text.configure(state='disabled')
 
     url = matches[new_screen][7]
