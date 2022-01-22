@@ -36,6 +36,14 @@ Features we hope to implement in the future:
   4. Run `pip install -r requirements.txt`
   5. Lastly run `python adventour.py`
 
+## Mac OS
+  
+  1. Click on the Green Code Button on the top right of the repository and choose Download Zip
+  2. Open file and extract
+  3. In your terminal, run `pip install -r requirements.txt`
+  4. Open the mainMac.py file
+  5. Lastly run the mainMac.py file
+ 
 # Usage Instructions
 
   1. Enter your desired criteria. The top dropdown decides the state, the second dropdown decides the city, and the third dropdown decides the top of attraction.  
