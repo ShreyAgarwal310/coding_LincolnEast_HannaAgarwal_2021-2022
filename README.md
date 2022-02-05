@@ -3,7 +3,6 @@
 # ADVENTOUR
 
 # Description
-Required Libraries: tkinter, pillow, io, webbrowser, requests, copy, csv
 
 This project was made for the Nebraska FBLA SLC 2021-2022 Coding and Programming event. 
 The main purpose of the program is to provide the user with possible places to visit based on six criteria: city, state, cost, type, indoor/outdoor, rating (based on Google Reviews)
@@ -40,6 +39,7 @@ Features we hope to implement in the future:
   
   1. Click on the Green Code Button on the top right of the repository and choose Download Zip
   2. Open file and extract
+  3. Make sure your Mac is in light mode, otherwise the window will have dark blobs blocking the display
   3. In your terminal, run `pip install -r requirements.txt`
   4. Open the mainMac.py file
   5. Lastly run the mainMac.py file
