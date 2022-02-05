@@ -32,7 +32,7 @@ Features we hope to implement in the future:
   1. Click on the Green Code Button on the top right of the repository and choose Download Zip
   2. Open file and extract all
   3. Open new folder in the command line by either alt clicking on folder and clicking "Open in Windows Terminal" or by first opening the terminal and type path name to downloaded folder
-  4. Run `pip install -r requirements.txt`
+  4. Run `pip install -r requirementsWin.txt`
   5. Lastly run `python adventour.py`
 
 ## Mac OS
@@ -40,7 +40,7 @@ Features we hope to implement in the future:
   1. Click on the Green Code Button on the top right of the repository and choose Download Zip
   2. Open file and extract
   3. Make sure your Mac is in light mode, otherwise the window will have dark blobs blocking the display
-  3. In your terminal, run `pip install -r requirements.txt`
+  3. In your terminal, run `pip install -r requirementsMac.txt`
   4. Open the mainMac.py file
   5. Lastly run the mainMac.py file
  
