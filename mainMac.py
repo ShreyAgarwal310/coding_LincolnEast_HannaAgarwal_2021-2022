@@ -100,15 +100,6 @@ def search():
             next_button.tkraise()
             back_button.tkraise()
 
-        if(about_showing):
-            about_text.place_forget()
-            about_button["text"] = "About"
-            about_button.place(x=63, y=460)
-
-        about_text.place_forget()
-        about_button["text"] = "About"
-        about_button.place(x=63, y=460)
-
         # sets the screen to the first match if there are matches
         if len(matches) > 0:
             update_screen(0)
@@ -227,7 +218,7 @@ def clear_screen():
 
 
 def update_screen(new_screen):
-    global image_label, screen_num, link_label
+    global image_label, screen_num, link_label, matches
     if(new_screen + 1 < len(matches)):
         next_button.place(x=675, y=20)
     else:
@@ -309,48 +300,12 @@ def back():
     else:
         update_screen(screen_num - 1)
 
-
-def about():
-    global image_label, about_showing, link_label, screen_num
-    if about_showing == False:
-        try:
-            image_label.place_forget()
-        except NameError:
-            pass
-        try:
-            link_label.place_forget()
-        except NameError:
-            pass
-        about_text.place(x=190, y=0)
-        about_button["text"] = "Close About"
-        about_button.place(x=45, y=460)
-        about_text.tkraise()
-        about_showing = not about_showing
-    else:
-        about_text.place_forget()
-        about_showing = not about_showing
-        next_button.tkraise()
-        back_button.tkraise()
-        about_button["text"] = "About"
-        about_button.place(x=63, y=460)
-        update_screen(screen_num - 1)
-
-
 def search_hover(e):
     search_button.config(background='white')
 
 
 def search_leave(e):
     search_button.config(background='SystemButtonFace')
-
-
-def about_hover(e):
-    about_button.config(background='white')
-
-
-def about_leave(e):
-    about_button.config(background='SystemButtonFace')
-
 
 def back_hover(e):
     back_button.config(background='white')
@@ -390,7 +345,6 @@ for i in attractions:
     i[6] = float(i[6])
 
 screen_num = 1
-about_showing = False
 inside_choice = IntVar()
 
 # creates backup of the attractions list
@@ -451,14 +405,9 @@ ratings_text.configure(state='disabled')
 
 # creates the button users click to search once they have finished their entering
 search_button = Button(window, text='Search', command=search)
-search_button.place(x=60, y=430)
+search_button.place(x=60, y=445)
 search_button.bind('<Enter>', search_hover)
 search_button.bind('<Leave>', search_leave)
-
-about_button = Button(window, text="About", command=about)
-about_button.place(x=63, y=460)
-about_button.bind('<Enter>', about_hover)
-about_button.bind('<Leave>', about_leave)
 
 # separates the sidebar from the main display
 separator = ttk.Separator(window, orient='vertical')
@@ -520,25 +469,6 @@ image_label = ttk.Label()
 
 link_label = Label(window, font=(
     'Avenir Next', 12), fg='sky blue', bg = 'white')
-
-about_text = Text(window, background='white', borderwidth=0,
-                  height=26, width=61, font=("Avenir Next", 14))
-about_text.insert("1.0", "The Adventour App is designed to create recommendations for users\n" +
-                  "based on entered criteria. \n \n" +
-                  "To use to the app, \n \n" +
-                  "1. Enter your desired criteria. The top dropdown decides the state, \n" +
-                  "the second dropdown decides the city, and the third dropdown \n" +
-                  "decides the top of attraction. The check mark indicates whether the \n" +
-                  "attraction is indoor (checked) or outdoors (unchecked). The next \n" +
-                  "slider is the maximum price and the bottommost slider is the \n" +
-                  "minimum rating. Once finished entered, click the search button.\n \n" +
-                  "2. Use the back and next button to toggle through the attractions. At \n" +
-                  "the bottom of the screen, you can see how many attractions match \n" +
-                  "your criteria. \n \n" +
-                  "3. Enjoy the attraction you choose! \n \n" +
-                  "Credits: Nixon Hanna, Shrey Agarwal")
-about_text.config(highlightbackground="white")
-about_text.configure(state='disabled')
 
 # Read the Image
 logo = Image.open("adventour_logo.jpg")
