@@ -599,21 +599,21 @@ link_label = Label(window, font=('Gill Sans MT', 12),
 
 # textbox for about page
 about_text = Text(window, background='white', borderwidth=0,
-                  height=23, width=53, font=("Gill Sans MT", 14))
+                  height=23, width=55, font=("Gill Sans MT", 14))
 about_text.insert("1.0", "The Adventour App is designed to create recommendations for users\n" +
                   "based on entered criteria. \n \n" +
                   "To use to the app, \n \n" +
-                  "1. Enter your desired criteria. The top dropdown decides the state, \n" +
+                  " 1. Enter your desired criteria. The top dropdown decides the state, \n" +
                   "the second dropdown decides the city, and the third dropdown \n" +
                   "decides the top of attraction. The check mark indicates whether the \n" +
                   "attraction is indoor (checked) or outdoors (unchecked). The next \n" +
                   "slider is the maximum price and the bottommost slider is the \n" +
                   "minimum rating. The only required field is state, you can leave \n" +
                   "everything else as default. Then just click the search button.\n \n" +
-                  "2. Use the back and next button to toggle through the attractions. At \n" +
+                  " 2. Use the back and next button to toggle through the attractions. At \n" +
                   "the bottom of the screen, you can see how many attractions match \n" +
                   "your criteria. \n \n" +
-                  "3. Enjoy the attraction you choose! \n \n" +
+                  " 3. Enjoy the attraction you choose! \n \n" +
                   "Credits: Nixon Hanna, Shrey Agarwal")
 about_text.configure(state='disabled')
 
