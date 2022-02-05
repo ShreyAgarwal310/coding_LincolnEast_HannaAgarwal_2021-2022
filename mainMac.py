@@ -16,8 +16,6 @@ window.resizable(0, 0)
 window.iconbitmap(r'adventour_logo_icon.ico')
 
 # this function runs whenever the "search" button is pressed
-
-
 def search():
     # clears the lists of matches and attractions in the selected city and resets the screen number
     global matches, screen_num, in_city
@@ -165,7 +163,7 @@ def update_screen_no_matches(new_screen):
     location_text.configure(state='disabled')
     price_text.configure(state="normal")
     price_text.delete("1.0", "end")
-    price_text.insert('end', "Price: " + in_city[new_screen][0][3])
+    price_text.insert('end', "Price: " + str(in_city[new_screen][0][3]))
     price_text.configure(state='disabled')
     type_text.configure(state="normal")
     type_text.delete("1.0", "end")
@@ -178,11 +176,11 @@ def update_screen_no_matches(new_screen):
     indoor_text.configure(state='disabled')
     rating_text.configure(state="normal")
     rating_text.delete("1.0", "end")
-    rating_text.insert('end', "Rating: " + in_city[new_screen][0][6])
+    rating_text.insert('end', "Rating: " + str(in_city[new_screen][0][6]))
     rating_text.configure(state='disabled')
     screen_num_text.configure(state="normal")
     screen_num_text.delete("1.0", "end")
-    screen_num_text.insert('end', screen_num + " / " + len(in_city))
+    screen_num_text.insert('end', str(screen_num) + " / " + str(len(in_city)))
     screen_num_text.configure(state='disabled')
 
     url = in_city[new_screen][0][7]
@@ -252,7 +250,7 @@ def update_screen(new_screen):
     location_text.configure(state='disabled')
     price_text.configure(state="normal")
     price_text.delete("1.0", "end")
-    price_text.insert('end', "Price: " + matches[new_screen][3])
+    price_text.insert('end', "Price: " + str(matches[new_screen][3]))
     price_text.configure(state='disabled')
     type_text.configure(state="normal")
     type_text.delete("1.0", "end")
@@ -265,11 +263,11 @@ def update_screen(new_screen):
     indoor_text.configure(state='disabled')
     rating_text.configure(state="normal")
     rating_text.delete("1.0", "end")
-    rating_text.insert('end', "Rating: " + matches[new_screen][6])
+    rating_text.insert('end', "Rating: " + str(matches[new_screen][6]))
     rating_text.configure(state='disabled')
     screen_num_text.configure(state="normal")
     screen_num_text.delete("1.0", "end")
-    screen_num_text.insert('end', screen_num + " / " + len(matches))
+    screen_num_text.insert('end', str(screen_num) + " / " + str(len(matches)))
     screen_num_text.configure(state='disabled')
 
     url = matches[new_screen][7]
@@ -435,6 +433,7 @@ max_text = Text(window, background='white', borderwidth=0,
                 height=1, width=9, font=("Avenir Next", 10))
 max_text.place(x=60, y=280)
 max_text.insert('end', 'Max Price')
+max_text.config(highlightbackground="white")
 max_text.configure(state='disabled')
 
 # creates the slider where users decide the rating they want their attraction to be
@@ -447,6 +446,7 @@ ratings_text = Text(window, background='white', borderwidth=0,
                     height=1, width=14, font=("Avenir Next", 10))
 ratings_text.place(x=40, y=350)
 ratings_text.insert('end', 'Minimum Rating')
+ratings_text.config(highlightbackground="white")
 ratings_text.configure(state='disabled')
 
 # creates the button users click to search once they have finished their entering
@@ -477,36 +477,43 @@ title_text = Text(window, background='white',
                   width=32, font=("Avenir Next", 19))
 title_text.place(x=275, y=15)
 title_text.tag_configure("center_title", justify='center')
+title_text.config(highlightbackground="white")
 title_text.configure(state='disabled')
 
 location_text = Text(window, background='white', borderwidth=0,
                      height=1, width=37, font=("Avenir Next", 16))
 location_text.place(x=200, y=80)
+location_text.config(highlightbackground="white")
 location_text.configure(state='disabled')
 
 price_text = Text(window, background='white', borderwidth=0,
                   height=1, width=37, font=("Avenir Next", 16))
 price_text.place(x=200, y=110)
+price_text.config(highlightbackground="white")
 price_text.configure(state='disabled')
 
 type_text = Text(window, background='white', borderwidth=0,
                  height=1, width=37, font=("Avenir Next", 16))
 type_text.place(x=200, y=140)
+type_text.config(highlightbackground="white")
 type_text.configure(state='disabled')
 
 indoor_text = Text(window, background='white', borderwidth=0,
                    height=1, width=37, font=("Avenir Next", 16))
 indoor_text.place(x=200, y=170)
+indoor_text.config(highlightbackground="white")
 indoor_text.configure(state='disabled')
 
 rating_text = Text(window, background='white', borderwidth=0,
                    height=1, width=37, font=("Avenir Next", 16))
 rating_text.place(x=200, y=200)
+rating_text.config(highlightbackground="white")
 rating_text.configure(state='disabled')
 
 screen_num_text = Text(window, background='white',
                        borderwidth=0, height=1, width=7, font=("Avenir Next", 14))
 screen_num_text.place(x=425, y=450)
+screen_num_text.config(highlightbackground="white")
 screen_num_text.configure(state='disabled')
 
 image_label = ttk.Label()
@@ -530,6 +537,7 @@ about_text.insert("1.0", "The Adventour App is designed to create recommendation
                   "your criteria. \n \n" +
                   "3. Enjoy the attraction you choose! \n \n" +
                   "Credits: Nixon Hanna, Shrey Agarwal")
+about_text.config(highlightbackground="white")
 about_text.configure(state='disabled')
 
 # Read the Image
