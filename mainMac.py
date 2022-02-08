@@ -324,16 +324,16 @@ def next_leave(e):
 
 
 # initializes all options for state and type
-states_options = ["Nebraska", "California", "New York", "Texas", "Florida"]
-type_options = ["Any", "Educational", "Sightseeing", "Nature", "Pleasure"]
+states_options = ["California", "Florida", "Nebraska", "New York", "Texas"]
+type_options = ["Any", "Educational", "Nature", "Pleasure", "Sightseeing"]
 
 # dictionary to retrieve cities in each state
 state_city_dict = {
-    "Nebraska": ["Any", "Lincoln", "Omaha", "Scottsbluff", "North Platte"],
-    "California": ["Any", "San Francisco", "Los Angeles", "San Jose", "Anaheim"],
+    "Nebraska": ["Any", "Lincoln", "North Platte", "Omaha", "Scottsbluff"],
+    "California": ["Any", "Anaheim", "Los Angeles", "San Francisco", "San Jose"],
     "New York": ["Any", "New York City"],
-    "Texas": ["Any", "Houston", "Dallas", "Austin", "San Antonio", "Fort Worth"],
-    "Florida": ["Any", "Miami", "Orlando", "Tampa", "Key West"]
+    "Texas": ["Any", "Austin", "Dallas", "Fort Worth" "Houston", "San Antonio"],
+    "Florida": ["Any", "Key West", "Miami", "Orlando", "Tampa"]
 }
 
 # stores the data for the possible places to go
